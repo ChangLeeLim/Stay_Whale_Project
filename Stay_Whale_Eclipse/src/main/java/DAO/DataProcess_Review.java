@@ -78,11 +78,7 @@ public class DataProcess_Review {
 					wr.setPost_file(rs.getString("post_file"));
 					wr.setPost_travel_location(rs.getString("post_travel_location"));
 					wr.setPost_rating(rs.getDouble("post_rating"));
-<<<<<<< HEAD
 					wr.setUser_id(rs.getString("user_id"));
-=======
-					wr.setPost_user_id(rs.getString("user_id"));
->>>>>>> branch 'master' of https://github.com/ChangLeeLim/Stay_Whale_Project.git
 					
 					arr.add(wr);
 				}
@@ -102,11 +98,7 @@ public class DataProcess_Review {
 				while(rs.next()) {
 					Writer wr = new Writer();
 					wr.setPost_num(rs.getInt("post_num"));
-<<<<<<< HEAD
 					wr.setUser_id(rs.getString("user_id"));
-=======
-					wr.setPost_user_id(rs.getString("user_id"));
->>>>>>> branch 'master' of https://github.com/ChangLeeLim/Stay_Whale_Project.git
 					wr.setPost_title(rs.getString("post_title"));
 					wr.setPost_rating(rs.getDouble("post_rating"));
 					wr.setPost_travel_location(rs.getString("post_travel_location"));
@@ -227,11 +219,7 @@ public class DataProcess_Review {
 						wr.setPost_file(rs.getString("post_file"));
 						wr.setPost_travel_location(rs.getString("post_travel_location"));
 						wr.setPost_rating(rs.getDouble("post_rating"));
-<<<<<<< HEAD
 						wr.setUser_id(rs.getString("user_id"));
-=======
-						wr.setPost_user_id(rs.getString("user_id"));
->>>>>>> branch 'master' of https://github.com/ChangLeeLim/Stay_Whale_Project.git
 						arr.add(wr);
 					}
 				} catch (SQLException e) {
@@ -253,11 +241,8 @@ public class DataProcess_Review {
 						wr.setPost_file(rs.getString("post_file"));
 						wr.setPost_travel_location(rs.getString("post_travel_location"));
 						wr.setPost_rating(rs.getDouble("post_rating"));
-<<<<<<< HEAD
 						wr.setUser_id(rs.getString("user_id"));
-=======
-						wr.setPost_user_id(rs.getString("user_id"));
->>>>>>> branch 'master' of https://github.com/ChangLeeLim/Stay_Whale_Project.git
+
 						arr.add(wr);
 					}
 				} catch (SQLException e) {
