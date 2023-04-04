@@ -36,7 +36,6 @@
 	<%
 	}
 	%>
-	<section class="section_wrap" style="width:0px; height: 0px;"></section>
 	<section>
 		<div id="big_title"><h1 style="font-family: 'Lobster', cursive;">Review Modify</h1></div>
 		<div class="form_wrap">
@@ -46,15 +45,15 @@
 				<div class="secon_wrap" style="margin-top: 10px;">
 					<div class="avgscore_wrap">평점
 					<fieldset class="avgscore">
-						<input type="radio" name="reviewStar" value="10" id="rate1"><label
+						<input type="radio" name="reviewStar" value="5" id="rate1"><label
 							for="rate1">★</label>
-						<input type="radio" name="reviewStar" value="8" id="rate2"><label
+						<input type="radio" name="reviewStar" value="4" id="rate2"><label
 							for="rate2">★</label>
-						<input type="radio" name="reviewStar" value="6" id="rate3"><label
+						<input type="radio" name="reviewStar" value="3" id="rate3"><label
 							for="rate3">★</label>
-						<input type="radio" name="reviewStar" value="4" id="rate4"><label
+						<input type="radio" name="reviewStar" value="2" id="rate4"><label
 							for="rate4">★</label>
-						<input type="radio" name="reviewStar" value="2" id="rate5"><label
+						<input type="radio" name="reviewStar" value="1" id="rate5"><label
 							for="rate5">★</label>
 					</fieldset>
 					</div>
@@ -64,8 +63,11 @@
 				<div style="display: flex; justify-content: center;">
 					<textarea class="txt" name="txt"><%= text%></textarea>
 				</div>
+				<div id="img_list_wrap">
+					<div></div>
+				</div>
 				<div id="sucess_bt">
-					<button type="button" class="custom-btn btn-5" onclick="location.href='Review_page.jsp'">목 록</button>
+					<button type="button" class="custom-btn btn-5" onclick="location.href='Bulletin_Board_Review.jsp'">목 록</button>
 					<button type="submit" class="custom-btn btn-5">수정완료</button>
 				</div>
 			</form>

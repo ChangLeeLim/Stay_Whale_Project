@@ -9,11 +9,11 @@
 	<jsp:useBean id="data" class="DAO.DataProcess_Review"> </jsp:useBean>
 	<jsp:useBean id="obj" class="DTO.Writer"> </jsp:useBean>
 	<%
-		obj.setNum(Integer.parseInt(request.getParameter("num")));
-		String command = "delete from review where num='"+obj.getNum()+"'";
+		obj.setPost_num(Integer.parseInt(request.getParameter("num")));
+		String command = "delete from review where num='"+obj.getPost_num()+"'";
 		
 		data.review_delete(obj);
-		response.sendRedirect("../Review_page.jsp");
+		response.sendRedirect("../Bulletin_Board_Review.jsp");
 	%>
 </body>
 </html>

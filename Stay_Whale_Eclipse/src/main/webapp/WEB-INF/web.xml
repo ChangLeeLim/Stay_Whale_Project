@@ -1,66 +1,12 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
-
-<servlet>
-	<servlet-name>class_connector</servlet-name>
-	<servlet-class>servlet_page_test</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>class_connector</servlet-name>
-	<url-pattern>/servlet_page_test</url-pattern>
-</servlet-mapping>
-
-<servlet>
-	<servlet-name>class_connector2</servlet-name>
-	<servlet-class>Servlet_Page_Test2</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>class_connector2</servlet-name>
-	<url-pattern>/Servlet_Page_Test2</url-pattern>
-</servlet-mapping>
- 
- <servlet>
-	<servlet-name>class_connector3</servlet-name>
-	<servlet-class>ServletExam</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>class_connector3</servlet-name>
-	<url-pattern>/ServletExam</url-pattern>
-</servlet-mapping>
-
- <servlet>
-	<servlet-name>class_connector4</servlet-name>
-	<servlet-class>ServletExamImage</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>class_connector4</servlet-name>
-	<url-pattern>/ServletExamImage</url-pattern>
-</servlet-mapping>
-
- <servlet>
-	<servlet-name>SignUpConnector</servlet-name>
-	<servlet-class>SignUp</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>SignUpConnector</servlet-name>
-	<url-pattern>/SignUp</url-pattern>
-</servlet-mapping>
-
- <servlet>
-	<servlet-name>LikeListConnector</servlet-name>
-	<servlet-class>LikeAnimal</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>LikeListConnector</servlet-name>
-	<url-pattern>/LikeAnimal</url-pattern>
-</servlet-mapping>
-
- <servlet>
-	<servlet-name>LikeListConnector2</servlet-name>
-	<servlet-class>LikeResult</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>LikeListConnector2</servlet-name>
-	<url-pattern>/LikeResult</url-pattern>
-</servlet-mapping>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Chapter11</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>

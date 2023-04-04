@@ -1,34 +1,87 @@
+var imageList = ['image/pension_back1.jpg', 'image/pension_back2.jpg', 'image/pension_back3.jpg', 'image/pension_back4.jpg'];
+var currentIndex = 0;
+
+function slideImage() {
+  if (currentIndex === imageList.length) {
+    currentIndex = 0;
+  }
+  var imagePath = 'url(' + imageList[currentIndex] + ')';
+  document.getElementById('image_in').style.backgroundImage = imagePath;
+  currentIndex++;
+}
+setInterval(slideImage, 3000);
+
 
 $(function(){
-      var $header = $('header'); //헤더를 변수에 넣기
-      var $page = $('.top_info_wrap'); //색상이 변할 부분
-      var $window = $(window);
-      var pageOffsetTop = $page.offset().top;//색상 변할 부분의 top값 구하기
-
-      $window.resize(function(){ //반응형을 대비하여 리사이즈시 top값을 다시 계산
-        pageOffsetTop = $page.offset().top;
-      });
-      
-      $window.on('scroll', function(){ //스크롤시
-        var scrolled = $window.scrollTop() >= pageOffsetTop; //스크롤된 상태; true or false
-        $header.toggleClass('down', scrolled); //클래스 토글
-        $(".logo").toggleClass('logodown', scrolled);
-      });
-      
-      $("#top_li > nav> ul > li").hover(function() {
+	var dateFormat = "yy-mm-dd", 
+      from = $( "#from" ) 
+        .datepicker({
+		  yearSuffix: '년',
+		  showOn: "both", 
+		  buttonImage: "image/pension_calen.png",
+		  buttonImageOnly: true,
+		  prevText: '이전 달',
+		  nextText: '다음 달',
+          showMonthAfterYear: true, //연도,달 순서로 지정
+          monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+          dateFormat:"yy-mm-dd",//날짜 포맷 
+          dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],//요일 이름 지정
+          minDate:0 //오늘 이전 날짜를 선택할 수 없음
+        }) 
+        .on( "change", function() { 
+          to.datepicker( "option", "minDate", getDate(this) );//종료일의 minDate 지정 
+        }), 
+        
+      to = $( "#to" ).datepicker({
+ 		  yearSuffix: '년',
+		  showOn: "both", 
+		  buttonImage: "image/pension_calen.png",
+		  buttonImageOnly: true, 
+		  prevText: '이전 달',
+		  nextText: '다음 달',
+		  showMonthAfterYear: true,
+		  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	      dateFormat:"yy-mm-dd",
+	      dayNamesMin: ["일", "월", "화", "수", "목", "금", "토" ],
+	      minDate:'+1D' //내일부터 선택가능, 지정형식 예(+1D +1M +1Y) 
+	      }) 
+	      .on( "change", function() { 
+	        from.datepicker( "option", "maxDate", getDate(this) );//시작일의 maxDate 지정 
+	      }); 
+	  
+	    function getDate(element) { 
+	      var date; 
+	      try { 
+	        date = $.datepicker.parseDate( dateFormat, element.value ); 
+	        if(element.id == 'from'){ 
+	        date.setDate(date.getDate()+1);//종료일은 시작보다 하루 이후부터 지정할 수 있도록 설정 
+	        }else{ 
+	         date.setDate(date.getDate()-1);//시작일은 종료일보다 하루 전부터 지정할 수 있도록 설정 
+	        } 
+	      } catch( error ) { 
+	        date = null; 
+	      } 
+	      return date; 
+	    }
+    
+    $(".top_info_wrap > nav > ul > li").mouseover(function() {
         var nowimg = $(this).find("img");
         var srcName = nowimg.attr("src");
         var newSrc = srcName.substring(0, srcName.lastIndexOf('.'));
 
-        if($(this).css("color") == "rgb(0, 0, 0)") {
-          $(this).find("img").attr("src", newSrc + '_on.' + /[^.]+$/.exec(srcName));
-          $(this).css("color", "#006CFA");
-        }
-        else if ($(this).css("color") == "rgb(0, 108, 250)"){
-          var onSrc = newSrc.slice(0, -3);
-          $(this).find("img").attr("src", onSrc + '.' + /[^.]+$/.exec(srcName));
-          $(this).css("color", "black");
-        }
+		$(this).find("img").attr("src", newSrc + '_on.' + /[^.]+$/.exec(srcName));
+		$(this).css("color", "#006CFA");
+    });
+    $(".top_info_wrap > nav > ul > li").mouseout(function() {
+        var nowimg = $(this).find("img");
+        var srcName = nowimg.attr("src");
+        var newSrc = srcName.substring(0, srcName.lastIndexOf('.'));
+        
+		var onSrc = newSrc.slice(0, -3);
+		$(this).find("img").attr("src", onSrc + '.' + /[^.]+$/.exec(srcName));
+		$(this).css("color", "black");
     });
     
     $('document').ready(function() {

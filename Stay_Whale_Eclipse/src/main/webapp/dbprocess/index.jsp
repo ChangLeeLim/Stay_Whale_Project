@@ -3,30 +3,30 @@
 <%@ page import="java.util.*"%>
 	<% 
 		request.setCharacterEncoding("utf-8");
-		String id = (String)session.getAttribute("id");
+		String id = (String) session.getAttribute("id");
 
 		Connection conn = null;
 		Statement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");//※이 구문에서 오류가 난다면 mysql-connector-java.jar의 버전을 확인해주세요.(최신버전일시 cj포함 구버전일시 cj미포함)
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/websitedb","root","1234"); //※본인 DB로 연결 및 ID, Password확인해주세요
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/prac","root","1234");
 			if(conn == null) {
 				throw new Exception("데이터베이스에 연결할 수 없습니다.");
 			}
 		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select user_id from sign_up where user_id='"+ id + "'"); //※본인 DB에 맞는 필드명, 테이블인지 확인해주세요.
+		ResultSet rs = stmt.executeQuery("select id from sign_up where id='"+ id + "';");
 		if(rs.next()) {
 			%>
 			<script>
 				alert("<%= id%>님 환영합니다.")
-				location.href = "..\\Main_Index.jsp";
+				location.href = "../Main_Index.jsp";
 			</script>
 			<%
 		} else {
 			%>
 			<script>
-				location.href = "..\\Main_Index.jsp";
+				location.href = "../Main_Index.jsp";
 			</script>
 			<%
 		}

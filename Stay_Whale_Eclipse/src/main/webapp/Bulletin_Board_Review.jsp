@@ -1,24 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true"%>
-<% request.setCharacterEncoding("utf-8"); %>
-
+<%@page import="java.net.URLDecoder"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="DTO.Writer"%>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>STAY WHALE</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/review_page.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="js/review_page.js"></script>
 
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bulletin_board_review.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/bulletin_board_review.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" ><!-- crossorigin -->
-	
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
-	<%@ page import="java.util.ArrayList" %>
-	<%@ page import="DTO.Bulletin_Board_Free" %>
-	<%@ page import="DTO.Writer" %>
-	
+<meta charset="UTF-8">
+<title>StayWhale | Review</title>
 </head>
 <body>
 	<jsp:useBean id="data" class="DAO.DataProcess_Review"> </jsp:useBean>
@@ -27,26 +21,8 @@
 		request.setCharacterEncoding("utf-8");
 		String id = (String) session.getAttribute("id");
 		
-		String option = (String)request.getParameter("searchOption");
-		/*if(option != null)
-		{
-			if(option.equals("제목"))
-			{
-				option = "title";
-			}
-			else if(option.equals("여행지"))
-			{
-				option = "travellocation";
-			}
-			else if(option.equals("작성자"))
-			{
-				option = "name";
-			}
-		}*/
-		
-		String searchtext = (String)request.getParameter("search");
-		/*String val = request.getParameter("val");
-		String str = request.getParameter("str");*/
+		String val = request.getParameter("val");
+		String str = request.getParameter("str");
 	%>
 	<%
 		if(id == null) {
@@ -61,190 +37,108 @@
 	<%
 	}
 	%>
-	<div class="section_wrap"></div>
-		<div id="conceptImg"></div>
-		
-		
-	<ul class="tab-bar">
-  <li data-num="1" class="tab wave dark">여행Diary</li>
-  <li data-num="2" class="tab wave dark">자유게시판</li>
-  <li data-num="3" class="tab wave dark selected">리뷰</li>
-  <li data-num="4" class="tab wave dark">1:1 문의</li>
-   <!-- <li data-num="5" class="tab wave dark">약관 및 정책</li> -->
-  <li class="indicator"></li>
-</ul>
-
-
-
-	<section>
-		<form action="Bulletin_Board_Review.jsp" method="get">
-		
-		<div id="titleWrap">
-			<Strong>Review게시판</Strong><br>
-			<p>
-				 다녀온 여행 공간을 남기는 공간입니다.
-				 타인에 대한 무분별한 비방이나 인신공격은 자제해주시기 바랍니다.
-			</p>
-		
+	<section id="section_wrap">
+		<div id="title_wrap">
+			<div id="big_title">
+				<h1 style="font-family: 'Lobster', cursive;">Review Bulletin</h1>
+				<h4 id="title_under">StayWhale 회원님만의 추억을 기록해주세요</h4>
+			</div>
 		</div>
-			
-
-			
-			<div id ='contwrap'>
-			
-			
-				<div id='cont'>
-					
-						<div id = 'content'>
-							<ul id='title'>
-								<li>No</li>
-								<li>제목</li>
-								<li>여행지</li>
-								<li>평점</li>
-								<li>작성자</li>
-								<li>작성일</li>	
-							</ul>
-							
-							<%	
-				if(searchtext == null) {
-				ArrayList<Writer> arr = data.review_check();
-				if(arr.size() != 0)
-				{
-					for(int i=0; i<arr.size(); i++) 
-					{
-						out.println("<ul id='data_pyo'>");
-						out.println("<li class='review_num'>" + arr.get(i).getNum() + "</li>");
-						out.println("<li class='col2 review_title' style='cursor: pointer;'>" + arr.get(i).getTitle() + "</li>");
-						out.println("<li class='location'>" + arr.get(i).getTravellocation() + "</li>");
-						if(arr.get(i).getAvgscore() == 2.0) {
-							out.println("<li class='avgscore'>" + "★" + "</li>");
-						} else if(arr.get(i).getAvgscore() == 4.0) {
-							out.println("<li class='avgscore'>" + "★★" + "</li>");
-						} else if(arr.get(i).getAvgscore() == 6.0) {
-							out.println("<li class='avgscore'>" + "★★★" + "</li>");
-						} else if(arr.get(i).getAvgscore() == 8.0) {
-							out.println("<li class='avgscore'>" + "★★★★" + "</li>");
-						} else if(arr.get(i).getAvgscore() == 10.0) {
-							out.println("<li class='avgscore'>" + "★★★★★" + "</li>");
-						}
-						out.println("<li class='id'>" + arr.get(i).getName() + "</li>");
-						out.println("<li class='write_day'>" + arr.get(i).getWritedate() + "</li>");
-						out.println("</ul>");
-					}
-				}
-				else
-				{
-					out.println("<ul>");
-					out.println("<li style='display: flex; align-items: center; justify-content: center; width: 1000px; height:602px;'><h1 style='text-align: center;'>검색 결과가 없습니다.</h1></li>");
-					out.println("</ul>");
-				}
-				}
-				
-				 else {
-					ArrayList<Writer> arr_search = data.review_search(searchtext, option);
-					if(arr_search.size() != 0)
-					{
-						for(int i=0; i<arr_search.size(); i++) {
-							out.println("<ul id='data_pyo'>");
-							out.println("<li class='review_num'>" + arr_search.get(i).getNum() + "</li>");
-							out.println("<li class='col2 review_title' style='cursor: pointer;'>" + arr_search.get(i).getTitle() + "</li>");
-							out.println("<li>" + arr_search.get(i).getTravellocation() + "</li>");
-							if(arr_search.get(i).getAvgscore() == 2.0) {
-								out.println("<li class='avgscore'>" + "★" + "</li>");
-							} else if(arr_search.get(i).getAvgscore() == 4.0) {
-								out.println("<li class='avgscore'>" + "★★" + "</li>");
-							} else if(arr_search.get(i).getAvgscore() == 6.0) {
-								out.println("<li class='avgscore'>" + "★★★" + "</li>");
-							} else if(arr_search.get(i).getAvgscore() == 8.0) {
-								out.println("<li class='avgscore'>" + "★★★★" + "</li>");
-							} else if(arr_search.get(i).getAvgscore() == 10.0) {
-								out.println("<li class='avgscore'>" + "★★★★★" + "</li>");
-							}
-							//out.println("<li>" + "✪ " + arr_search.get(i).getAvgscore() + "</li>");
-							out.println("<li class='id'>" + arr_search.get(i).getName() + "</li>");
-							out.println("<li class='write_day'>" + arr_search.get(i).getWritedate() + "</li>");
-							out.println("</ul>");
-						}
-					}
-					else
-					{
-						out.println("<ul>");
-						out.println("<li style='display: flex; align-items: center; justify-content: center; width: 1000px; height:602px;'><h1 style='text-align: center;'>검색 결과가 없습니다.</h1></li>");
-						out.println("</ul>");
-					}
-					
-				}
-			%>
-						
-						
-						</div>
-						
-							<div id="container">
-							  <div id="pagination" style="border: none; font-size:18px;"></div>
-							</div>
-
-						
-				
-						
-						
+		<div id="content_wrap">
+			<div id="content_1">
+				<ul id="content_ul">
 					<%
-						if(option != null)
-						{
-							if(option.equals("제목"))
-							{
-								out.println("<select id='searchOption' name='searchOption'>");
-								out.println("<option value='제목' selected>제목</option>");
-								out.println("<option value='여행지'>여행지</option>");
-								out.println("<option value='작성자'>작성자</option>");
-								out.println("</select>");
+						if(val == null) {
+							ArrayList<Writer> arr = data.review_check();
+							for(int i=0; i<arr.size(); i++) {
+								out.println("<li id='content_li'>");
+								if(arr.get(i).getPost_file().equals("null")) {
+									out.println("<div id='thumbnail' style='background-image: url(image/no-photo.png);'></div>");
+								} else {
+									out.println("<div id='thumbnail' style='background-image: url(thumbnail/" + arr.get(i).getPost_file() + ");'></div>");	
+								}
+								out.println("<div id='title'>"+ arr.get(i).getPost_title() +"</div>");
+								out.println("<div id='profile_wrap'>");
+								out.println("<img src='image/review_profile_icon.png'>");
+								out.println("<div>");
+								out.println("<div id='profile_text'><label id='user_id'>" + arr.get(i).getPost_user_id() + "<br></label><label id='post_date'>" + arr.get(i).getPost_date() + "</label></div>");
+								out.println("</div>");
+								out.println("<div><div id='travellocation'>" + arr.get(i).getPost_travel_location() + "</div>");
+								if(arr.get(i).getPost_rating() == 1.0) {
+									out.println("<div id='avgscore'>" + "★" + "</div></div>");
+								} else if(arr.get(i).getPost_rating() == 2.0) {
+									out.println("<div id='avgscore'>" + "★★" + "</div></div>");
+								} else if(arr.get(i).getPost_rating() == 3.0) {
+									out.println("<div id='avgscore'>" + "★★★" + "</div></div>");
+								} else if(arr.get(i).getPost_rating() == 4.0) {
+									out.println("<div id='avgscore'>" + "★★★★" + "</div></div>");
+								} else if(arr.get(i).getPost_rating() == 5.0) {
+									out.println("<div id='avgscore'>" + "★★★★★" + "</div></div>");
+								}
+								out.println("<input type='hidden' id='post_num' name='post_num' value='" + arr.get(i).getPost_num() + "'>");
+								out.println("<input type='hidden' id='post_category' name='post_category' value='" + arr.get(i).getPost_category() + "'>");
+								out.println("<input type='hidden' id='post_like' name='post_like' value='" + arr.get(i).getPost_like()+ "'>");
+								out.println("<input type='hidden' id='post_readcount' name='post_readcount' value='" + arr.get(i).getPost_readcount()+ "'>");
+								out.println("</li>");
 							}
-							else if(option.equals("여행지"))
-							{
-								out.println("<select id='searchOption' name='searchOption'>");
-								out.println("<option value='제목'>제목</option>");
-								out.println("<option value='여행지' selected>여행지</option>");
-								out.println("<option value='작성자'>작성자</option>");
-								out.println("</select>");
+						} else {
+							ArrayList<Writer> arr_search = data.review_search(val, str);
+							for(int i=0; i<arr_search.size(); i++) {
+								out.println("<li id='content_li'>");	
+								if(arr_search.get(i).getPost_file().equals("null")) {
+									out.println("<div id='thumbnail' style='background-image: url(image/no-photo.png);'></div>");
+								} else {
+									out.println("<div id='thumbnail' style='background-image: url(thumbnail/" + arr_search.get(i).getPost_file() + ");'></div>");	
+								}
+								out.println("<div id='title'>"+ arr_search.get(i).getPost_title() +"</div>");
+								out.println("<div id='profile_wrap'>");
+								out.println("<img src='image/review_profile_icon.png'>");
+								out.println("<div>");
+								out.println("<div id='profile_text'><label id='user_id'>" + arr_search.get(i).getPost_user_id() + "<br></label><label id='post_date'>" + arr_search.get(i).getPost_date() + "</label></div>");
+								out.println("</div>");
+								out.println("<div><div id='travellocation'>" + arr_search.get(i).getPost_travel_location() + "</div>");
+								if(arr_search.get(i).getPost_rating() == 1.0) {
+									out.println("<div id='avgscore'>" + "★" + "</div></div>");
+								} else if(arr_search.get(i).getPost_rating() == 2.0) {
+									out.println("<div id='avgscore'>" + "★★" + "</div></div>");
+								} else if(arr_search.get(i).getPost_rating() == 3.0) {
+									out.println("<div id='avgscore'>" + "★★★" + "</div></div>");
+								} else if(arr_search.get(i).getPost_rating() == 4.0) {
+									out.println("<div id='avgscore'>" + "★★★★" + "</div></div>");
+								} else if(arr_search.get(i).getPost_rating() == 5.0) {
+									out.println("<div id='avgscore'>" + "★★★★★" + "</div></div>");
+								}
+								out.println("<input type='hidden' id='post_num' name='post_num' value='" + arr_search.get(i).getPost_num() + "'>");
+								out.println("<input type='hidden' id='post_category' name='post_category' value='" + arr_search.get(i).getPost_category() + "'>");
+								out.println("<input type='hidden' id='post_like' name='post_like' value='" + arr_search.get(i).getPost_like()+ "'>");
+								out.println("<input type='hidden' id='post_readcount' name='post_readcount' value='" + arr_search.get(i).getPost_readcount()+ "'>");
+								out.println("</li>");
 							}
-							else if(option.equals("작성자"))
-							{
-								out.println("<select id='searchOption' name='searchOption'>");
-								out.println("<option value='제목'>제목</option>");
-								out.println("<option value='여행지'>여행지</option>");
-								out.println("<option value='작성자' selected>작성자</option>");
-								out.println("</select>");
-							}
-						}
-						else
-						{
-							out.println("<select id='searchOption' name='searchOption'>");
-							out.println("<option value='제목' selected>제목</option>");
-							out.println("<option value='여행지'>여행지</option>");
-							out.println("<option value='작성자'>작성자</option>");
-							out.println("</select>");
 						}
 					%>
-						<!-- <select id="searchOption" name="searchOption">
-							<option value="제목">제목</option>
-							<option value="여행지">여행지</option>
-							<option value="작성자">작성자</option>
-						</select> -->
-						<input id ='search' name="search" type="text">
-						<input id= 'searchbtn' type="submit" value="검색">
-						<input id= 'write' type="button" value="글쓰기" onclick="location.href='Review_text.jsp'">
-						
-				
-					
-				
-				</div>
-			
-		
+				</ul>
 			</div>
-		</form>
-	
+		</div>
+			<div id="search_wrap">
+				<div id="next_wrap">
+					<div id="next_page"><image src="image/left_icon.png"> 1 2 3 4 5 <image src="image/right_icon.png"></div>
+				</div>
+				<div id="che_wrap">
+					<div id="search_div">
+						<select id="search_selec">
+							<option>제목</option>
+							<option>여행지</option>
+							<option>작성자</option>
+						</select>
+						<input id="search_box" type="text" placeholder="검 색">
+						<img id="review_search_icon" src="image/review_search_icon.png">
+					</div>
+				</div>
+				<div id="wri_bt">
+					<button type="button" class="custom-btn btn-5" onclick="location.href='Review_text.jsp'">Review 작성</button>
+				</div>
+			</div>
 	</section>
-	
-
-<jsp:include page="footer.jsp"/>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

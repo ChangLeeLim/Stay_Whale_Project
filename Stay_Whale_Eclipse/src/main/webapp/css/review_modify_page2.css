@@ -20,7 +20,7 @@
 	}
 	section{
 		width: 1280px;
-		height: 1200px;
+		height: 1500px;
 		margin: auto;
 	}
 	#big_title {
@@ -109,6 +109,14 @@
 		margin-top: 30px;
 		width: 950px;
 		height: 600px;		
+	}
+	#img_list_wrap {
+		margin-top: 30px;
+		border: 1px solid black;
+		width: 1180px;
+		height: 200px;
+		display: flex;
+		justify-content: center;
 	}
 	textarea {
 		resize: none;

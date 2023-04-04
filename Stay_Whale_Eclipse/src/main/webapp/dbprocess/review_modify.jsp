@@ -9,14 +9,14 @@
 	<jsp:useBean id="data" class="DAO.DataProcess_Review"> </jsp:useBean>
 	<jsp:useBean id="obj" class="DTO.Writer"> </jsp:useBean>
 	<%		
-		obj.setName(request.getParameter("id"));
-		obj.setInfo(request.getParameter("txt").replaceAll("<br>", "\r\n"));
-		obj.setTitle(request.getParameter("title"));
-		obj.setNum(Integer.parseInt(request.getParameter("num")));
-		obj.setAvgscore(Double.parseDouble(request.getParameter("reviewStar")));
+		obj.setPost_user_id(request.getParameter("id"));
+		obj.setPost_body(request.getParameter("txt").replaceAll("<br>", "\r\n"));
+		obj.setPost_title(request.getParameter("title"));
+		obj.setPost_num(Integer.parseInt(request.getParameter("num")));
+		obj.setPost_rating(Double.parseDouble(request.getParameter("reviewStar")));
 
 		data.review_update(obj);
-		response.sendRedirect("../Review_page.jsp");
+		response.sendRedirect("../Bulletin_Board_Review.jsp");
 	%>
 </body>
 </html>

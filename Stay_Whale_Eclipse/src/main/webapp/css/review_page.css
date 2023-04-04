@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 	*
 	{
 		margin: 0px;
@@ -18,98 +19,150 @@
 	img {
 		-webkit-user-drag: none;
 	}
-	section{
-		width: 1280px;
-		height: 1000px;
-		margin: auto;
-	}
-	#big_title {
-		padding-top: 50px;
-	}
-	h1 {
-		border-bottom: 1px dotted gray;
-		font-size: 50px;
-		color: #006CFA;
-		padding-bottom: 30px;
-	}
-	table {
-		overflow: hidden;
-		margin: auto;
+	#section_wrap {
 		margin-top: 30px;
-		width: 1180px;
 	}
-	#pyo_title td {
-		background-color: #E2E2E2;
-		height: 50px;
-		border-bottom: 2px solid gray;
+	#title_wrap {
+        position: relative;
+		background-image: url("../image/review_back.png");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		width: 1280px;
+		height: 250px;
+		margin: auto;
+	}
+	#title_wrap::before{
+        content: "";
+        opacity: 0.65;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: white;
+    }
+	#big_title {
+		position: relative;
+		width: 1150px;
+		height: auto;
+		padding-top: 75px;
+		margin: auto;
+		color: black;
+		font-size: 30px;
+	}
+	#title_under {
+		font-family: 'Noto Sans KR', sans-serif;
 		font-size: 17px;
-		text-align: center;
-		font-family: 'Gothic A1', sans-serif;
+		color: cornflowerblue;
 	}
-	#next_wrap {
-		margin-top: 20px;
+	#content_wrap {
 		display: flex;
 		justify-content: center;
+		width: 1280px;
+		height: 800px;
+		margin: auto;
+	}
+	#content_1 {
+		overflow: hidden;
+		margin-top: 40px;
+		width: 1200px;
+		height: 680px;
+	}
+	#thumbnail {
+		margin-bottom: 5px;
+		width: 250px;
+		height: 190px;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+	}
+	#title {
+		overflow: hidden;
+		border-bottom: 1px dotted gray;
+		padding-top: 5px;
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 17px;
+		text-align: center;
+		font-weight: 700;
+		width: 250px;
+		height: 32px;
+	}
+	#profile_wrap {
+		margin-top: 13px;
+		height: 45px;
+		display: flex;
+		justify-content: flex-start;
+	}
+	#profile_wrap img {
+		padding-top: 5px;
+		padding-right: 10px;
+	}
+	#profile_text {
+		margin-right: 20px;
+		width: 100px;
+		overflow: hidden;
+	}
+	#user_id {
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 14px;
+	}
+	#post_date {
+		color: gray;
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 12px;
+	}
+	#travellocation {
+		width: 75px;
+		height: 23px;
+		overflow: hidden;
+		font-family: 'Noto Sans KR', sans-serif;
+		font-weight: 700;
+		font-size: 16px;
+	}
+	#avgscore {
+		color: #ffd400;
+		font-size: 17px;
+	}
+	#content_ul li {
+		cursor: pointer;
+		overflow: hidden;
+		width: 250px;
+		height: 295px;
+		border-radius: 8px;
+		border: 2px double gray;
+		padding: 13px 13px 13px 13px;
+	}
+	#content_ul li:nth-child(n+2):nth-child(-n+4) {
+		
+		margin-left: 26px;
+	}
+	#content_ul li:nth-child(n+5):nth-child(-n+8) {
+		margin-top: 30px;
+	}
+	#content_ul li:nth-child(n+6):nth-child(-n+8) {
+		margin-left: 26px;
+	}
+	#next_wrap {
+		display: flex;
+		justify-content: center;
+		margin: auto;
 		width: 1280px;
 		height: 40px;
 	}
 	#next_page {
 		font-size: 20px;
-		width: 200px;
-		height: 40px;
 	}
 	#next_page img{
 		width: 23px;
 		height: 15px;
 	}
 	#che_wrap {
+		margin: auto;
 		display: flex;
 		justify-content: center;
 		width: 1280px;
 		height: 40px;
 	}
-	#num {
-		width: 7%;
-	}
-	#title {
-		width: 40%;
-	}
-	#date {
-		width: 8%;
-	}
-	#loca {
-		width: 10%;
-	}
-	#avs {
-		width: 8%;
-	}
-	#writer {
-		width: 8%;
-	}
-	.review_num {
-		font-family: 'Noto Sans KR', sans-serif;
-		font-size: 13px;
-		color: gray;
-	}
-	.review_title {
-		font-family: 'Noto Sans KR', sans-serif;
-		font-size: 17px;
-	}
-	.write_day {
-		font-family: 'Noto Sans KR', sans-serif;
-		font-size: 15px;
-	}
-	.id {
-		font-family: 'Noto Sans KR', sans-serif;
-		font-size: 12px;
-		color: gray;
-	}
-	.avgscore {
-		color: #006CFA;
-	}
-	.location {
-		
-	}
+	
 	.custom-btn {
 		font-size: 14px;
 		font-family: 'Noto Sans KR', sans-serif;
@@ -163,14 +216,10 @@
 		width:100%;
 		transition:800ms ease all;
 	}
-	#data_pyo td {
-		height: 45px;
-		border-bottom: 1px dotted gray;
-		text-align: center;
-	}
 	#search_wrap {
-		align-content: center;
-		text-align: center;
+		width: 1280px;
+		margin: auto;
+		height: 300px;
 	}
 	#search_box {
 		border-radius: 5px;
@@ -186,7 +235,7 @@
 		width: 70px;
 		height: 35px;
 	}
-	#search_icon {
+	#review_search_icon {
 		cursor: pointer;
 		position: absolute;
 		margin-top: 5px;
@@ -201,7 +250,9 @@
 		height: 40px;
 	}
 	#wri_bt {
-		margin-right: 60px;
-		text-align: right;
+		width: 1200px;
+		margin: auto;
+		display: flex;
+		justify-content: flex-end;
 	}
 	
