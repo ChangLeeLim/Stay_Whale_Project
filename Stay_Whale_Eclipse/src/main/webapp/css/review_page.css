@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap');
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	ol, ul, li
+	{
+		list-style-type: none;
+		float: left;
+	}
+	a
+	{
+		text-decoration: none;
+		color: #333;
+	}
+	img {
+		-webkit-user-drag: none;
+	}
+	section{
+		width: 1280px;
+		height: 1000px;
+		margin: auto;
+	}
+	#big_title {
+		padding-top: 50px;
+	}
+	h1 {
+		border-bottom: 1px dotted gray;
+		font-size: 50px;
+		color: #006CFA;
+		padding-bottom: 30px;
+	}
+	table {
+		overflow: hidden;
+		margin: auto;
+		margin-top: 30px;
+		width: 1180px;
+	}
+	#pyo_title td {
+		background-color: #E2E2E2;
+		height: 50px;
+		border-bottom: 2px solid gray;
+		font-size: 17px;
+		text-align: center;
+		font-family: 'Gothic A1', sans-serif;
+	}
+	#next_wrap {
+		margin-top: 20px;
+		display: flex;
+		justify-content: center;
+		width: 1280px;
+		height: 40px;
+	}
+	#next_page {
+		font-size: 20px;
+		width: 200px;
+		height: 40px;
+	}
+	#next_page img{
+		width: 23px;
+		height: 15px;
+	}
+	#che_wrap {
+		display: flex;
+		justify-content: center;
+		width: 1280px;
+		height: 40px;
+	}
+	#num {
+		width: 7%;
+	}
+	#title {
+		width: 40%;
+	}
+	#date {
+		width: 8%;
+	}
+	#loca {
+		width: 10%;
+	}
+	#avs {
+		width: 8%;
+	}
+	#writer {
+		width: 8%;
+	}
+	.review_num {
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 13px;
+		color: gray;
+	}
+	.review_title {
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 17px;
+	}
+	.write_day {
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 15px;
+	}
+	.id {
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 12px;
+		color: gray;
+	}
+	.avgscore {
+		color: #006CFA;
+	}
+	.location {
+		
+	}
+	.custom-btn {
+		font-size: 14px;
+		font-family: 'Noto Sans KR', sans-serif;
+		width: 110px;
+		height: 40px;
+		padding: 10px 25px;
+		border: 2px solid #000;
+		font-weight: 500;
+		background: transparent;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		position: relative;
+		display: inline-block;
+	}
+	.btn-5 {
+		border-radius: 5px;
+		background: #006CFA;
+		color: #fff;
+		line-height: 42px;
+		padding: 0;
+		border: none;
+	}
+	.btn-5:hover {
+		background: transparent;
+		color: #000;
+		box-shadow:
+		-7px -7px 20px 0px #fff9,
+		-4px -4px 5px 0px #fff9,
+		7px 7px 20px 0px #0002,
+		4px 4px 5px 0px #0001;
+	}
+	.btn-5:before,
+	.btn-5:after{
+		content:'';
+		position:absolute;
+		top:0;
+		right:0;
+		height:2px;
+		width:0;
+		background: #006CFA;
+		transition:400ms ease all;
+	}
+	.btn-5:after{
+		right:inherit;
+		top:inherit;
+		left:0;
+		bottom:0;
+	}
+	.btn-5:hover:before,
+	.btn-5:hover:after{
+		width:100%;
+		transition:800ms ease all;
+	}
+	#data_pyo td {
+		height: 45px;
+		border-bottom: 1px dotted gray;
+		text-align: center;
+	}
+	#search_wrap {
+		align-content: center;
+		text-align: center;
+	}
+	#search_box {
+		border-radius: 5px;
+		border: 1px solid gray;
+		padding: 3px 3px 3px 10px;
+		width: 200px;
+		height: 30px;
+	}
+	#search_selec {
+		font-size: 14px;
+		border: none;
+		margin-right: 10px;
+		width: 70px;
+		height: 35px;
+	}
+	#search_icon {
+		cursor: pointer;
+		position: absolute;
+		margin-top: 5px;
+		margin-left: 8px;
+		width: 30px;
+		height: 23px;
+	}
+	#write_bt {
+		margin-left: 260px;
+		margin-right: 120px;
+		width: 100px;
+		height: 40px;
+	}
+	#wri_bt {
+		margin-right: 60px;
+		text-align: right;
+	}
+	

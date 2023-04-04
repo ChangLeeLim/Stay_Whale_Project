@@ -1,0 +1,164 @@
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	ol, ul, li
+	{
+		list-style-type: none;
+		float: left;
+	}
+	a
+	{
+		text-decoration: none;
+		color: #333;
+	}
+	img {
+		-webkit-user-drag: none;
+	}
+	section{
+		width: 1280px;
+		height: 2000px;
+		margin: auto;
+	}
+	.top {
+		width: 1280px;
+		height: 200px;
+	}
+	h1 {
+		text-align: center;
+		border-bottom: 1px dotted gray;
+		font-size: 50px;
+		color: #006CFA;
+		padding-bottom: 30px;
+	}
+	table {
+		overflow: hidden;
+		margin: auto;
+		margin-top: 30px;
+		width: 1100px;
+	}
+	#pyo_title td {
+		height: 50px;
+		border-bottom: 2px solid gray;
+		font-size: 25px;
+		text-align: center;
+		font-family: Black Han Sans;
+	}
+	#num {
+		width: 8%;
+	}
+	#title {
+		width: 40%;
+	}
+	#date {
+		width: 10%;
+	}
+	#loca {
+		width: 10%;
+	}
+	#avs {
+		width: 5%;
+	}
+	#writer {
+		width: 8%;
+	}
+	.custom-btn {
+		font-size: 15px;
+		font-family: Black Han Sans;
+		width: 110px;
+		height: 40px;
+		padding: 10px 25px;
+		border: 2px solid #000;
+		font-weight: 500;
+		background: transparent;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		position: relative;
+		display: inline-block;
+	}
+	.btn-5 {
+		border-radius: 5px;
+		background: #006CFA;
+		color: #fff;
+		line-height: 42px;
+		padding: 0;
+		border: none;
+	}
+	.btn-5:hover {
+		background: transparent;
+		color: #000;
+		box-shadow:
+		-7px -7px 20px 0px #fff9,
+		-4px -4px 5px 0px #fff9,
+		7px 7px 20px 0px #0002,
+		4px 4px 5px 0px #0001;
+	}
+	.btn-5:before,
+	.btn-5:after{
+		content:'';
+		position:absolute;
+		top:0;
+		right:0;
+		height:2px;
+		width:0;
+		background: #006CFA;
+		transition:400ms ease all;
+	}
+	.btn-5:after{
+		right:inherit;
+		top:inherit;
+		left:0;
+		bottom:0;
+	}
+	.btn-5:hover:before,
+	.btn-5:hover:after{
+		width:100%;
+		transition:800ms ease all;
+	}
+	#data_pyo td {
+		height: 45px;
+		border-bottom: 1px dotted gray;
+		font-size: 20px;
+		text-align: center;
+		font-family: Gowun Dodum;
+	}
+	#search_wrap {
+		margin-top: 50px;
+		align-content: center;
+		text-align: center;
+	}
+	#search_box {
+		border-top: none;
+		border-left: none;
+		border_right: none;
+		border-radius: 5px;
+		width: 300px;
+		height: 30px;
+	}
+	#search_selec {
+		border: none;
+		border-radius: 0;
+		margin-right: 10px;
+		width: 70px;
+		height: 30px;
+	}
+	#search_icon {
+		cursor: pointer;
+		position: absolute;
+		margin-top: 5px;
+		margin-left: 5px;
+		width: 30px;
+		height: 20px;
+	}
+	#write_bt {
+		margin-left: 260px;
+		margin-right: 120px;
+		width: 100px;
+		height: 40px;
+	}
+	#wri_bt {
+		margin-right: 100px;
+		text-align: right;
+	}
+	

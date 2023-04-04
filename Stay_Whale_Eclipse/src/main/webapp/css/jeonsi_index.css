@@ -1,0 +1,303 @@
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	ol, ul, li
+	{
+		list-style-type: none;
+		float: left;
+	}
+	a
+	{
+		text-decoration: none;
+		color: #333;
+	}
+	img {
+		-webkit-user-drag: none;
+	}
+	
+	.section_wrap
+	{
+		width: 1280px;
+		margin: auto;
+	}
+/* 헤드 끝 */
+
+/* 좌측 사이드바 메뉴 */
+	.sidebar {
+		position: fixed;
+		top: 100px;
+		left: 0;
+		bottom: 0;
+		width: 150px;
+		background-color: rgba(161, 212, 254,0.3);
+		padding: 20px;
+	  }
+	  
+	  .sidebar ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	  }
+	  
+	  .sidebar li {
+		margin-bottom: 10px;
+		display: block;
+		margin-top: 10px;
+	  }
+
+	  .sidebar_menu:hover {
+		background-color: lightgray;
+	  }
+	  .sidebar a {
+		display: block;
+		color: #333;
+		text-decoration: none;
+		font-weight: bold;
+	  }
+
+	  .sidebar_menu a{
+		        display: block;
+        padding: 10px 20px;
+        color: #000;
+        text-decoration: none;
+        transition: background-color 0.3s;
+	  }
+
+
+
+
+	section
+	{
+		width: 1280px;
+		margin: auto;
+	}
+
+	#main_jeonsi_section1
+	{
+		height: 40px;
+		border-bottom: 1px solid black;
+		margin-top:3px;
+	}
+	#main_jeonsi_section1 #nav1
+	{
+		width: 900px;
+		height: 20px;
+		float: left;
+		margin-top: 5px;
+		margin-left: 60px;
+	}
+	#main_jeonsi_section1 #nav2
+	{
+		width: 200px;
+		height: 20px;
+		float: right;
+		text-align: center;
+		line-height: 1px;
+	}
+	#main_jeonsi_section1 li
+	{
+		float: left;
+		width: 70px;
+		height: 20px;
+		margin-left: 20px;
+	}
+	#ranking
+	{
+		width: 25px;
+		float: 25px;
+	}
+	#main_jeonsi_section2
+	{	
+		width: 1280px;
+		height: 400px;
+	}
+	/* #main_jeonsi_section2 li
+	{
+		width: 360px;
+		display: felx;
+		float: left;
+		padding: 0px;
+		margin-right: 5px;
+	} */
+	.magazine_arrow
+	{
+		margin-top: 135px;
+		
+		float: left;
+	}
+	.magazine
+	{
+		width: 360px;
+		display: flex;
+		float: left;
+		padding: 0px;
+		margin-right: 5px;
+	}
+	#slideShow{
+		width:1280px;
+		height: 360px;
+		position: relative;
+		margin: 30px auto;
+		overflow: hidden;
+	}
+	.slides
+	{
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 4000px;
+		height: 360px;
+		
+	}
+	.controller span{
+		position:absolute;
+		/* background-color: transparent; */
+		color: black;
+		text-align: center;
+		border-radius: 50%;
+		padding: 10px 20px;
+		top: 50%;
+		font-size: 1.3em;
+		cursor: pointer;
+	}
+	/* .controller span:hover
+	{
+		background-color: rgba(128,128,128,0.11);
+	} */
+
+	.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 0px 0px 0;
+  user-select: none;
+  background-color: rgba(231, 228, 228, 0.822);
+}
+.next {
+	right: 0;
+	border-radius: 1px 0 0 1px;
+  }
+  
+  .prev:hover,
+  .next:hover {
+	background-color: rgba(174, 235, 253, 0.582);
+  }
+	/* .prev:hover{
+		transform: translatex(-2px);
+	} */
+
+	/* .next:hover{
+		transform: translateX(2px)
+	} */
+	#main_jeonsi_section3
+	{
+		height: 130px;
+
+	}
+	#main_jeonsi_section3 nav
+	{	
+		height: 90px;
+		border: 1px solid black;
+		border-radius: 10px;
+		margin-top: 10px;
+	}
+	#main_jeonsi_section3 li
+	{
+		width: 120px;
+		float: left;
+		padding: 0px;
+		margin-right: 40px;
+		margin-left: 40px;
+		text-align: center;
+	}
+
+	#main_jeonsi_section4
+	{
+		height: 400px;
+	}
+	#main_jeonsi_section4 nav
+	{
+		height: 300px;
+		border: 1px solid black;
+		border-radius: 10px;
+		margin-top: 10px;
+	}
+	#main_jeonsi_section4 ul
+	{
+		margin-left: 35px;
+	}
+	#main_jeonsi_section4 li
+	{	
+		float: left;
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+		margin: 10px 20px 0px 20px;
+	}
+	.categori_icon:hover img {
+		transform: scale(1.1); /* 이미지 크기를 1.1배로 확대 */
+		transition: transform 0.2s ease-in-out; /* 부드러운 애니메이션 효과를 위해 transition 추가 */
+	  }
+	  .categori_icon.active > img {
+		opacity: 0.5;
+	}
+	.sangpum_detail.active {
+		display: block;
+	}
+	
+	#main_jeonsi_section4 p
+	{
+		width: 70px;
+		height: 30px;
+		margin:10px 20px 0px 20px;
+		float: left;
+	}
+		#main_jeonsi_section5
+	{
+		height: 400px;
+	}
+	#main_jeonsi_section5 nav
+	{
+		height: 300px;
+		border: 1px solid black;
+		border-radius: 10px;
+		margin-top: 10px;
+	}
+	#main_jeonsi_section5 p
+	{
+		width: 70px;
+		height: 30px;
+		margin:10px 20px 0px 20px;
+		float: left;
+	}
+	#main_jeonsi_section5 ul
+	{
+		margin-left: 35px;
+	}
+	#main_jeonsi_section5 li
+	{	
+		float: left;
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+		margin: 10px 20px 0px 20px;
+	}
+
+	#main_jeonsi_section5 button
+	{
+		width: 80px;
+		height: 30px;
+		margin:20px 20px 0px 20px;
+	}
+
+	

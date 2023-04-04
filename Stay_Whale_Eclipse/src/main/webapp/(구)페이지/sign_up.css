@@ -1,0 +1,498 @@
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	ol, ul, li
+	{
+		list-style-type: none;
+	}
+	a
+	{
+		text-decoration: none;
+		color: #333;
+	}
+	section
+	{
+		width: 700px;
+		height: 900px;
+		margin: auto;
+	}
+	#logo_div, #logo_div img
+	{
+		width: 480px;
+		height: 100px;
+	}
+
+	#userinfo_div, #userinfo_form
+	{
+		width: 600px;
+		height: 650px;
+		margin: auto;
+		border: 1px solid black;
+		position: relative;
+		overflow: hidden;
+	}
+	#userinfo_form ul
+	{
+		width: 1200px;
+		height: 650px;
+		position: absolute;
+	}
+	#userinfo_form li
+	{
+		float: left;
+		width: 600px;
+		height: 650px;
+		text-align: center;
+		position: relative;
+	}
+	/*#next
+	{
+		position: absolute;
+		width: 80px;
+		height: 40px;
+		top: 600px;
+		left: 500px;
+		cursor: pointer;
+	}
+	#prev
+	{
+		position: absolute;
+		width: 80px;
+		height: 40px;
+		top: 600px;
+		left: 20px;
+		cursor: pointer;
+		display: none;
+	}*/
+	.textfield
+	{
+		width: 500px;
+		height: 50px;
+		border-radius: 5pt;
+		border-width: 1pt;
+		border-color: gray;
+		border-style: outset;
+		margin: 35px 0px 0px 0px;
+	}
+	li:first-child .textfield
+	{
+		width: 500px;
+		height: 50px;
+		border-radius: 5pt;
+		border-width: 1pt;
+		border-color: gray;
+		border-style: outset;
+		margin: 50px 0px 0px 0px;
+	}
+	label
+	{
+		position: absolute;
+		left: 140px;
+		color: red;
+		font-weight: bold;
+		font-size: 15px;
+	}
+	.textfield2
+	{
+		width: 160px;
+		height: 50px;
+		border-radius: 5pt;
+		border-width: 1pt;
+		border-color: gray;
+		border-style: outset;
+		margin: 50px 0px 0px 0px;
+	}
+	.textfieldaddr
+	{
+		width: 500px;
+		height: 50px;
+		margin-top: 10px;
+		border-radius: 5pt;
+		border-width: 1pt;
+		border-color: gray;
+		border-style: outset;
+	}
+	.selectfieldgender
+	{
+		width: 500px;
+		height: 50px;
+		border-radius: 5pt;
+		border-width: 1pt;
+		border-color: gray;
+		border-style: outset;
+		margin: 35px 0px 0px 0px;
+	}
+	.selectfieldmonth
+	{
+		width: 160px;
+		height: 50px;
+		border-radius: 5pt;
+		border-width: 1pt;
+		border-color: gray;
+		border-style: outset;
+	}
+	.label
+	{
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	.button
+	{
+		background-color: #86DDFD;
+		color: black;
+		border-color: deepskyblue;
+		border-style: outset;
+		border-radius: 5px;
+		width: 100px;
+		height: 30px;
+		font-family: 'Noto Sans KR', sans-serif;
+		cursor: pointer;
+	}
+	#imgwhich
+	{
+		position: absolute;
+		overflow: auto;
+		left: 20%;
+		width: 80%;
+		height: 80%;
+		z-index: 1;
+	}
+	#tbwhich
+	{
+		
+	}
+	#signup
+	{
+		background-color: #EBEBEB;
+	}
+	#signupbutton
+	{
+		background-color: #86DDFD;
+		color: black;
+		border-color: deepskyblue;
+		border-style: outset;
+		border-radius: 5px;
+		margin-top: 30px;
+		margin-right: 20px;
+		width: 300px;
+		height: 50px;
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 25px;
+	}
+
+.outBox
+{ 
+	margin:50px auto; 
+	padding: 0px; 
+	max-width:320px; 
+	border:1px solid #999; 
+	border-radius: 6px 
+}
+.outBox .inputBox
+{ 
+	position:relative; 
+	height: 50px 
+}
+.outBox .inputBox input[type="text"] 
+{
+	padding: 0 10px; 
+	width: 100%; 
+	height: 50px; 
+	font-size: 14px; 
+	box-sizing: border-box; 
+	border: 1px solid #999; 
+	outline: none;
+}
+.outBox .inputBox label 
+{ 
+	pointer-events:none; 
+	position:absolute; 
+	left:0; 
+	bottom:0; 
+	padding:0 6px; 
+	color:#999; 
+	font-size:14px; 
+	font-weight:normal; 
+	background:#fff; 
+	transform:translate(4px, -18px);
+}
+.outBox .inputBox input[type="text"].has-value + label {
+  transform: translate(-10px, -48px);
+  color: #999;
+  font-size: 12px;
+}
+.outBox .inputBox input[type="text"]:focus 
+{
+	border:2px solid blue;
+}
+.outBox .inputBox input[type="text"]:focus + label 
+{
+	color:blue; 
+	font-size:12px; 
+	transform:translate(-10px, -48px);
+}
+.outBox .inputBox label 
+{
+	transition:all .2s; 
+	pointer-events:none; 
+	position:absolute; 
+	left:0; 
+	bottom:0; 
+	padding:0 6px; 
+	color:#999; 
+	font-size:14px; 
+	font-weight:normal; 
+	background:#fff; 
+	transform:translate(4px, -18px);
+}
+
+
+
+.outBox .inputBox input[type="text"].error-value {
+  padding: 0 10px; 
+	width: 100%; 
+	height: 50px; 
+	font-size: 14px; 
+	box-sizing: border-box; 
+	border: 1px solid red; 
+	outline: none;
+}
+
+.outBox .inputBox input[type="text"].error-value + label {
+  transform: translate(-10px, -48px);
+  color: red;
+  font-size: 12px;
+}
+
+.outBox .inputBox input[type="password"] 
+{
+	padding: 0 10px; 
+	width: 100%; 
+	height: 50px; 
+	font-size: 14px; 
+	box-sizing: border-box; 
+	border: 1px solid #999; 
+	outline: none;
+}
+.outBox .inputBox input[type="password"].has-value + label {
+  transform: translate(-10px, -48px);
+  color: #999;
+  font-size: 12px;
+}
+.outBox .inputBox input[type="password"]:focus 
+{
+	border:2px solid blue;
+}
+.outBox .inputBox input[type="password"]:focus + label 
+{
+	color:blue; 
+	font-size:12px; 
+	transform:translate(-10px, -48px);
+}
+.outBox .inputBox input[type="password"].error-value {
+  padding: 0 10px; 
+	width: 100%; 
+	height: 50px; 
+	font-size: 14px; 
+	box-sizing: border-box; 
+	border: 1px solid red; 
+	outline: none;
+}
+.outBox .inputBox input[type="password"].error-value + label {
+  transform: translate(-10px, -48px);
+  color: red;
+  font-size: 12px;
+}
+
+/*-----------------------------------생일------------------------------------ */
+
+
+.birthoutBox
+{ 
+	margin:30px auto; 
+	padding: 0px; 
+	max-width:100px; 
+	border:1px solid #999; 
+	border-radius: 6px;
+	float: left;
+}
+.birthoutBox .birthinputBox
+{ 
+	position:relative; 
+	height: 50px 
+}
+.birthoutBox .birthinputBox input[type="text"] 
+{
+	padding: 0 10px; 
+	width: 100%; 
+	height: 50px; 
+	font-size: 14px; 
+	box-sizing: border-box; 
+	border: 1px solid #999;
+	border-radius: 6px;  
+	outline: none;
+}
+.birthoutBox .birthinputBox label 
+{ 
+	pointer-events:none; 
+	position:absolute; 
+	left:0; 
+	bottom:0; 
+	padding:0 6px; 
+	color:#999; 
+	font-size:14px; 
+	font-weight:normal; 
+	background:#fff; 
+	transform:translate(4px, -18px);
+}
+.birthoutBox .birthinputBox input[type="text"].has-value + label {
+  transform: translate(-10px, -48px);
+  color: #999;
+  font-size: 12px;
+}
+.birthoutBox .birthinputBox input[type="text"]:focus 
+{
+	border:2px solid blue;
+}
+.birthoutBox .birthinputBox input[type="text"]:focus + label 
+{
+	color:blue; 
+	font-size:12px; 
+	transform:translate(-10px, -48px);
+}
+.birthoutBox .birthinputBox label 
+{
+	transition:all .2s; 
+	pointer-events:none; 
+	position:absolute; 
+	left:0; 
+	bottom:0; 
+	padding:0 6px; 
+	color:#999; 
+	font-size:14px; 
+	font-weight:normal; 
+	background:#fff; 
+	transform:translate(4px, -18px);
+}
+
+.birthoutBox .birthinputBox input[type="text"].error-value {
+  padding: 0 10px; 
+	width: 100%; 
+	height: 50px; 
+	font-size: 14px; 
+	box-sizing: border-box; 
+	border: 1px solid red; 
+	outline: none;
+}
+
+.birthoutBox .birthinputBox input[type="text"].error-value + label {
+  transform: translate(-10px, -48px);
+  color: red;
+  font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrap {
+	/*position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -86px;
+	margin-left: -89px;*/
+	text-align: center;
+	position: absolute;
+		width: 100px;
+		height: 15px;
+		top: 575px;
+		left: 490px;
+		
+}
+.wrap2 {
+	/*position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -86px;
+	margin-left: -89px;*/
+	text-align: center;
+	position: absolute;
+		width: 100px;
+		height: 15px;
+		top: 575px;
+		left: 10px;
+		
+}
+
+/*a {
+	-webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	display: block;
+	margin: 20px auto;
+	max-width: 180px;
+	text-decoration: none;
+	border-radius: 4px;
+	padding: 20px 20px;
+}
+
+
+
+a.button2 {
+	color: rgba(30, 22, 54, 0.6);
+	box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+a.button2:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+}*/
+
+.beautiful {
+	-webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	display: block;
+	margin: 20px auto;
+	max-width: 180px;
+	text-decoration: none;
+	border-radius: 4px;
+	border-width:0px;
+	padding: 12px 20px;
+	cursor: pointer;
+}
+
+
+
+.beautiful.button2 {
+	color: rgba(30, 22, 54, 0.6);
+	/*box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;*/
+	box-shadow: rgba(51, 153, 255, 0.4) 0 0px 0px 2px inset;
+	background-color: rgba(51, 153, 255, 0.4);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.beautiful.button2:hover {
+	color: rgba(255, 255, 255, 0.85);
+	/*box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;*/
+	box-shadow: rgba(0, 128, 255, 0.7) 0 80px 0px 2px inset;
+}

@@ -1,0 +1,122 @@
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	ol, ul, li
+	{
+		list-style-type: none;
+		float: left;
+	}
+	a
+	{
+		text-decoration: none;
+		color: #333;
+	}
+	img {
+		-webkit-user-drag: none;
+	}
+	header
+	{
+		width: 100%;
+		height: 100px;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		margin: auto;
+		z-index: 20;
+    	background-color: #ffffff;
+    	position: -webkit-sticky;
+    	position: sticky;
+	    -webkit-transition-duration:0.7s;
+		-webkit-transition-timing-function:ease;
+		transition-duration:0.7s;
+		transition-timing-function:ease;
+    	top: 0px;
+    	left: 0;
+    	right: 0;
+	}
+	header:after {
+		border: none;
+		display:block;
+		width:100%;
+	}
+	.down {
+		border: none;
+		background-color: #A1D4FE;
+		-webkit-transition-duration:0.7s;
+		-webkit-transition-timing-function:ease;
+		transition-duration:0.7s;
+		transition-timing-function:ease;
+	}
+	#logo_Wrap
+	{	
+		margin: auto;
+		width: 1280px;
+		height: 100px;
+	}
+	.logo
+	{
+		overflow: hidden;
+		background-size: contain;
+		background-repeat: no-repeat;
+		float: left;
+		width: 480px;
+		height: 100px;
+		margin-left: -60px;
+	}
+	.logoup
+	{
+		background-image: url('../image/logo.png');
+	}
+	.logodown
+	{
+		background-image: url('../image/logo_on.png');	
+	}
+	.logo_Menu nav ul li img {
+		width: 75%;
+		height: 75%;
+	}
+	.logo_Menu nav ul li button {
+		cursor: pointer;
+		font-size: 13px;
+		width: 45px;
+		height: 30px;
+		background: none;
+		border: none;
+	}
+	header nav
+	{
+		width: 700px;
+		float: right;
+		padding: 48px 0px 0px 0px;
+	}
+	header ul
+	{
+		float: right;
+	}
+	header li
+	{
+		text-align: right;
+		margin: 0px 0px 0px 20px;
+	}
+	.section_wrap
+	{
+		width: 1280px;
+		margin: auto;
+	}
+	footer
+	{
+		margin: auto;
+		border-width: 1px;
+		border-top-style: solid;
+		background-color: #EBEBEB;
+		width: 100%;
+		height: 300px;
+	}
+	footer div
+	{
+		width: 1280px;
+		height: 300px;
+		background-color: #EBEBEB;
+		margin: auto;
+	}

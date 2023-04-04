@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');	
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	ol, ul, li
+	{
+		list-style-type: none;
+		float: left;
+	}
+	a
+	{
+		text-decoration: none;
+		color: #333;
+	}
+	img {
+		-webkit-user-drag: none;
+	}
+	section {
+		width: 1280px;
+		height: 2000px;
+		margin: auto;
+	}
+	section .top_info_wrap {
+		width: 1280px;
+		height: 500px;
+		margin: auto;
+		position: relative;
+		z-index: 1;
+		
+	}
+	section .top_info_wrap::before {
+		background: url("../image/back2.jpg");
+		background-repeat: no-repeat;
+		background-size: 100% 500px;
+		content: "";
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		opacity: 0.3;
+		position: absolute;
+		z-index: -1;
+	}
+	section #top_li {
+		position: relative;
+		margin: auto;
+		width: 1100px;
+	}
+	section #top_li li {
+		border-radius: 15px;
+		cursor: pointer;
+		padding-top: 13px;
+		margin-top: 65px;
+		margin-left: 75px;
+		width: 130px;
+		height: 128px;
+	}
+	.top_info_wrap img {
+		margin: auto;
+		display: block;
+		width: 60%;
+		height: 60%;
+	}
+	.top_info_wrap div {
+		font-family: 'Jua', sans-serif;
+		font-size: 20px;
+		margin-top: 18px;
+		text-align: center;
+	}
+	section .map_wrap {
+		display: flex;
+		justify-content: center;
+		margin-top: 30px;
+		width: 1280px;
+		height: 720px;
+	}
+	section .map {
+		border-radius: 9px;
+		border: 1px solid black;
+		float: left;
+		width: 600px;
+		height: 700px;
+	}
+	section .map_wrap ul {
+		display: inline-block;
+		overflow: scroll;
+		width: 500px;
+		height: 700px;
+	}
+	section .map_wrap ul li {
+		margin-top: 10px;
+		margin-bottom: 5px;
+		margin-left: 25px;
+		width: 90%;
+		height: 123px;
+	}
+	section .map_search_wrap {
+		width: 1280px;
+		height: 90px;
+	}
+	select {
+		background: url("../image/select_icon.jpeg") no-repeat 95% 50%;
+		cursor: pointer;
+		font-size: 13px;
+		margin-top: 5px;
+		width: 100px; 
+		padding: .8em .5em; 
+		border: 1px solid #999;
+		border-radius: 7px; 
+		-webkit-appearance: none; 
+		-moz-appearance: none;
+		appearance: none;
+	}
+	section .map_search_ul {
+		border: 1px solid black;
+		margin: auto;
+		width: 990px;
+		height: 100%;
+	}
+	section .map_search_ul li:nth-child(1) {
+		margin-left: 50px;
+		width: 200px;
+		height: 50px;
+	}
+	section .map_search_ul li:nth-child(2) {
+		margin-left: 20px;
+		width: 230px;
+		height: 50px;
+	}
+	section .map_search_ul li:nth-child(3) {
+		margin-left: 10px;
+		width: 230px;
+		height: 50px;
+	}
+	section .map_search_ul li:nth-child(4) {
+		margin-left: 20px;
+		width: 80px;
+		height: 50px;
+	}
+	section .map_search_ul li:nth-child(5) {
+		margin-left: 20px;
+		width: 120px;
+		height: 50px;
+	}
+	section .event_info_wrap {
+		width: 1280px;
+		height: 600px;
+	}
+	section .event_info_wrap ul li:nth-child(1) {
+		margin-right: 25px;
+		width: 530px;
+		height: 500px;
+	}
+	section .event_info_wrap ul li:nth-child(2) {
+		margin-top: 8px;
+		margin-bottom: 40px;
+		width: 350px;
+		height: 220px;
+	}
+	section .event_info_wrap ul li:nth-child(3) {
+		margin-left: 10px;
+		margin-top: 8px;
+		margin-bottom: 40px;
+		width: 350px;
+		height: 220px;
+	}
+	section .event_info_wrap ul li:nth-child(4) {
+		width: 350px;
+		height: 220px;
+	}
+	section .event_info_wrap ul li:nth-child(5) {
+		margin-left: 10px;
+		width: 350px;
+		height: 220px;
+	}
+	.title_image {
+		float: left;
+		border-radius: 7px;
+		width: 180px;
+		height: 120px;
+		border: 1px solid black;
+	}
+	.title_image img{
+		width: 100%;
+		height: 100%;
+	}
+	.name {
+		font-family: 'Black Han Sans', sans-serif;
+		font-size: 23px;
+		margin-top: 8px;
+		float: right;
+		width: 260px;
+		height: 30px;
+	}
+	.address {
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 15px;
+		float: right;
+		width: 260px;
+		height: 30px;
+	}
+	.avgscore {
+		font-family: 'Gugi', cursive;
+		font-size: 17px;
+		float: right;
+		width: 260px;
+		height: 30px;
+	}
+	.price {
+		font-family: 'Jua', sans-serif;
+		font-size: 20px;
+		float: right;
+		width: 260px;
+		height: 30px;
+	}
+	
+
+	

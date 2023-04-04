@@ -1,0 +1,141 @@
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	ol, ul, li
+	{
+		list-style-type: none;
+		float: left;
+	}
+	a
+	{
+		text-decoration: none;
+		color: #333;
+	}
+	img {
+		-webkit-user-drag: none;
+	}
+	
+	.section_wrap
+	{
+		width: 1280px;
+		margin: auto;
+	}
+	section
+	{
+		width: 1280px;
+		margin: auto;
+	}
+
+	#main_jeonsi_section1
+	{
+		height: 40px;
+		border-bottom: 1px solid black;
+		margin-top:3px;
+	}
+	#main_jeonsi_section1 #nav1
+	{
+		width: 900px;
+		height: 20px;
+		float: left;
+		margin-top: 5px;
+		margin-left: 60px;
+	}
+	#main_jeonsi_section1 #nav2
+	{
+		width: 200px;
+		height: 20px;
+		float: right;
+		text-align: center;
+		line-height: 1px;
+	}
+	#main_jeonsi_section1 li
+	{
+		float: left;
+		width: 70px;
+		height: 20px;
+		margin-left: 20px;
+	}
+	#ranking
+	{
+		width: 25px;
+		float: 25px;
+	}
+	#main_center
+	{
+		width: 1280px;
+		height: 1500px;
+		margin: auto;
+	}
+	section .main_center_top ul li{
+		float: left;
+	}
+	.main_center_top
+	{
+		width: 1280px;
+		height: 300px;
+		border: 1px solid black;
+		background-color: skyblue;
+	}
+	.main_center_text
+	{
+		font-size: 22px;
+		margin: 20px 0px 10px 20px;
+		
+	}
+	.main_center_contents
+	{
+		width: 470px;
+		height: 488px;
+		margin-left: 120px;
+		margin-top: 30px;
+		border: 1px solid gray;
+		background-color: white;
+		border-radius: 20px;
+
+		
+	}
+	.main_center_contents2
+	{
+		width: 470px;
+		height: 488px;
+		margin-left: 80px;
+		margin-top: 30px;
+		border: 1px solid gray;
+		background-color: white;
+		border-radius: 20px;	
+	}
+	.main_center_contents_chart
+	{
+		margin: 20px;
+		border: 1px solid black;
+		height: 190px;
+	}
+	.main_bottom
+	{
+		height: 900px;
+		border: 1px solid black;
+		margin-top: 300px;
+	}
+	.main_bottom_text
+	{
+		font-size: 22px;
+		margin: 20px 0px 10px 20px;
+		border-bottom: 1px solid gray;
+	}	
+	.main_bottom_center
+	{	
+		height: 700px;
+		margin: 50px;
+		border: 1px solid black;
+	}
+	div .main_bottom_center ul li
+	{	
+		width: 370px;
+		height: 150px;
+		border: 1px solid black;
+		float: left;
+		margin: 10px;
+	}
+	
