@@ -3,7 +3,7 @@ package DTO;
 public class Writer {
 	int post_num, post_readcount, post_like;
 	double post_rating;
-	String post_user_id, post_date, post_title, post_body, post_file, post_category, post_img, post_travel_location;
+	String user_id, post_date, post_title, post_body, post_file, post_category, post_img, post_travel_location;
 	public int getPost_num() {
 		return post_num;
 	}
@@ -28,11 +28,11 @@ public class Writer {
 	public void setPost_rating(double post_rating) {
 		this.post_rating = post_rating;
 	}
-	public String getPost_user_id() {
-		return post_user_id;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setPost_user_id(String post_user_id) {
-		this.post_user_id = post_user_id;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getPost_date() {
 		return post_date;

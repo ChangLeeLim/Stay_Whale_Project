@@ -43,7 +43,7 @@ public class DataProcess_Review {
 		try {
 			stmt = conn.createStatement();
 			String command = "insert into bulletin_board_review values(0, '"
-					+ obj.getPost_user_id() + "', now(), '"
+					+ obj.getUser_id() + "', now(), '"
 					+ obj.getPost_title() + "', '"
 					+ obj.getPost_body() + "', '"
 					+ obj.getPost_file() + "', '"
@@ -65,7 +65,7 @@ public class DataProcess_Review {
 		data_Connec();
 		ArrayList<Writer> arr = new ArrayList();
 			try {
-				ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, post_user_id from bulletin_board_review order by post_num desc;");
+				ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review order by post_num desc;");
 				while(rs.next()) {
 					Writer wr = new Writer();
 					
@@ -78,7 +78,7 @@ public class DataProcess_Review {
 					wr.setPost_file(rs.getString("post_file"));
 					wr.setPost_travel_location(rs.getString("post_travel_location"));
 					wr.setPost_rating(rs.getDouble("post_rating"));
-					wr.setPost_user_id(rs.getString("post_user_id"));
+					wr.setUser_id(rs.getString("user_id"));
 					
 					arr.add(wr);
 				}
@@ -94,11 +94,11 @@ public class DataProcess_Review {
 		data_Connec();
 		ArrayList<Writer> arr = new ArrayList();
 			try {
-				ResultSet rs = stmt.executeQuery("select post_category, post_like, post_readcount, post_img, post_num,post_body,post_user_id,post_title,post_rating,post_travel_location, post_file, DATE_FORMAT(post_date, '%y-%m-%d') as post_date from bulletin_board_review where post_title='" + title + "' and post_num=" + num + "");
+				ResultSet rs = stmt.executeQuery("select post_category, post_like, post_readcount, post_img, post_num,post_body,user_id,post_title,post_rating,post_travel_location, post_file, DATE_FORMAT(post_date, '%y-%m-%d') as post_date from bulletin_board_review where post_title='" + title + "' and post_num=" + num + "");
 				while(rs.next()) {
 					Writer wr = new Writer();
 					wr.setPost_num(rs.getInt("post_num"));
-					wr.setPost_user_id(rs.getString("post_user_id"));
+					wr.setUser_id(rs.getString("user_id"));
 					wr.setPost_title(rs.getString("post_title"));
 					wr.setPost_rating(rs.getDouble("post_rating"));
 					wr.setPost_travel_location(rs.getString("post_travel_location"));
@@ -207,7 +207,7 @@ public class DataProcess_Review {
 		ArrayList<Writer> arr = new ArrayList();
 			if(str.equals("post_title")) {
 				try {
-					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, post_user_id from bulletin_board_review where post_title like '%" + val + "%' order by post_num desc;");
+					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review where post_title like '%" + val + "%' order by post_num desc;");
 					while(rs.next()) {
 						Writer wr = new Writer();
 						wr.setPost_num(rs.getInt("post_num"));
@@ -219,7 +219,7 @@ public class DataProcess_Review {
 						wr.setPost_file(rs.getString("post_file"));
 						wr.setPost_travel_location(rs.getString("post_travel_location"));
 						wr.setPost_rating(rs.getDouble("post_rating"));
-						wr.setPost_user_id(rs.getString("post_user_id"));
+						wr.setUser_id(rs.getString("user_id"));
 						arr.add(wr);
 					}
 				} catch (SQLException e) {
@@ -229,7 +229,7 @@ public class DataProcess_Review {
 				}
 			} else {
 				try {
-					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, post_user_id from bulletin_board_review where " + str + " ='" + val + "' order by post_num desc;");
+					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review where " + str + " ='" + val + "' order by post_num desc;");
 					while(rs.next()) {
 						Writer wr = new Writer();
 						wr.setPost_num(rs.getInt("post_num"));
@@ -241,7 +241,7 @@ public class DataProcess_Review {
 						wr.setPost_file(rs.getString("post_file"));
 						wr.setPost_travel_location(rs.getString("post_travel_location"));
 						wr.setPost_rating(rs.getDouble("post_rating"));
-						wr.setPost_user_id(rs.getString("post_user_id"));
+						wr.setUser_id(rs.getString("user_id"));
 						arr.add(wr);
 					}
 				} catch (SQLException e) {
