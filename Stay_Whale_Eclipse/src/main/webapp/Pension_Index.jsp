@@ -30,6 +30,7 @@
 	}
 	%>
 	<section>
+	<div class="section_wrap"></div>
 		<div id="main_search_wrap">
 			<div id="image_in" class="image_in">
 				<div class="selec_wrap">
