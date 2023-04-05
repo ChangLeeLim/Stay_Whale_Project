@@ -68,7 +68,7 @@
 				<div id="input_file_wrap">
 					<div class="filebox">
 					    <input class="upload-name" readonly placeholder="첨부파일">
-					    <label for="file">파일찾기</label><input type="file" id="file" name="file" accept="image/*" multiple>
+					    <label for="file">파일찾기</label><input type="file" id="file" name="file" accept="image/*">
 					</div>
 				</div>
 				<div id="sucess_bt">

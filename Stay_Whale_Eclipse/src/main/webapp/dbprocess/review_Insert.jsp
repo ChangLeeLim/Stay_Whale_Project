@@ -21,47 +21,39 @@
 	<jsp:useBean id="data" class="DAO.DataProcess_Review"> </jsp:useBean>
 	<jsp:useBean id="obj" class="DTO.Writer"> </jsp:useBean>
 	<%
-		ServletContext context = request.getServletContext();
-		String imagePath=context.getRealPath("thumbnail");
+		String uploadPath=request.getRealPath("review_image");
+	
+		int size = 10*1024*1024; // 첨부 파일의 용량(10메가)
+		String name="";
+		String subject="";
+		String filename1="";
+		String filename2="";
+		String origfilename1="";
+		String origfilename2="";
+	
+	try{
+		MultipartRequest multi=new MultipartRequest(request,
+							uploadPath,
+							size, 
+							"UTF-8",
+				new DefaultFileRenamePolicy());
 		
-		int size = 1*1024*1024 ;
-		String filename="";
+		Enumeration files=multi.getFileNames();
 		
-		try{
-			MultipartRequest multi=	new MultipartRequest(request,
-			  					  imagePath,
-								  size,
-								  "utf-8",
-								new DefaultFileRenamePolicy());
-			
-			Enumeration files=multi.getFileNames();
-			
-			String file =(String)files.nextElement();
-			filename=multi.getFilesystemName(file);
-			out.println(filename);
-			obj.setUser_id(multi.getParameter("id"));
-			obj.setPost_title(multi.getParameter("title"));
-			obj.setPost_body(multi.getParameter("txt").replace("\r\n","<br>"));
-			obj.setPost_file(filename);
-			obj.setPost_like(0);
-			obj.setPost_travel_location(multi.getParameter("travellocation"));
-			obj.setPost_rating(Double.parseDouble(multi.getParameter("reviewStar")));
-		} catch(Exception e) {
+		String file1 =(String)files.nextElement();
+		filename1=multi.getFilesystemName(file1);
+		origfilename1= multi.getOriginalFileName(file1);
+		
+		obj.setUser_id(multi.getParameter("id"));
+		obj.setPost_title(multi.getParameter("title"));
+		obj.setPost_body(multi.getParameter("txt").replace("\r\n","<br>"));
+		obj.setPost_file(filename1);
+		obj.setPost_like(0);
+		obj.setPost_travel_location(multi.getParameter("travellocation"));
+		obj.setPost_rating(Double.parseDouble(multi.getParameter("reviewStar")));
+
+		}catch(Exception e){
 			e.printStackTrace();
-		}
-		if(filename != null) {
-			ParameterBlock pb=new ParameterBlock();
-			pb.add(imagePath+"/"+filename);
-			RenderedOp rOp=JAI.create("fileload",pb);
-			
-			BufferedImage bi= rOp.getAsBufferedImage();
-			BufferedImage thumb=new BufferedImage(100,100,BufferedImage.TYPE_INT_RGB);
-			
-			Graphics2D g=thumb.createGraphics();
-			g.drawImage(bi,0,0,100,100,null);
-			
-			File file=new File(imagePath+"/sm_"+filename);
-			ImageIO.write(thumb,"jpg",file);
 		}
 		
 		data.review_insert(obj);

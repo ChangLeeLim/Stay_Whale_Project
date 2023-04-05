@@ -9,13 +9,13 @@
 		Statement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/websitedb","root","1234");
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/prac","root","1234");
 			if(conn == null) {
 				throw new Exception("데이터베이스에 연결할 수 없습니다.");
 			}
 		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select user_id from sign_up where user_id='"+ id + "';");
+		ResultSet rs = stmt.executeQuery("select id from sign_up where id='"+ id + "';");
 		if(rs.next()) {
 			%>
 			<script>
