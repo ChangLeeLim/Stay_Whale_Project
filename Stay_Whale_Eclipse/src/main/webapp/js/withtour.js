@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
       var $header = $('header'); //헤더를 변수에 넣기
       var $page = $('.section_wrap'); //색상이 변할 부분
       var $window = $(window);
@@ -13,4 +13,22 @@ $(function(){
         $header.toggleClass('down', scrolled); //클래스 토글
         $(".logo").toggleClass('logodown', scrolled);
       });
-    });
+    });*/
+
+
+
+$(function() {
+	$("#section1").css("height","45px");
+	$("#writeBtn").click(function() {
+		$("#section1").css("height","420px");
+		$("#writeBtn").hide();
+	});
+	
+	$("#cancel").click(function() {
+		$("#introCont").val("");
+		$("#section1").css("height","45px");
+		$("#writeBtn").show();
+		
+	});
+	
+});
