@@ -13,7 +13,7 @@
         $header.toggleClass('down', scrolled); //클래스 토글
         $(".logo").toggleClass('logodown', scrolled);
       });
-    });*/
+    });ㅇㅇ애ㅑㅕㅗㄹ대ㅗ*/
 
 
 

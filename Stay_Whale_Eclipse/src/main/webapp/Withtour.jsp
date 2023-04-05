@@ -287,7 +287,7 @@
 							<div>
 								<ul>
 									<li>d</li>
-									<li>weojfwioejf</li>
+									<li>weojfwioewef변경점efjf</li>
 									<li>여행준비중</li>
 								</ul>
 							</div>
