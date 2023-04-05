@@ -96,7 +96,7 @@
 			}
 			if(!arr.get(i).getPost_file().equals("null")) {
 				out.println("<div id='file_image_wrap'>");
-				out.println("<img id='file_image' src='thumbnail/" + arr.get(i).getPost_file() + "'>");
+				out.println("<img id='file_image' src='review_image/" + arr.get(i).getPost_file() + "'>");
 				out.println("</div>");
 			}
 			out.println("<div id='sucess_bt'>");

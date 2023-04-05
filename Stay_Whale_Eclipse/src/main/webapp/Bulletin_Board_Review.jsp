@@ -55,7 +55,7 @@
 								if(arr.get(i).getPost_file().equals("null")) {
 									out.println("<div id='thumbnail' style='background-image: url(image/no-photo.png);'></div>");
 								} else {
-									out.println("<div id='thumbnail' style='background-image: url(thumbnail/" + arr.get(i).getPost_file() + ");'></div>");	
+									out.println("<div id='thumbnail' style='background-image: url(review_image/" + arr.get(i).getPost_file() + ");'></div>");	
 								}
 								out.println("<div id='title'>"+ arr.get(i).getPost_title() +"</div>");
 								out.println("<div id='profile_wrap'>");
@@ -88,7 +88,7 @@
 								if(arr_search.get(i).getPost_file().equals("null")) {
 									out.println("<div id='thumbnail' style='background-image: url(image/no-photo.png);'></div>");
 								} else {
-									out.println("<div id='thumbnail' style='background-image: url(thumbnail/" + arr_search.get(i).getPost_file() + ");'></div>");	
+									out.println("<div id='thumbnail' style='background-image: url(review_image/" + arr_search.get(i).getPost_file() + ");'></div>");	
 								}
 								out.println("<div id='title'>"+ arr_search.get(i).getPost_title() +"</div>");
 								out.println("<div id='profile_wrap'>");
