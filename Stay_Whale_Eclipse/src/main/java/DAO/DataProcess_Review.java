@@ -43,7 +43,7 @@ public class DataProcess_Review {
 		try {
 			stmt = conn.createStatement();
 			String command = "insert into bulletin_board_review values(0, '"
-					+ obj.getPost_user_id() + "', now(), '"
+					+ obj.getUser_id() + "', now(), '"
 					+ obj.getPost_title() + "', '"
 					+ obj.getPost_body() + "', '"
 					+ obj.getPost_file() + "', '"
@@ -78,7 +78,7 @@ public class DataProcess_Review {
 					wr.setPost_file(rs.getString("post_file"));
 					wr.setPost_travel_location(rs.getString("post_travel_location"));
 					wr.setPost_rating(rs.getDouble("post_rating"));
-					wr.setPost_user_id(rs.getString("user_id"));
+					wr.setUser_id(rs.getString("user_id"));
 					
 					arr.add(wr);
 				}
@@ -98,7 +98,7 @@ public class DataProcess_Review {
 				while(rs.next()) {
 					Writer wr = new Writer();
 					wr.setPost_num(rs.getInt("post_num"));
-					wr.setPost_user_id(rs.getString("user_id"));
+					wr.setUser_id(rs.getString("user_id"));
 					wr.setPost_title(rs.getString("post_title"));
 					wr.setPost_rating(rs.getDouble("post_rating"));
 					wr.setPost_travel_location(rs.getString("post_travel_location"));
@@ -219,7 +219,7 @@ public class DataProcess_Review {
 						wr.setPost_file(rs.getString("post_file"));
 						wr.setPost_travel_location(rs.getString("post_travel_location"));
 						wr.setPost_rating(rs.getDouble("post_rating"));
-						wr.setPost_user_id(rs.getString("user_id"));
+						wr.setUser_id(rs.getString("user_id"));
 						arr.add(wr);
 					}
 				} catch (SQLException e) {
@@ -241,7 +241,8 @@ public class DataProcess_Review {
 						wr.setPost_file(rs.getString("post_file"));
 						wr.setPost_travel_location(rs.getString("post_travel_location"));
 						wr.setPost_rating(rs.getDouble("post_rating"));
-						wr.setPost_user_id(rs.getString("user_id"));
+						wr.setUser_id(rs.getString("user_id"));
+
 						arr.add(wr);
 					}
 				} catch (SQLException e) {

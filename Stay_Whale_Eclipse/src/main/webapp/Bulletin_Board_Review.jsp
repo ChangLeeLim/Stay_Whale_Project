@@ -61,7 +61,7 @@
 								out.println("<div id='profile_wrap'>");
 								out.println("<img src='image/review_profile_icon.png'>");
 								out.println("<div>");
-								out.println("<div id='profile_text'><label id='user_id'>" + arr.get(i).getPost_user_id() + "<br></label><label id='post_date'>" + arr.get(i).getPost_date() + "</label></div>");
+								out.println("<div id='profile_text'><label id='user_id'>" + arr.get(i).getUser_id() + "<br></label><label id='post_date'>" + arr.get(i).getPost_date() + "</label></div>");
 								out.println("</div>");
 								out.println("<div><div id='travellocation'>" + arr.get(i).getPost_travel_location() + "</div>");
 								if(arr.get(i).getPost_rating() == 1.0) {
@@ -94,7 +94,7 @@
 								out.println("<div id='profile_wrap'>");
 								out.println("<img src='image/review_profile_icon.png'>");
 								out.println("<div>");
-								out.println("<div id='profile_text'><label id='user_id'>" + arr_search.get(i).getPost_user_id() + "<br></label><label id='post_date'>" + arr_search.get(i).getPost_date() + "</label></div>");
+								out.println("<div id='profile_text'><label id='user_id'>" + arr_search.get(i).getUser_id() + "<br></label><label id='post_date'>" + arr_search.get(i).getPost_date() + "</label></div>");
 								out.println("</div>");
 								out.println("<div><div id='travellocation'>" + arr_search.get(i).getPost_travel_location() + "</div>");
 								if(arr_search.get(i).getPost_rating() == 1.0) {

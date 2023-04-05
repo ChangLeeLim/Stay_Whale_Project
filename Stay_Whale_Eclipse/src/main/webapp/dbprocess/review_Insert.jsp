@@ -39,7 +39,7 @@
 			String file =(String)files.nextElement();
 			filename=multi.getFilesystemName(file);
 			out.println(filename);
-			obj.setPost_user_id(multi.getParameter("id"));
+			obj.setUser_id(multi.getParameter("id"));
 			obj.setPost_title(multi.getParameter("title"));
 			obj.setPost_body(multi.getParameter("txt").replace("\r\n","<br>"));
 			obj.setPost_file(filename);

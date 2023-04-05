@@ -29,6 +29,7 @@
 	<%
 	}
 	%>
+	<section>
 	<div class="section_wrap"></div>
 		<div id="main_search_wrap">
 			<div id="image_in" class="image_in">
@@ -63,6 +64,7 @@
 				</div>
 			</div>
 		</div>
+	</section>
 	<section id="sec_section">
 		<div id="map_serarch_title"><img src="image/map_search_icon.png">&nbsp지도 검색</div>
 		<div class="map_wrap">

@@ -9,7 +9,7 @@
 	<jsp:useBean id="data" class="DAO.DataProcess_Review"> </jsp:useBean>
 	<jsp:useBean id="obj" class="DTO.Writer"> </jsp:useBean>
 	<%		
-		obj.setPost_user_id(request.getParameter("id"));
+		obj.setUser_id(request.getParameter("id"));
 		obj.setPost_body(request.getParameter("txt").replaceAll("<br>", "\r\n"));
 		obj.setPost_title(request.getParameter("title"));
 		obj.setPost_num(Integer.parseInt(request.getParameter("num")));
