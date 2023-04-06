@@ -14,7 +14,7 @@ public class DataProcess_Review {
 	
 	public DataProcess_Review() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -22,7 +22,7 @@ public class DataProcess_Review {
 	
 	void data_Connec() {
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/prac","root","1234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/websitedb","root","1234");
 			stmt = conn.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
