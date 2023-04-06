@@ -1,20 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8" %>
-<%@ page import="java.sql.*"%>
-<%@ page import="java.util.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% request.setCharacterEncoding("UTF-8");%>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>STAY WHALE || Hotel Resort</title>
-	
-	
 </head>
 <body>
 	<%
 		request.setCharacterEncoding("utf-8");
-		String id = (String)session.getAttribute("id");
+		String id = (String) session.getAttribute("id");
 	%>
 	<%
 		if(id == null) {
@@ -88,7 +82,7 @@
 						<div id="people_Wrap">
 							<button id="dw"><img src="image/minus_Bt.png"></button>
 							<span id="people_cnt" style="font-size: 22px">2</span>
-							<button id="up"><img src="image/plus_Bt.png"></button>
+							<button id="up"><img src="image/plus_BT.png"></button>
 						</div>
 					</div>
 					<div style="margin-top: 20px"><b>배드 타입</b></div>
@@ -184,7 +178,7 @@
 					<div class="info_content">
 						<ul>
 							<li>
-								<div><img src="image/ex1.jpg"></div>
+								<div class="list_image"><img src="image/ex1.jpg"></div>
 								<div class="content_text_wrap">
 									<div class="info_in_text" id="info_intext1"><span>3성급</span></div>
 									<div class="info_in_text" id="info_intext2"><span>호텔이름</span></div>
@@ -194,23 +188,23 @@
 								</div>
 							</li>
 							<li>
-								<div><img src="image/ex2.jpg"></div>
+								<div class="list_image"><img src="image/ex2.jpg"></div>
 								<div class="content_text_wrap">
-									<div class="info_in_text" id="info_intext1"><span>5성급</span></div>
+									<div class="info_in_text" id="info_intext1"><span>3성급</span></div>
 									<div class="info_in_text" id="info_intext2"><span>호텔이름</span></div>
-									<div id="info_intext3"><span>★ 9.8 (1,761)</span></div>
-									<div class="info_in_text" id="info_intext4"><span>송파구</span></div>
-									<div id="info_intext5"><span>650,000원</span></div>
+									<div id="info_intext3"><span>★ 9.7 (2,761)</span></div>
+									<div class="info_in_text" id="info_intext4"><span>강남구</span></div>
+									<div id="info_intext5"><span>420,000원</span></div>
 								</div>
 							</li>
 							<li>
-								<div><img src="image/ex3.jpg"></div>
+								<div class="list_image"><img src="image/ex3.jpg"></div>
 								<div class="content_text_wrap">
-									<div class="info_in_text" id="info_intext1"><span>4성급</span></div>
+									<div class="info_in_text" id="info_intext1"><span>3성급</span></div>
 									<div class="info_in_text" id="info_intext2"><span>호텔이름</span></div>
-									<div id="info_intext3"><span>★ 9.5 (761)</span></div>
-									<div class="info_in_text" id="info_intext4"><span>서초구</span></div>
-									<div id="info_intext5"><span>220,000원</span></div>
+									<div id="info_intext3"><span>★ 9.7 (2,761)</span></div>
+									<div class="info_in_text" id="info_intext4"><span>강남구</span></div>
+									<div id="info_intext5"><span>420,000원</span></div>
 								</div>
 							</li>
 						</ul>
@@ -218,7 +212,6 @@
 				</div>
 			</div>
 		</article>
-
 	<jsp:include page="footer.jsp"/>
 </body>
 <link rel="stylesheet" type="text/css" href="css/hotel_resort_index.css">
@@ -226,19 +219,16 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 	<script type="text/javascript" src="daterangepicker-master/daterangepicker.js"></script>
-	<link rel="stylesheet" type="text/css" href="daterangepicker-master/daterangepicker.css" />
-	
+	<link rel="stylesheet" type="text/css" href="daterangepicker-master/daterangepicker.css"/>
+	<script type="text/javascript" src="js/hotel_resort_index.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!--  -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon:400" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font:400" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
   	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
-    <!--Plugin CSS file with desired skin-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
-    <!--Plugin JavaScript file-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
-    <script type="text/javascript" src="js/hotel_resort_index.js"></script>
 </html>
