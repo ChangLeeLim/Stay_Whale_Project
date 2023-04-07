@@ -15,7 +15,7 @@
 				throw new Exception("데이터베이스에 연결할 수 없습니다.");
 			}
 		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select user_id, password from sign_up where id='" + id_get + "';");
+		ResultSet rs = stmt.executeQuery("select user_id, password from sign_up where user_id='" + id_get + "';");
 
 		if(rs.next()) {
 			String id = rs.getString("user_id");
@@ -28,7 +28,7 @@
 			} else {
 				%>
 				<script>
-					alert("비밀번호를 확인해주세요")
+					alert("비밀번호를 확인해주세요");
 					history.back();
 				</script>
 				<%
@@ -37,7 +37,7 @@
 		}  else {
 			%>
 			<script>
-				alert("회원가입을 먼저 진행해주세요.")
+				alert("회원가입을 먼저 진행해주세요.");
 				history.back();
 			</script>
 			<%

@@ -15,7 +15,7 @@
 			<div id="intro">
 				<div><label><b>StayWhale 회원가입<b></label></div>
 			</div>
-			<div id="icon"><img src="image/logo_sky.png" style="width: 280px; height: 280px;"></div>
+			<div id="icon"><img src="image/logo2.png"></div>
 
 			<form onsubmit="return onsub()" method="post" action="dbprocess/sign_Up_Jsp.jsp" >
 
@@ -105,11 +105,14 @@
 
 					<div class="outBox3">
 						<div class="inputBox">
-					<input type="tel" id="hp_1" name="hp_1" placeholder="휴대폰번호" size="13" maxlength="13" style="width: 278px;" onchange="hpCheck()">
+					<input type="tel" id="hp_1" name="hp_1" placeholder="휴대폰번호" size="13" maxlength="13" style="width: 200px;" onchange="hpCheck()">
 					<label for="hp1_1">휴대폰번호</label>
 				</div>
-			</div>
+			</div>	<input type="button" id="hpCheckBtn" value="인증요청">
 					<label id="gender_error"></label><label id="hp_error1"></label>
+					<input type="text" id="hpCheckInput" placeholder="인증번호입력.">
+					<input type="button" id="hpCheckBtn2" value="확인">
+					
 				</td>
 			</tr>
 			<tr>
@@ -175,7 +178,7 @@
 				<label id="addrdetail_error"></label>
 				</td>
 			</tr>
-			<input type="submit" id="confirm" name="confirm" value="회원가입" onclick="signupCheck()">
+			<input type="submit" id="confirm" name="confirm" value="회원가입" onclick="signupCheck()" >
 			<input type="button" id="back" name="back" value="뒤로가기">
 		</table>
 	</form>

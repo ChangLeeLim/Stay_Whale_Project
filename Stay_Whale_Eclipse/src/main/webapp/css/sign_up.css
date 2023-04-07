@@ -173,27 +173,27 @@
 
 
 	.outBox .inputBox input[type="text"]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox2 .inputBox .input_style2:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox3 .inputBox input[type=tel]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox3 .inputBox input[type=text]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox4 .inputBox input[type=text]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
@@ -345,7 +345,7 @@
 
 	.total_frame{
 		width: 750px;
-		height: 600px;
+		height: 650px;
 		margin: 200px auto;
 		border-radius: 15px;
 		border: 2px solid #E0E0E0;
@@ -387,7 +387,7 @@
     	background-color: #006CFA;
     	color: white;
     	position: relative;
-    	top: 107px;
+    	top: 150px;
     	left: 350px;
     	z-index: 999;
    
@@ -424,7 +424,7 @@
     	background-color: #006CFA;
     	color: white;
     	position: relative;
-    	top: 107px;
+    	top: 150px;
     	left: 256px;
     	opacity: 0;
     	z-index: 890;
@@ -437,7 +437,7 @@
     	border: none;
     	color: black;
     	position: relative;
-    	top: 107px;
+    	top: 150px;
     	left: -194px;
     	z-index: 900;
     	font-size: 16px;
@@ -481,4 +481,35 @@
 		border-radius: 5px;
 		position: relative;
 		height: 37px;
+	}
+	#hpCheckBtn{
+		font-family: 'Noto Sans KR', sans-serif;
+		border-radius: 5px;
+	    border: none;
+	    background-color: #006CFA;
+	    color: white;
+	    height: 40px;
+	    width: 75px;
+	    font-size: 16px;
+	    cursor: pointer;	
+	}
+	#hpCheckBtn2{
+		position: relative;
+		top: 2px;
+		font-family: 'Noto Sans KR', sans-serif;
+		border-radius: 5px;
+	    border: none;
+	    background-color: #006CFA;
+	    color: white;
+	    height: 40px;
+	    width: 75px;
+	    font-size: 16px;
+	   	cursor: pointer;
+	}
+	#hpCheckInput{
+    	width: 325px;
+    	border-radius: 6px;
+    	box-sizing: border-box;
+    	border: 2px solid #999;
+    	height: 40px;
 	}
