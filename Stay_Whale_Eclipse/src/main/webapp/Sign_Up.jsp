@@ -6,8 +6,8 @@
 	<title></title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript" src="js/sign_Up_Js.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/sign_Up_Css.css">
+	<script type="text/javascript" src="js/sign_up.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/sign_up.css">
 </head>
 <body>
 	<section>
