@@ -591,3 +591,47 @@ $(function(){
 
 
 
+
+$(function(){
+    var number;
+    
+    $('#hpCheckBtn').click(function() {
+		if (!$('#hp_1').hasClass("error-value")) {
+    	var phone = $('#hp_1').val().trim();
+        $.ajax({
+            url : "dbprocess/Sms_Number_Check.jsp",
+            data : {"phone" : phone},
+            type : "POST",
+            success : function(data){
+                number = data.trim();
+            }
+        });
+        alert("인증번호를 전송하였습니다.");  
+  	}
+        else
+        {
+			alert("휴대폰 번호를 다시 확인해주세요.");
+		}           
+    });
+    
+    $('#hpCheckBtn2').click(function(){ 
+        var inputnumber = $('#hpCheckInput').val().trim();
+        
+        if(inputnumber == number)
+        {
+            alert("인증에 성공하였습니다.");
+            $("#hpCheckInput").prop("disabled", true);
+            $("#hp_1").prop("disabled", true);
+            $("#hpCheckBtn").prop("disabled", true);
+            $("#hpCheckBtn2").prop("disabled", true);
+        }
+        else
+        {
+            alert("인증번호를 다시 확인해주세요.");
+        }
+        
+    });
+});
+
+
+

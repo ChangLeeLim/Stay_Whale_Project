@@ -108,7 +108,7 @@
 					<input type="tel" id="hp_1" name="hp_1" placeholder="휴대폰번호" size="13" maxlength="13" style="width: 200px;" onchange="hpCheck()">
 					<label for="hp1_1">휴대폰번호</label>
 				</div>
-			</div>	<input type="button" id="hpCheckBtn" value="중복확인">
+			</div>	<input type="button" id="hpCheckBtn" value="인증요청">
 					<label id="gender_error"></label><label id="hp_error1"></label>
 					<input type="text" id="hpCheckInput" placeholder="인증번호입력.">
 					<input type="button" id="hpCheckBtn2" value="확인">
