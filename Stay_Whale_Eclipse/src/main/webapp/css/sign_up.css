@@ -173,27 +173,27 @@
 
 
 	.outBox .inputBox input[type="text"]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox2 .inputBox .input_style2:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox3 .inputBox input[type=tel]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox3 .inputBox input[type=text]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
 	.outBox4 .inputBox input[type=text]:focus + label {
-		color:darkblue; 
+		color:red; 
 		font-size:12px; 
 		transform:translate(5px, -38px);
 	}
@@ -481,4 +481,14 @@
 		border-radius: 5px;
 		position: relative;
 		height: 37px;
+	}
+	#hpCheckBtn{
+		font-family: 'Noto Sans KR', sans-serif;
+		border-radius: 5px;
+	    border: none;
+	    background-color: #006CFA;
+	    color: white;
+	    height: 40px;
+	    width: 75px;
+	
 	}

@@ -6,8 +6,8 @@
 	<title></title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript" src="js/sign_up.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/sign_up.css">
+	<script type="text/javascript" src="js/sign_Up_Js.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/sign_Up_Css.css">
 </head>
 <body>
 	<section>
@@ -15,7 +15,7 @@
 			<div id="intro">
 				<div><label><b>StayWhale 회원가입<b></label></div>
 			</div>
-			<div id="icon"><img src="image/logo_sky.png" style="width: 280px; height: 280px;"></div>
+			<div id="icon"><img src="image/logo2.png"></div>
 
 			<form onsubmit="return onsub()" method="post" action="dbprocess/sign_Up_Jsp.jsp" >
 
@@ -105,10 +105,11 @@
 
 					<div class="outBox3">
 						<div class="inputBox">
-					<input type="tel" id="hp_1" name="hp_1" placeholder="휴대폰번호" size="13" maxlength="13" style="width: 278px;" onchange="hpCheck()">
+					<input type="tel" id="hp_1" name="hp_1" placeholder="휴대폰번호" size="13" maxlength="13" style="width: 200px;" onchange="hpCheck()">
 					<label for="hp1_1">휴대폰번호</label>
 				</div>
 			</div>
+					<input type="button" id="hpCheckBtn" value="중복확인">
 					<label id="gender_error"></label><label id="hp_error1"></label>
 				</td>
 			</tr>
@@ -175,7 +176,7 @@
 				<label id="addrdetail_error"></label>
 				</td>
 			</tr>
-			<input type="submit" id="confirm" name="confirm" value="회원가입" onclick="signupCheck()">
+			<input type="submit" id="confirm" name="confirm" value="회원가입" onclick="signupCheck()" >
 			<input type="button" id="back" name="back" value="뒤로가기">
 		</table>
 	</form>
