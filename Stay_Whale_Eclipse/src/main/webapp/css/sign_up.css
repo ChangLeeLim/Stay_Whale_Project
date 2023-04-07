@@ -345,7 +345,7 @@
 
 	.total_frame{
 		width: 750px;
-		height: 600px;
+		height: 650px;
 		margin: 200px auto;
 		border-radius: 15px;
 		border: 2px solid #E0E0E0;
@@ -387,7 +387,7 @@
     	background-color: #006CFA;
     	color: white;
     	position: relative;
-    	top: 107px;
+    	top: 150px;
     	left: 350px;
     	z-index: 999;
    
@@ -424,7 +424,7 @@
     	background-color: #006CFA;
     	color: white;
     	position: relative;
-    	top: 107px;
+    	top: 150px;
     	left: 256px;
     	opacity: 0;
     	z-index: 890;
@@ -437,7 +437,7 @@
     	border: none;
     	color: black;
     	position: relative;
-    	top: 107px;
+    	top: 150px;
     	left: -194px;
     	z-index: 900;
     	font-size: 16px;
