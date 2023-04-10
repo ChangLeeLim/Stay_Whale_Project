@@ -29,6 +29,7 @@
 	}
 	%>
 <div class="section_wrap"></div>
+
 <section id="main_section1">
 	<nav>
 		<span>이미지슬라이더</span>
