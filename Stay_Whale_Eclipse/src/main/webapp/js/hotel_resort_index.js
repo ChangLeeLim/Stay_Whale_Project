@@ -5,35 +5,35 @@ $(function() {
     var year = a.getFullYear();
     var month = a.getMonth()+1;
     var date = a.getDate();
-
-    $(function(){
-      var $header = $('header'); //헤더를 변수에 넣기
-      var $page = $('.section_wrap'); //색상이 변할 부분
-      var $window = $(window);
-      var pageOffsetTop = $page.offset().top;//색상 변할 부분의 top값 구하기
-
-      $window.resize(function(){ //반응형을 대비하여 리사이즈시 top값을 다시 계산
-        pageOffsetTop = $page.offset().top;
-      });
-      
-      $window.on('scroll', function(){ //스크롤시
-        var scrolled = $window.scrollTop() >= pageOffsetTop; //스크롤된 상태; true or false
-        $header.toggleClass('down', scrolled); //클래스 토글
-        $(".logo").toggleClass('logodown', scrolled);
-      });
-    });
+	var publicArray = []
 
     $("#reset_Bt").click(function() {
         $("input[type=checkbox]").prop("checked", false);
         location.reload();
-    });
-
+    });	
+	
+	$(document).ready(function(){
+	    $("input:checkbox[name=detail_check]").change(function(){
+	        if($(this).is(":checked") && !publicArray.includes($(this).val())){
+	            publicArray.push($(this).val())
+	        } else {
+	            for(var i=0; i<publicArray.length; i++) {
+					if(publicArray[i] === $(this).val()) {
+						publicArray.splice(i, 1);
+					}
+				}
+	        }
+	        $("#detailHidden").val(publicArray)
+	    });
+	});
+	
     $("#dw").click(function() {
         var val = $("#people_cnt").text();
         $("#people_cnt").html(parseInt(val) -1);
         if(val == 0) {
             $("#people_cnt").html("0");
         }
+        $("#people_set").val($("#people_cnt").text()) 
     });
     $("#up").click(function() {
         var val = $("#people_cnt").text();
@@ -41,8 +41,9 @@ $(function() {
         if(val == 8) {
             $("#people_cnt").html("8");
         }
+        $("#people_set").val($("#people_cnt").text())
     });
-
+    
     $("#day_Selec").daterangepicker({
         "autoApply": false,
         "locale": {
@@ -106,11 +107,13 @@ $(function() {
         var newSrc = srcName.substring(0, srcName.lastIndexOf('.'));
 
         if($(this).css("background-color") == "rgba(0, 0, 0, 0)") {
+			$(this).next().val($(this).find("div").html())
           $(this).find("img").attr("src", newSrc + '_on.' + /[^.]+$/.exec(srcName));
           $(this).css("color", "white");
           $(this).css("background-color", "#006CFA");
         }
         else if ($(this).css("background-color") == "rgb(0, 108, 250)"){
+			$(this).next().val("")
           var onSrc = newSrc.slice(0, -3);
           $(this).find("img").attr("src", onSrc + '.' + /[^.]+$/.exec(srcName));
           $(this).css("color", "black");
@@ -119,8 +122,7 @@ $(function() {
     });
         var $range = $(".js-range-slider"),
         $inputFrom = $(".js-input-from"),
-        $inputTo = $(".js-input-to"),
-        instance
+        $inputTo = $(".js-input-to"), instance
 
     $range.ionRangeSlider({
         skin: "round",
@@ -138,8 +140,8 @@ $(function() {
       from = data.from;
         to = data.to;
         
-        $inputFrom.prop("value", from + "만원");
-        $inputTo.prop("value", to + "만원"); 
+        $("#price_left").val(from + "만원");
+        $("#price_right").val(to + "만원");
     }
 
     $inputFrom.on("input", function () {
