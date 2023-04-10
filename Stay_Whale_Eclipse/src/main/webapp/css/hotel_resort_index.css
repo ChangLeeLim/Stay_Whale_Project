@@ -19,18 +19,17 @@
 	body {
 		font-family: 'Gothic A1', sans-serif;
 	}
-	label {
-		font-size: 15px;
+	#addr_selec {
+		display: flex;
+		justify-content: center; 
 	}
-	#addr_Selec {
-		text-align: center;
-	}
+	
 	select {
 		background: url("../image/select_icon.jpeg") no-repeat 95% 50%;
 		cursor: pointer;
 		font-size: 15px;
-		margin-top: 20px;
-		width: 150px; 
+		margin-top: 10px;
+		width: 133px; 
 		padding: .8em .5em; 
 		border: 1px solid #999;
 		border-radius: 7px; 
@@ -38,9 +37,17 @@
 		-moz-appearance: none;
 		appearance: none;
 	}
+	select:nth-child(1) {
+		margin-right: 10px;
+	}
+	#date_wrap {
+		margin-top: 10px;
+		display: flex;
+		justify-content: center;
+	}
 	.section_wrap {
 		width: 1280px;
-		height: 1900px;
+		height: 1970px;
 		margin: auto;
 	}
 	.side_wrap {
@@ -149,8 +156,43 @@
 		margin-left: 500px;
 	}
 	.bt1 button {
-		margin: 20px;
+		margin: 10px;
 		outline: none;
+	}
+	#check_top_wrap {
+		display: flex;
+		justify-content: center;
+	}
+	#check_top_wrap ul li {
+		margin-top: 10px;
+		text-align: center;
+		width: 150px;
+		height: 40px;
+	}
+	#grade_selec_wrap {
+		margin-top: 10px;
+		display: flex;
+		justify-content: center; 
+	}
+	#grade_selec_wrap ul li{
+		text-align: center;
+		width: 90px;
+		height: 45px;
+	}
+	.check_box_wrap {
+		padding-top: 10px;
+		padding-left: 40px;
+		display: flex;
+		justify-content: center;
+	}
+	.check_box_wrap ul {
+		width: 340px;
+		height: auto;
+	}
+	
+	.check_box_wrap ul li {
+		width: 170px;
+		height: 45px;
 	}
 	.custom-btn {
 		font-size: 17px;
@@ -289,12 +331,6 @@
 		width: 100%;
 	}
 
-	form li {
-		margin-top: 10px;
-		margin-left: 30px;
-		width: 150px;
-		height: 30px;
-	}
 	#people_Wrap {
 		float: right; 
 		margin-right: 35px;
@@ -355,6 +391,7 @@
 		height: auto;
 	}
 	#price_left {
+		color : darkgray;
 		background: transparent;
 		border: none;
 		font-size: 15px;
@@ -362,6 +399,7 @@
 		text-align: center;
 	}
 	#price_right {
+		color : darkgray;
 		background: transparent;
 		border: none;
 		font-size: 15px;
@@ -374,11 +412,10 @@
 	    display: none;
 	}
 	input[type=checkbox] + label{
-	    display: inline-block;
+	    display: inline;
 	    cursor: pointer;
 	    position: relative;  
-	    padding-left: 25px;  
-	    margin-right: 15px;  
+	    padding-left: 25px;
 	    font-size: 15px;
 	}
 	input[type=checkbox] + label:before {     
