@@ -30,7 +30,7 @@
 		String filename2="";
 		String origfilename1="";
 		String origfilename2="";
-	
+		
 	try{
 		MultipartRequest multi=new MultipartRequest(request,
 							uploadPath,
@@ -51,7 +51,7 @@
 		obj.setPost_like(0);
 		obj.setPost_travel_location(multi.getParameter("travellocation"));
 		obj.setPost_rating(Double.parseDouble(multi.getParameter("reviewStar")));
-
+		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
