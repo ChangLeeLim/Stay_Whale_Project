@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="vo.HotelBean"%>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,8 @@
 <body>
 	<%
 		request.setCharacterEncoding("utf-8");
-		String id = (String) session.getAttribute("id");
+		String id = (String)session.getAttribute("id");
+		ArrayList <HotelBean> hotelList = (ArrayList<HotelBean>)request.getAttribute("hotelList");
 	%>
 	<%
 		if(id == null) {
@@ -26,141 +30,151 @@
 		<div class="section_wrap">
 			<div class="side_wrap">
 				<aside>
+					<form action="hotelSearch.xr" method="post" name="hotelListForm">
 					<div class="select_Wrap">
-						<div><b>호텔 / 리조트</b></div>
-							<form id="addr_Selec">
-								<select name="sido1" value = "시/도" id="sido1"></select>
-								<select name="gugun1" value = "구/군" id="gugun1"></select>
-							</form>
+						<div>호텔 / 리조트</div>
+						<div id="addr_selec">
+							<select name="sido1" value = "시/도" id="sido1"></select>
+							<select name="gugun1" value = "구/군" id="gugun1"></select>
+						</div>
 					</div>
 					<div>
 						<div style="margin-top: 20px;"><b>날짜</b></div>
-							<form style="text-align: center;" style="margin-top: 10px;">
-						  		<input type="text" readonly placeholder="날짜 선택" id="day_Selec">
-						  	</form>
+						<div id="date_wrap">
+							<input type="text" name="date_selec" readonly placeholder="날짜 선택" id="day_Selec">
+						</div>
 					</div>
-					<div style="margin-bottom: 10px; margin-top: 10px;"><b>상세조건</b></div>
+					<div style="margin-top: 10px;"><b>상세조건</b></div>
 						<div id="bt_wrap" style="margin-top: 10px;">
-							<form action='login_page.php'>
-								<div class="bt1">
-								  <button type="button" class="custom-btn btn-5" id="reset_Bt"><span>초기화</span></button>
-								  <button type="button" class="custom-btn btn-5"><span>적 용</span></button>
-								</div>
-							</form>
-					</div>
+							<div class="bt1">
+							  <button type="button" class="custom-btn btn-5" id="reset_Bt"><span>초기화</span></button>
+							  <button type="submit" class="custom-btn btn-5"><span>적 용</span></button>
+							</div>
+						</div>
+						
 					<div>
-						<form>
-							<ul style="margin-top: 10px; margin-bottom: 10px; margin-right: 30px;">
-						      <li><input type="checkbox" id="check1"><label for="check1"> 예약가능</label></li>
-						      <li><input type="checkbox" id="check2"><label for="check2"> 프로모션</label></li>
+						<div id="check_top_wrap">
+							<ul>
+						      <li><input type="checkbox" value="예약가능" id="check1" name="check1"><label for="check1"> 예약가능</label></li>
+						      <li><input type="checkbox" value="프로모션" id="check2" name="check2"><label for="check2"> 프로모션</label></li>
 					     	</ul>
-					    </form>
+					    </div>
 				    </div>
-				    
-					    <div><b>호텔 & 리조트 유형</b></div>
-						    <form>
-						    	<ul style="margin-bottom: 10px;">
-							      <li><input type="checkbox" id="check3"><label for="check3"> 5성급</label></li>
-							      <li><input type="checkbox" id="check4"><label for="check4"> 4성급</label></li>
-							      <li><input type="checkbox" id="check5"><label for="check5"> 특1급</label></li>
-							      <li><input type="checkbox" id="check6"><label for="check6"> 특급</label></li>
+				    <div>
+					    <div>호텔 & 리조트 유형</div>
+					    	<div id="grade_selec_wrap">
+						    	<ul>
+							      <li><input type="checkbox" value="5성급" id="check3" name="check3"><label for="check3"> 5성급</label></li>
+							      <li><input type="checkbox" value="4성급" id="check4" name="check4"><label for="check4"> 4성급</label></li>
+							      <li><input type="checkbox" value="특1급" id="check5" name="check5"><label for="check5"> 특1급</label></li>
+							      <li><input type="checkbox" value="특급" id="check6" name="check6"><label for="check6"> 특급</label></li>
 							    </ul>
-						    </form>
+						    </div>
+				    </div>
+						    
 				    
-				    <div style="margin-bottom: 10px;"><b>가격</b><span style="font-size: 5px; color: gray;">(만원)</span></div>
-				    <form id="price_Wrap">
+				    <div style="margin-bottom: 10px;">가격<span style="font-size: 5px; color: gray;">(만원)</span></div>
+				    <div id="price_Wrap">
 					    <div class="range-slider">
 						    <input type="text" class="js-range-slider">
 						</div>
 						<div class="extra-controls">
-						    <input type="text" disabled class="js-input-from" id="price_left" value="0">
-						    <input type="text" disabled class="js-input-to" id="price_right" value="0">
-						</div>
-					</form>
-					<div style="margin-top: 25px">
-						<b>인원</b><span style="font-size: 5px; color: gray;">(최대 8명)</span>
-						<div id="people_Wrap">
-							<button id="dw"><img src="image/minus_Bt.png"></button>
-							<span id="people_cnt" style="font-size: 22px">2</span>
-							<button id="up"><img src="image/plus_BT.png"></button>
+						    <input type="text" readonly class="js-input-from" id="price_left" name="price_left">
+						    <input type="text" readonly class="js-input-to" id="price_right" name="price_right">
 						</div>
 					</div>
-					<div style="margin-top: 20px"><b>배드 타입</b></div>
+					<div style="margin-top: 25px">
+						인원<span style="font-size: 5px; color: gray;">(최대 8명)</span>
+						<div id="people_Wrap">
+							<button type="button" id="dw"><img src="image/minus_Bt.png"></button>
+							<span id="people_cnt" style="font-size: 22px">2</span>
+							<input type="hidden" id="people_set" name="people_set">
+							<button type="button" id="up"><img src="image/plus_Bt.png"></button>
+						</div>
+					</div>
+					<div style="margin-top: 20px">배드 타입</div>
 					<div class="icon_Wrap">
 						<div class="list_Wrap">
 							<ul>
-								<li><img src="image/single_Bed.png"><div>싱글</div></li>
-								<li><img src="image/double_Bed.png"><div>더블</div></li>
-								<li><img src="image/twin_Bed.png"><div>트윈<div></li>
-								<li><img src="image/ondol_Bed.png"><div>온돌<div></li>
+								<li><img src="image/single_Bed.png"><div id="single_Bed">싱글</div></li>
+								<input type="hidden" id="single_Bed_value" name="single_Bed_value">
+								<li><img src="image/double_Bed.png"><div id="double_Bed">더블</div></li>
+								<input type="hidden" id="double_Bed_value" name="double_Bed_value">
+								<li><img src="image/twin_Bed.png"><div id="twin_Bed">트윈</div></li>
+								<input type="hidden" id="twin_Bed_value" name="twin_Bed_value">
+								<li><img src="image/ondol_Bed.png"><div id="ondol_Bed">온돌</div></li>
+								<input type="hidden" id="ondol_Bed_value" name="ondol_Bed_value">
 							</ul>
 						</div>
 					</div>
-
-					<div><b>공용 시설</b></div>
-						<form>
+					<div>공용 시설</div>
+						<div class="check_box_wrap">
+						<input type="hidden" name="detailHidden" id="detailHidden" value="">
 							<ul style="margin-bottom: 10px">
-						      <li><input type="checkbox" id="check7"><label for="check7"> 피트니스</label></li>
-						      <li><input type="checkbox" id="check8"><label for="check8"> 수영장</label></li>
-						      <li><input type="checkbox" id="check9"><label for="check9"> 사우나</label></li>
-						      <li><input type="checkbox" id="check10"><label for="check10"> 골프장</label></li>
-						      <li><input type="checkbox" id="check11"><label for="check11"> 레스토랑</label></li>
-						      <li><input type="checkbox" id="check12"><label for="check12"> 엘레베이터</label></li>
-						      <li><input type="checkbox" id="check13"><label for="check13"> 라운지</label></li>
-						      <li><input type="checkbox" id="check14"><label for="check14"> 공용PC</label></li>
-						      <li><input type="checkbox" id="check15"><label for="check15"> BBQ</label></li>
-						      <li><input type="checkbox" id="check16"><label for="check16"> 카페</label></li>
-						      <li><input type="checkbox" id="check17"><label for="check17"> 공용스파</label></li>
-						      <li><input type="checkbox" id="check18"><label for="check18"> 족구장</label></li>
-						      <li><input type="checkbox" id="check19"><label for="check19"> 세미나실</label></li>
-						      <li><input type="checkbox" id="check20"><label for="check20"> 편의점</label></li>
-						      <li><input type="checkbox" id="check21"><label for="check21"> 노래방</label></li>
-						      <li><input type="checkbox" id="check22"><label for="check22"> 주방/식당</label></li>
-						      <li><input type="checkbox" id="check23"><label for="check23"> 세탁기</label></li>
-						      <li><input type="checkbox" id="check24"><label for="check24"> 건조기</label></li>
-						      <li><input type="checkbox" id="check25"><label for="check25"> 탈수기</label></li>
-						      <li><input type="checkbox" id="check26"><label for="check26"> 주차장</label></li>
-						      <li><input type="checkbox" id="check27"><label for="check27"> 취사가능</label></li>
-						      <li><input type="checkbox" id="check28"><label for="check28"> 공용샤워실</label></li>
-						      <li><input type="checkbox" id="check29"><label for="check29"> 온천</label></li>
-						      <li><input type="checkbox" id="check30"><label for="check30"> 스키장</label></li>
+						      <li><input type="checkbox" name="detail_check" value="피트니스" id="check7"><label for="check7"> 피트니스</label></li>
+						      <li><input type="checkbox" name="detail_check" value="수영장" id="check8"><label for="check8"> 수영장</label></li>
+						      <li><input type="checkbox" name="detail_check" value="사우나" id="check9"><label for="check9"> 사우나</label></li>
+						      <li><input type="checkbox" name="detail_check" value="골프장" id="check10"><label for="check10"> 골프장</label></li>
+						      <li><input type="checkbox" name="detail_check" value="레스토랑" id="check11"><label for="check11"> 레스토랑</label></li>
+						      <li><input type="checkbox" name="detail_check" value="엘레베이터" id="check12"><label for="check12"> 엘레베이터</label></li>
+						      <li><input type="checkbox" name="detail_check" value="라운지" id="check13"><label for="check13"> 라운지</label></li>
+						      <li><input type="checkbox" name="detail_check" value="공용PC" id="check14"><label for="check14"> 공용PC</label></li>
+						      <li><input type="checkbox" name="detail_check" value="BBQ" id="check15"><label for="check15"> BBQ</label></li>
+						      <li><input type="checkbox" name="detail_check" value="카페" id="check16"><label for="check16"> 카페</label></li>
+						      <li><input type="checkbox" name="detail_check" value="공용스파" id="check17"><label for="check17"> 공용스파</label></li>
+						      <li><input type="checkbox" name="detail_check" value="족구장" id="check18"><label for="check18"> 족구장</label></li>
+						      <li><input type="checkbox" name="detail_check" value="세미나실" id="check19"><label for="check19"> 세미나실</label></li>
+						      <li><input type="checkbox" name="detail_check" value="편의점" id="check20"><label for="check20"> 편의점</label></li>
+						      <li><input type="checkbox" name="detail_check" value="노래방" id="check21"><label for="check21"> 노래방</label></li>
+						      <li><input type="checkbox" name="detail_check" value="주방식당" id="check22"><label for="check22"> 주방/식당</label></li>
+						      <li><input type="checkbox" name="detail_check" value="세탁기" id="check23"><label for="check23"> 세탁기</label></li>
+						      <li><input type="checkbox" name="detail_check" value="건조기" id="check24"><label for="check24"> 건조기</label></li>
+						      <li><input type="checkbox" name="detail_check" value="탈수기" id="check25"><label for="check25"> 탈수기</label></li>
+						      <li><input type="checkbox" name="detail_check" value="주차장" id="check26"><label for="check26"> 주차장</label></li>
+						      <li><input type="checkbox" name="detail_check" value="취사가능" id="check27"><label for="check27"> 취사가능</label></li>
+						      <li><input type="checkbox" name="detail_check" value="공용샤워실" id="check28"><label for="check28"> 공용샤워실</label></li>
+						      <li><input type="checkbox" name="detail_check" value="온천" id="check29"><label for="check29"> 온천</label></li>
+						      <li><input type="checkbox" name="detail_check" value="스키장" id="check30"><label for="check30"> 스키장</label></li>
 					      	</ul>
-					    </form>
-					<div><b>객실내 시설</b></div>
-						<form>
+						</div>
+					<div>객실내 시설</div>
+						<div class="check_box_wrap">
 							<ul style="margin-bottom: 10px">
-						      <li><input type="checkbox" id="check31"><label for="check31"> 객실 스파</label></li>
-						      <li><input type="checkbox" id="check32"><label for="check32"> 미니바</label></li>
-						      <li><input type="checkbox" id="check33"><label for="check33"> 와이파이</label></li>
-						      <li><input type="checkbox" id="check34"><label for="check34"> 욕실 용품</label></li>
-						      <li><input type="checkbox" id="check35"><label for="check35"> TV</label></li>
-						      <li><input type="checkbox" id="check36"><label for="check36"> 에어컨</label></li>
-						      <li><input type="checkbox" id="check37"><label for="check37"> 냉장고</label></li>
-						      <li><input type="checkbox" id="check38"><label for="check38"> 객실 샤워실</label></li>
-						      <li><input type="checkbox" id="check39"><label for="check39"> 욕조</label></li>
-						      <li><input type="checkbox" id="check40"><label for="check40"> 드라이기</label></li>
-						      <li><input type="checkbox" id="check41"><label for="check41"> 다리미</label></li>
-						      <li><input type="checkbox" id="check42"><label for="check42"> 전기밥솥</label></li>
+							<input type="hidden" name="amenities">
+						      <li><input type="checkbox" name="detail_check" value="객실스파" id="check31"><label for="check31"> 객실 스파</label></li>
+						      <li><input type="checkbox" name="detail_check" value="미니바" id="check32"><label for="check32"> 미니바</label></li>
+						      <li><input type="checkbox" name="detail_check" value="와이파이" id="check33"><label for="check33"> 와이파이</label></li>
+						      <li><input type="checkbox" name="detail_check" value="욕실용품" id="check34"><label for="check34"> 욕실 용품</label></li>
+						      <li><input type="checkbox" name="detail_check" value="TV" id="check35"><label for="check35"> TV</label></li>
+						      <li><input type="checkbox" name="detail_check" value="에어컨" id="check36"><label for="check36"> 에어컨</label></li>
+						      <li><input type="checkbox" name="detail_check" value="냉장고" id="check37"><label for="check37"> 냉장고</label></li>
+						      <li><input type="checkbox" name="detail_check" value="객실샤워실" id="check38"><label for="check38"> 객실 샤워실</label></li>
+						      <li><input type="checkbox" name="detail_check" value="욕조" id="check39"><label for="check39"> 욕조</label></li>
+						      <li><input type="checkbox" name="detail_check" value="드라이기" id="check40"><label for="check40"> 드라이기</label></li>
+						      <li><input type="checkbox" name="detail_check" value="다리미" id="check41"><label for="check41"> 다리미</label></li>
+						      <li><input type="checkbox" name="detail_check" value="전기밥솥" id="check42"><label for="check42"> 전기밥솥</label></li>
 						 	 </ul>
-					    </form>
-					<div><b>기 타</b></div>
-						<form>
+						</div>
+					<div>기 타</div>
+						<div class="check_box_wrap">
 							<ul>
-						      <li><input type="checkbox" id="check43"><label for="check43"> 반려견 동반</label></li>
-						      <li><input type="checkbox" id="check44"><label for="check44"> 조식포함</label></li>
-						      <li><input type="checkbox" id="check45"><label for="check45"> 객실내 흡연</label></li>
-						      <li><input type="checkbox" id="check46"><label for="check46"> 발렛 파킹</label></li>
-						      <li><input type="checkbox" id="check47"><label for="check47"> 금연</label></li>
-						      <li><input type="checkbox" id="check48"><label for="check48"> 객실내 취사</label></li>
-						      <li><input type="checkbox" id="check49"><label for="check49"> 프린터 사용</label></li>
-						      <li><input type="checkbox" id="check50"><label for="check50"> 짐보관 가능</label></li>
-						      <li><input type="checkbox" id="check51"><label for="check51"> 개인 사물함</label></li>
-						      <li><input type="checkbox" id="check52"><label for="check52"> 무료 주차</label></li>
-						      <li><input type="checkbox" id="check53"><label for="check53"> 픽업 가능</label></li>
-						      <li><input type="checkbox" id="check54"><label for="check54"> 캠프 파이어</label></li>
-						      <li><input type="checkbox" id="check55"><label for="check55"> 카드 결재</label></li>
-						      <li><input type="checkbox" id="check56"><label for="check56"> 장애인 편의시설</label></li>
+							<input type="hidden" name="etc">
+						      <li><input type="checkbox" name="detail_check" value="반려견동반" id="check43"><label for="check43"> 반려견 동반</label></li>
+						      <li><input type="checkbox" name="detail_check" value="조식포함" id="check44"><label for="check44"> 조식포함</label></li>
+						      <li><input type="checkbox" name="detail_check" value="객실내흡연" id="check45"><label for="check45"> 객실내 흡연</label></li>
+						      <li><input type="checkbox" name="detail_check" value="발렛파킹" id="check46"><label for="check46"> 발렛 파킹</label></li>
+						      <li><input type="checkbox" name="detail_check" value="금연" id="check47"><label for="check47"> 금연</label></li>
+						      <li><input type="checkbox" name="detail_check" value="객실내취사" id="check48"><label for="check48"> 객실내 취사</label></li>
+						      <li><input type="checkbox" name="detail_check" value="프린터사용" id="check49"><label for="check49"> 프린터 사용</label></li>
+						      <li><input type="checkbox" name="detail_check" value="짐보관가능" id="check50"><label for="check50"> 짐보관 가능</label></li>
+						      <li><input type="checkbox" name="detail_check" value="개인사물함" id="check51"><label for="check51"> 개인 사물함</label></li>
+						      <li><input type="checkbox" name="detail_check" value="무료주차" id="check52"><label for="check52"> 무료 주차</label></li>
+						      <li><input type="checkbox" name="detail_check" value="픽업가능" id="check53"><label for="check53"> 픽업 가능</label></li>
+						      <li><input type="checkbox" name="detail_check" value="캠프파이어" id="check54"><label for="check54"> 캠프 파이어</label></li>
+						      <li><input type="checkbox" name="detail_check" value="카드결재" id="check55"><label for="check55"> 카드 결재</label></li>
+						      <li><input type="checkbox" name="detail_check" value="장애인편의시설" id="check56"><label for="check56"> 장애인 편의시설</label></li>
 						    </ul>
+					    </div>
 					    </form>
 				</aside>
 			</div>
@@ -177,36 +191,20 @@
 				<div class="info">
 					<div class="info_content">
 						<ul>
-							<li>
-								<div class="list_image"><img src="image/ex1.jpg"></div>
-								<div class="content_text_wrap">
-									<div class="info_in_text" id="info_intext1"><span>3성급</span></div>
-									<div class="info_in_text" id="info_intext2"><span>호텔이름</span></div>
-									<div id="info_intext3"><span>★ 9.7 (2,761)</span></div>
-									<div class="info_in_text" id="info_intext4"><span>강남구</span></div>
-									<div id="info_intext5"><span>420,000원</span></div>
-								</div>
-							</li>
-							<li>
-								<div class="list_image"><img src="image/ex2.jpg"></div>
-								<div class="content_text_wrap">
-									<div class="info_in_text" id="info_intext1"><span>3성급</span></div>
-									<div class="info_in_text" id="info_intext2"><span>호텔이름</span></div>
-									<div id="info_intext3"><span>★ 9.7 (2,761)</span></div>
-									<div class="info_in_text" id="info_intext4"><span>강남구</span></div>
-									<div id="info_intext5"><span>420,000원</span></div>
-								</div>
-							</li>
-							<li>
-								<div class="list_image"><img src="image/ex3.jpg"></div>
-								<div class="content_text_wrap">
-									<div class="info_in_text" id="info_intext1"><span>3성급</span></div>
-									<div class="info_in_text" id="info_intext2"><span>호텔이름</span></div>
-									<div id="info_intext3"><span>★ 9.7 (2,761)</span></div>
-									<div class="info_in_text" id="info_intext4"><span>강남구</span></div>
-									<div id="info_intext5"><span>420,000원</span></div>
-								</div>
-							</li>
+							<%
+							for(int i=0; i<hotelList.size(); i++) {
+							out.println("<li>");
+								out.println("<div class='list_image'><img src='image/" + hotelList.get(i).getAcc_picture() + "'></div>");
+								out.println("<div class='content_text_wrap'>");
+									out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelList.get(i).getHotel_grade() + "</span></div>");
+									out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelList.get(i).getAcc_name() + "</span></div>");
+									out.println("<div id='info_intext3'><span>★ " + hotelList.get(i).getRating() + " (2,761)</span></div>");
+									out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelList.get(i).getLocation() + "</span></div>");
+									out.println("<div id='info_intext5'><span>" + hotelList.get(i).getPrice() + "</span>원</div>");
+								out.println("</div>");
+							out.println("</li>");
+							}
+							%>
 						</ul>
 					</div>
 				</div>

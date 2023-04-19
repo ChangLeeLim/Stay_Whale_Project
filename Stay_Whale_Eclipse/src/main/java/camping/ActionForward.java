@@ -1,5 +1,4 @@
-
-package vo;
+package camping;
 
 public class ActionForward {
 	private boolean isRedirect=false;
@@ -21,4 +20,3 @@ public class ActionForward {
 		path=string;
 	}
 }
-
