@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="vo.HotelBean"%>
+<%@ page import="java.text.*" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>STAY WHALE || Hotel Resort</title>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ac96333bf6ff2bb0f94315ab1e58bf1"></script>
 </head>
 <body>
 	<%
 		request.setCharacterEncoding("utf-8");
 		String id = (String)session.getAttribute("id");
 		ArrayList <HotelBean> hotelList = (ArrayList<HotelBean>)request.getAttribute("hotelList");
+		ArrayList <HotelBean> hotelSearchList = (ArrayList<HotelBean>)request.getAttribute("hotelSearchList");
+		DecimalFormat df = new DecimalFormat("###,###");
 	%>
 	<%
 		if(id == null) {
@@ -30,7 +33,7 @@
 		<div class="section_wrap">
 			<div class="side_wrap">
 				<aside>
-					<form action="hotelSearch.xr" method="post" name="hotelListForm">
+					<form action="hotelSearch.xr" method="post" name="hotelListForm" onsubmit="return search_check();">
 					<div class="select_Wrap">
 						<div>호텔 / 리조트</div>
 						<div id="addr_selec">
@@ -88,8 +91,8 @@
 						<div id="people_Wrap">
 							<button type="button" id="dw"><img src="image/minus_Bt.png"></button>
 							<span id="people_cnt" style="font-size: 22px">2</span>
-							<input type="hidden" id="people_set" name="people_set">
-							<button type="button" id="up"><img src="image/plus_Bt.png"></button>
+							<input type="hidden" id="people_set" name="people_set" value="2">
+							<button type="button" id="up"><img src="image/plus_BT.png"></button>
 						</div>
 					</div>
 					<div style="margin-top: 20px">배드 타입</div>
@@ -181,7 +184,15 @@
 		<article>
 			<nav>
 				<ul class="info_list">
-					<li><button type="button" id="map_Bt" class="custom-btnn btn-3"><span><img src="image/map_icon.png">지 도</span></button></li>
+					<li><button type="button" a href='#pop_info_1' id="map_Bt" class="custom-btnn btn-3"><span><img src="image/map_icon.png">지 도</span></button></li>
+					<div id="pop_info_1" class="pop_wrap" style="display:none;">
+					  <div class="pop_inner">
+					    <div class="mapWrap" id="map">
+							
+						</div>
+					    <button type="button" class="btn_close">닫기</button>
+					  </div>
+					</div>
 					<li><button type="button" id="high_Price_Bt" class="custom-btnn btn-3"><span><img src="image/high_price.png">높은 가격 순</span></button></li>
 					<li><button type="button" id="low_Price_Bt" class="custom-btnn btn-3"><span><img src="image/low_price.png">낮은 가격 순</span></button></li>
 					<li><button type="button" id="distance_Bt" class="custom-btnn btn-3"><span><img src="image/distance_icon.png">거리 순</span></button></li>
@@ -191,18 +202,35 @@
 				<div class="info">
 					<div class="info_content">
 						<ul>
-							<%
-							for(int i=0; i<hotelList.size(); i++) {
-							out.println("<li>");
-								out.println("<div class='list_image'><img src='image/" + hotelList.get(i).getAcc_picture() + "'></div>");
-								out.println("<div class='content_text_wrap'>");
-									out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelList.get(i).getHotel_grade() + "</span></div>");
-									out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelList.get(i).getAcc_name() + "</span></div>");
-									out.println("<div id='info_intext3'><span>★ " + hotelList.get(i).getRating() + " (2,761)</span></div>");
-									out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelList.get(i).getLocation() + "</span></div>");
-									out.println("<div id='info_intext5'><span>" + hotelList.get(i).getPrice() + "</span>원</div>");
-								out.println("</div>");
-							out.println("</li>");
+							<%	
+							if(hotelSearchList == null && hotelList != null) {
+								for(int i=0; i<hotelList.size(); i++) {
+									out.println("<li>");
+									out.println("<div class='list_image' style='background-image: url(image/" + hotelList.get(i).getAcc_picture() + "');>");
+										out.println("<div class='content_text_wrap'>");
+											out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelList.get(i).getHotel_grade() + "</span></div>");
+											out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelList.get(i).getAcc_name() + "</span></div>");
+											out.println("<div id='info_intext3'><span>★ " + hotelList.get(i).getRating() + " (2,761)</span></div>");
+											out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelList.get(i).getLocation() + "</span></div>");
+											out.println("<div id='info_intext5'><span>" + df.format(hotelList.get(i).getPrice()) + "</span>원</div>");
+										out.println("</div>");
+									out.println("</div>");
+									out.println("</li>");
+								}
+							} else if(hotelSearchList != null && hotelList == null) {
+								for(int i=0; i<hotelSearchList.size(); i++) {
+									out.println("<li>");
+									out.println("<div class='list_image' style='background-image: url(image/" + hotelSearchList.get(i).getAcc_picture() + "');>");
+										out.println("<div class='content_text_wrap'>");
+											out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelSearchList.get(i).getHotel_grade() + "</span></div>");
+											out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelSearchList.get(i).getAcc_name() + "</span></div>");
+											out.println("<div id='info_intext3'><span>★ " + hotelSearchList.get(i).getRating() + " (2,761)</span></div>");
+											out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelSearchList.get(i).getLocation() + "</span></div>");
+											out.println("<div id='info_intext5'><span>" + df.format(hotelSearchList.get(i).getPrice()) + "</span>원</div>");
+										out.println("</div>");
+									out.println("</div>");
+									out.println("</li>");
+								}
 							}
 							%>
 						</ul>

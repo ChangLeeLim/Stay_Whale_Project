@@ -16,7 +16,6 @@ public class HotelPrintProService {
 		HotelDAO hotelDAO = HotelDAO.getInstance();
 		hotelDAO.setConnection(con);
 		
-		HotelBean hotelbean = new HotelBean();
 		ArrayList<HotelBean> hotelList = hotelDAO.printHotelList();
 		return hotelList;
 	}

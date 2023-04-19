@@ -14,8 +14,7 @@ import vo.HotelBean;
 	 
 	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		HotelPrintProService hotelPrintProService = new HotelPrintProService();
-		ArrayList<HotelBean> hotelList = hotelPrintProService.getHotel();	
-		
+		ArrayList<HotelBean> hotelList = hotelPrintProService.getHotel();		
 		request.setAttribute("hotelList", hotelList);
 		ActionForward forward= new ActionForward();
 		forward.setPath("/Hotel_Resort_Index.jsp");
