@@ -2,26 +2,26 @@
 <%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="camping.ACC_Camping" %>
+<%@ page import="camping.PageInfo" %>
 <%@ page import="DTO.Bulletin_Board_Camptip" %>
 <%@ page import="DAO.DBProcess_Camptip" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("UTF-8");%>
+
 <html>
 <head>
   <meta charset="utf-8">
   <title>STAY WHALE || Camp_Glam</title>
   <link rel="stylesheet" type="text/css" href="css/camp_glam_index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=33a2b44e211b174550a0f064c970415d"></script>
 </head>
 <body>
 	<jsp:useBean id="ob" class="DTO.Bulletin_Board_Camptip"> </jsp:useBean>
-	<jsp:useBean id="db" class="DAO.DBProcess_Camptip"> </jsp:useBean>
+	<jsp:useBean id="db" class="DAO.DBProcess_Camptip"> </jsp:useBean>	
   <%
     request.setCharacterEncoding("utf-8");
-    String id = (String)session.getAttribute("id");
-  %>
-  <%
+    String id = (String)session.getAttribute("id"); 
+    ArrayList <ACC_Camping> campList = (ArrayList<ACC_Camping>)request.getAttribute("articleList");
     if(id == null) {
   %>
     <jsp:include page="Header_Login_Fail.jsp" >
@@ -40,27 +40,27 @@
     <main>
     	
       	<!-- 타이틀 및 추천 상품 -->
-      	<div class="title">
-	        <h1>STAY WHALE</h1>
-	        <p>캠핑 / 글램핑</p>
-	        <a href="Camp_Glam_Reserve.jsp">
-	          <button class="cta_button">추천 상품 바로가기</button>
-	        </a>
-	        <div class="slider_controls">
-	          <button id="prevButton">이전</button>
-	          <button id="nextButton">다음</button>
-	        </div>
-	     </div>
+		<div class="title">
+			<h1>STAY WHALE</h1>
+			<p>캠핑 / 글램핑</p>
+			<a href="Camp_Glam_Reserve.jsp">
+				<button class="cta_button">추천 상품 바로가기</button>
+			</a>
+			<div class="slider_controls">
+				<button id="prevButton">이전</button>
+				<button id="nextButton">다음</button>
+			</div>
+		</div>
 		
       <!-- 조건별 검색 -->
-      <div class="content">      	
+		<div class="content">      	
 	      
 	      	<section class="reserve_section">
 	      	
 				<div class="reserve_title"> 캠핑 테마</div>
 				
 				<div class="reserve_content">
-					<form id="search_date">
+					<form id="search_date" action="search_date.cp" method="post">
 						<ul>
 							<li>
 								<div>
@@ -68,20 +68,21 @@
 									<label style="margin: 0px 5px 5px 0px;" for="check_out"> Check-out Date </label>
 								</div>
 								<div>	
-									<input style="margin: 0px 5px 5px 0px;" type="date" id="check_in" name="check_in">
-									<input style="margin: 0px 5px 5px 0px;" type="date" id="check_out" name="check_out">
+									<input style="margin: 0px 5px 5px 0px;" type="date" id="check_in" name="check_in" min="today" />
+									<input style="margin: 0px 5px 5px 0px;" type="date" id="check_out" name="check_out" min="today" />
 								</div>
 								<div>
+								 <%-- <% out.println(campList.get(0).getAcc_picture()); %> --%>
 									<button type="submit" id="date_butoon" class="reservation_button"> 날짜 검색 </button>
 								</div>
 							</li>
 						</ul>
 					</form>
-					<form>
+					<form id="search_place" action="search_place.cp" method="post">
 						<ul>
 							<li>
 								<div>
-									<label style="margin-bottom: 5px;" for="sido1" style="margin-right: 30px;">시/도</label>
+									<label style="margin-bottom: 5px;" for="sido1" style="margin-right:30px;">시/도</label>
 									<label style="margin-bottom: 5px;" for="gugun1" >구/군</label>  
 								</div>
 								<div>
@@ -89,7 +90,7 @@
 									<select name="gugun1" id="gugun1"></select>	
 								</div>
 								<div>
-									<button type="submit" id="date_butoon" class="reservation_button"> 지역 검색 </button>
+									<button type="submit" id="place_butoon" class="reservation_button"> 지역 검색 </button>
 								</div>
 							</li>
 						</ul>
@@ -97,133 +98,124 @@
 				</div>
 				<div class="reserve_content2">
 					<nav>
-						<button type="button" class="spot_button" data-content-id="id1">Camp</button>
-		        		<button type="button" class="spot_button" data-content-id="id2">Caravan</button>
-		        		<button type="button" class="spot_button" data-content-id="id3">Glamping</button>
-		        		<button type="button" class="spot_button" data-content-id="id4">Map</button>
+						<button type="button" id="btn_camping" class="spot_button" data-content-id="1">Camp</button>
+		        		<button type="button" id="btn_caravan" class="spot_button" data-content-id="2">Caravan</button>
+		        		<button type="button" id="btn_glamping" class="spot_button" data-content-id="3">Glamping</button>
+		        		<button type="button" id="btn_map" class="spot_button" data-content-id="4">Map</button>
 		        	</nav>		
 				</div>
 			</section>	  
 			
 	      <!--캠핑 테마 및 메인상품 목록 -->
-	      <section class="spots_section">
-	      	
-	        <article class="spot_container">
-	        	<ul>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/리버뷰_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/바다뷰_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/산속_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/카라반_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/카라반_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/산속_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/바다뷰_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-		          	<li>
-		            	<div>
-		            		<div>
-		            			<a><img src="image/리버뷰_이미지1.jpg" alt="이미지 준비중"></a>
-		            		</div>
-		            	</div>
-		            	<div>
-		            		<a>title</a>
-		            		<p>spot</p>
-		            		<div>✰rating</div>
-		            		<div>main</div>
-		            		<div><button class="spots_button">예약하기</button></div>
-		            	</div>
-		          	</li>
-	          	</ul>
-	      	</article>
+	      <section class="spots_section">			
+	        <div class="spot_container">
+	       
+				<div id="content_camping" style="display: block">
+					<ul>
+<% 
+					int camping=0;
+					for(int i=0; i<campList.size(); i++) {
+						if("Camping".equals(campList.get(i).getCategory())){
+				            out.println("<li>");
+				            out.println("<div>");
+				            out.println("<div> <input type='hidden' value='"+campList.get(i).getReg_num_c() +"'>");
+				            out.println("<a href='Camp_Glam_Reserve.cp?reg_num_c="+campList.get(i).getReg_num_c()+"'>");
+				            out.println("<img src='image/"+ campList.get(i).getAcc_picture() +"' alt='이미지 준비중'>");
+				            out.println("</a> </div>");
+				            out.println("</div>");
+				            out.println("<div>");
+				            out.println("<a>"+campList.get(i).getAcc_name()+"</a>");
+				            out.println("<p>"+campList.get(i).getSite_1()+"</p>");
+				            out.println("<div>"+campList.get(i).getSite_2()+"</div>");
+				            out.println("<div>"+campList.get(i).getDetail()+"</div>");
+				            out.println("<div><a href='camping_reserve.cp?reg_num_c="+campList.get(i).getReg_num_c()+"'>");
+				            out.println("<button class='spots_button'>예약하기</button>");
+				           	out.println("</a></div>");
+				            out.println("</div>");
+				            out.println("</li>");
+				            camping++;
+				            if(camping==8){
+				            	break;
+				            }
+						}
+					} 
+%>
+					</ul>
+				</div>
+	        	
+	          	<div id="content_caravan" style="display:none">
+		        	<ul>
+<% 
+					int caravan=0;
+					for(int i=0; i<campList.size(); i++) {
+						if("Caravan".equals(campList.get(i).getCategory())){
+				            out.println("<li>");
+				            out.println("<div>");
+				            out.println("<div> <input type='hidden' value='"+campList.get(i).getReg_num_c() +"'>");
+				            out.println("<a href='Camp_Glam_Reserve.cp?reg_num_c="+campList.get(i).getReg_num_c()+"'>");
+				            out.println("<img src='image/"+ campList.get(i).getAcc_picture() +"' alt='이미지 준비중'>");
+				            out.println("</a> </div>");
+				            out.println("</div>");
+				            out.println("<div>");
+				            out.println("<a>"+campList.get(i).getAcc_name()+"</a>");
+				            out.println("<p>"+campList.get(i).getSite_1()+"</p>");
+				            out.println("<div>"+campList.get(i).getSite_2()+"</div>");
+				            out.println("<div>"+campList.get(i).getDetail()+"</div>");
+				            out.println("<div><a href='camping_reserve.cp?reg_num_c="+campList.get(i).getReg_num_c()+"'>");
+				            out.println("<button class='spots_button'>예약하기</button>");
+				           	out.println("</a></div>");
+				            out.println("</div>");
+				            out.println("</li>");
+				            caravan++;
+				            if(caravan==8){
+				            	break;
+				            }
+						}
+					} 
+%>
+		          	</ul>
+	          	</div>
+	          	<div id="content_glamping" style="display:none">
+		        	<ul>
+<% 
+					int glamping=0;
+					for(int i=0; i<campList.size(); i++) {
+						if("Glamping".equals(campList.get(i).getCategory())){
+				            out.println("<li>");
+				            out.println("<div>");
+				            out.println("<div> <input type='hidden' value='"+campList.get(i).getReg_num_c() +"'>");
+				            out.println("<a href='Camp_Glam_Reserve.cp?reg_num_c="+campList.get(i).getReg_num_c()+"'>");
+				            out.println("<img src='image/"+ campList.get(i).getAcc_picture() +"' alt='이미지 준비중'>");
+				            out.println("</a> </div>");
+				            out.println("</div>");
+				            out.println("<div>");
+				            out.println("<a>"+campList.get(i).getAcc_name()+"</a>");
+				            out.println("<p>"+campList.get(i).getSite_1()+"</p>");
+				            out.println("<div>"+campList.get(i).getSite_2()+"</div>");
+				            out.println("<div>"+campList.get(i).getDetail()+"</div>");
+				            out.println("<div><a href='camping_reserve.cp?reg_num_c="+campList.get(i).getReg_num_c()+"'>");
+				            out.println("<button class='spots_button'>예약하기</button>");
+				           	out.println("</a></div>");
+				            out.println("</div>");
+				            out.println("</li>");
+				            glamping++;
+				            if(glamping==8){
+				            	break;
+				            }
+						}
+					} 
+%>
+		          	</ul>
+	          	</div >
+
+	          	<div id="content_map" style="display:none">
+	          		<input type="text" id="keyword" placeholder="장소 검색">
+					<button onclick="placeSearch()">검색</button>	          		
+					<div id="clickLatlng" class="map_clickLatlng"></div>
+					<div id="map" class="map_container"></div>
+				</div>
+	          	
+	      	</div>
 	      </section>
 	      
 	      <!-- 오지 격지 캠핑 추천 섹션 -->
@@ -327,13 +319,10 @@
 		            					<p>spot</p>
 					            	</div>
 					          	</li>
-					          	
 	      					</ul>
 	      				</div>
-	      				
 	      			</div>
 	      		</div>
-	      		
 	      	</article>	
 	      </section>
 	      
@@ -343,14 +332,14 @@
 				
 				<div class="board_title">Camping Tip</div>
 					
-				<div id="board_search" class="board_search">
-					<select id="search_select">
-						<option>관련 검색</option>
+				<form id="board_search" class="board_search" action="">
+					<select id="search_select" class="search_select">
+						<option>관련검색</option>
 						<option>제목</option>
 						<option>작성자</option>
 					</select>	
-					<input id="search_text" type="text" placeholder="검색">
-					<button class="search_button">✔</button>
+					<input id="search_text" class="search_text" type="text" placeholder="검색">
+					<button type="submit" class="search_button">검색</button>
 					<!-- 게시물 작성은 회원만 넘어가도록 -->
 					<% if (session.getAttribute("id") != null) { %>
 					<a href="Camptip_Write.jsp" class="write_button">작성하기</a>
@@ -361,7 +350,7 @@
 					<%
 						}
 					%>	
-					</div>
+					</form>
 					
 					<div class="board_hot">
 						<ul>
@@ -374,7 +363,7 @@
 		            			<div>
 		            				<a href="">board_title</a>
 		            				<p>user_id</p>
-		            				<div>✰rating</div>
+		            				<div>추천수</div>
 		            				<div>조회수</div>
 		            				<div><a href=""><button class="board_button">Tip Check</button></a></div>
 		            			</div>
@@ -388,7 +377,7 @@
 		            			<div>
 		            				<a href="">board_title</a>
 		            				<p>user_id</p>
-		            				<div>✰rating</div>
+		            				<div>추천수</div>
 		            				<div>조회수</div>
 		            				<div><a href=""><button class="board_button">Tip Check</button></a></div>
 		            			</div>
@@ -402,7 +391,7 @@
 		            			<div>
 		            				<a href="">board_title</a>
 		            				<p>user_id</p>
-		            				<div>✰rating</div>
+		            				<div>추천수</div>
 		            				<div>조회수</div>
 		            				<div><a href=""><button class="board_button">Tip Check</button></a></div>
 		            			</div>
@@ -416,7 +405,7 @@
 		            			<div>
 		            				<a href="">board_title</a>
 		            				<p>user_id</p>
-		            				<div>✰rating</div>
+		            				<div>추천수</div>
 		            				<div>조회수</div>
 		            				<div><a href=""><button class="board_button">Tip Check</button></a></div>
 		            			</div>
@@ -430,7 +419,7 @@
 		            			<div>
 		            				<a href="">board_title</a>
 		            				<p>user_id</p>
-		            				<div>✰rating</div>
+		            				<div>추천수</div>
 		            				<div>조회수</div>
 		            				<div><a href=""><button class="board_button">Tip Check</button></a></div>
 		            			</div>
@@ -452,21 +441,23 @@
 										<th style="background-color : #eeeeeee; text-align:center;width: 5%;">추천</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="board_list tbody">
 								<%	/* 게시글 리스트 출력문 */
-									ArrayList<Bulletin_Board_Camptip> list = db.db_SelectList();
+								/* if(){ */
+									ArrayList<Bulletin_Board_Camptip> list2 = db.db_SelectList();
 											//DTO 처럼 object객체 가져다 쓰려면 import해야함 >> 메소드 등은 usebean으로 가능 
-									for(int i=0; i<list.size(); i++) {
-										out.println("<tr id='list_data' class='table_list' cursor: pointer; onclick=location.href='Camptip_Read.jsp?post_num="+list.get(i).getPost_num()+"'>");
-											out.println("<td>" + list.get(i).getPost_num() + "</td>");
-											out.println("<td>" + list.get(i).getPost_title() + "</td>");
-											out.println("<td>" + list.get(i).getUser_id() + "</td>");
-											out.println("<td>" + list.get(i).getPost_category() + "</td>");
-											out.println("<td>" + list.get(i).getPost_date() + "</td>");
-											out.println("<td>" + list.get(i).getPost_readcount() + "</td>");
-											out.println("<td>" + list.get(i).getPost_like() + "</td>");
+									for(int i=0; i<list2.size(); i++) {
+										out.println("<tr id='list_data' class='table_list' cursor: pointer; onclick=location.href='Camptip_Read.jsp?post_num="+list2.get(i).getPost_num()+"'>");
+											out.println("<td>" + list2.get(i).getPost_num() + "</td>");
+											out.println("<td>" + list2.get(i).getPost_title() + "</td>");
+											out.println("<td>" + list2.get(i).getUser_id() + "</td>");
+											out.println("<td>" + list2.get(i).getPost_category() + "</td>");
+											out.println("<td>" + list2.get(i).getPost_date() + "</td>");
+											out.println("<td>" + list2.get(i).getPost_readcount() + "</td>");
+											out.println("<td>" + list2.get(i).getPost_like() + "</td>");
 										out.println("</tr>");
 									}
+								/* } */
 								%>
 								</tbody>
 							</table>
@@ -474,35 +465,17 @@
 					</div>				
 				</article>
 			</section>
-			<section>
-			<div id="clickLatlng" style="z-index:99"></div>
-			<div id="map" style="width:1280px; height:500px; margin: auto;"></div>
-			</section>
-			
-			
-			
-			
-			
-			
-			
-			<!-- <section class="camp_modal_section">
-				<div class="modal-window">
-            		<div class="title"> <h2>모달</h2> </div>
-            		<div class="close-area">X</div>
-            		<form class="content">
-                		<p>가나다라마바사 아자차카타파하</p>
-                		<p>가나다라마바사 아자차카타파하</p>
-                		<p>가나다라마바사 아자차카타파하</p>
-                		<p>가나다라마바사 아자차카타파하</p>
-            		</form>
-        		</div>
-			</section> -->
 				
 		</div>
     </main>
 
     <!-- 푸터 영역 -->
     <jsp:include page="footer.jsp"/>
+	
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=33a2b44e211b174550a0f064c970415d&libraries=services"></script>
 	<script src="js/camp_glam_index.js"></script>
   </body>
+  
 </html>
