@@ -14,12 +14,54 @@ $(function(){
         $(".logo").toggleClass('logodown', scrolled);
       });
     });
+// 캠핑/카라반/글램핑/지도 선택버튼 css 효과 기능
+function showContent(contentId) {
+	
+}
+$('.spot_button:first').addClass('selected');
+
 $('.spot_button').click(function(e) {
-  e.preventDefault();
-  $('.spot_button').removeClass('selected');
-  $(this).addClass('selected');
-  showContent($(this).attr('data-content-id'));
-});    
+  	e.preventDefault();
+  	$('.spot_button').removeClass('selected');
+  	$(this).addClass('selected');
+  	showContent($(this).attr('data-content-id'));
+});
+    
+
+// 게시판 글목록 검색 기능
+ $(document).ready(function() {
+    $("#board_search").submit(function(event) {
+      event.preventDefault(); // 기본 제출 이벤트 취소
+
+      var search_select = $("#search_select").val(); // 검색 옵션 값
+      var search_text = $("#search_text").val(); // 검색어 값
+
+      $.ajax({
+		  url: "../dbprocess/Camptip_Search.jsp",
+			type: "POST",
+  			data: {search_text: search_text, search_select: search_select},
+  		
+  		success: function(list) {
+    		var tbody = $("#board_list tbody");
+    		tbody.empty(); // 기존에 있던 게시글 삭제
+    		for (var i = 0; i < list.length; i++) {
+      			var tr = $("<tr>").attr("id", "list_data").addClass("table_list");
+      				tr.append($("<td>").text(list[i].post_num));
+				      tr.append($("<td>").text(list[i].post_title));
+				      tr.append($("<td>").text(list[i].user_id));
+				      tr.append($("<td>").text(list[i].post_category));
+				      tr.append($("<td>").text(list[i].post_date));
+				      tr.append($("<td>").text(list[i].post_readcount));
+				      tr.append($("<td>").text(list[i].post_like));
+					tbody.append(tr);
+    		}
+  		}, error: function(xhr, status, error) {
+    		console.log(error);
+  		}
+	});
+
+    });
+  });
      
 $('document').ready(function() {
  var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
@@ -122,8 +164,15 @@ $('document').ready(function() {
 	  // 검색 필터 기능 추가
 	  // ...
 	});
-	
-	
+
+// 예약날짜 선택시 입실퇴실날짜 오늘이전은 안되도록	
+var now_utc = Date.now() // 지금 날짜를 밀리초로
+// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+document.getElementById("check_in").setAttribute("min", today);
+document.getElementById("check_out").setAttribute("min", today);	
 	
 	
 const moveMain = document.querySelector('.move_main');
@@ -160,49 +209,194 @@ setInterval(() => {
   }
 }, 3000);
 
+// 캠핑 버튼 클릭 이벤트
+document.getElementById("btn_camping").addEventListener("click", function() {
+  // 캠핑 콘텐츠를 보이게 함
+  document.getElementById("content_camping").style.display = "block";
+  // 다른 콘텐츠는 숨김 처리
+  document.getElementById("content_caravan").style.display = "none";
+  document.getElementById("content_glamping").style.display = "none";
+  document.getElementById("content_map").style.display = "none";
+});
+
+// 카라반 버튼 클릭 이벤트
+document.getElementById("btn_caravan").addEventListener("click", function() {
+  // 카라반 콘텐츠를 보이게 함
+  document.getElementById("content_caravan").style.display = "block";
+  // 다른 콘텐츠는 숨김 처리
+  document.getElementById("content_camping").style.display = "none";
+  document.getElementById("content_glamping").style.display = "none";
+  document.getElementById("content_map").style.display = "none";
+});
+// 글램핑 버튼 클릭 이벤트
+document.getElementById("btn_glamping").addEventListener("click", function() {
+  // 글램핑 콘텐츠를 보이게 함
+  document.getElementById("content_glamping").style.display = "block";
+  // 다른 콘텐츠는 숨김 처리
+  document.getElementById("content_camping").style.display = "none";
+  document.getElementById("content_caravan").style.display = "none";
+  document.getElementById("content_map").style.display = "none";
+});
+// 지도 버튼 클릭 이벤트
+document.getElementById("btn_map").addEventListener("click", function() {
+  // 지도 콘텐츠를 보이게 함
+  document.getElementById("content_map").style.display = "block";
+  // 다른 콘텐츠는 숨김 처리
+  document.getElementById("content_camping").style.display = "none";
+  document.getElementById("content_caravan").style.display = "none";
+  document.getElementById("content_glamping").style.display = "none";
+});
+
+// 날짜 및 시도/구군 검색 시 상품출력 AJAX
+$(document).ready(function(){
+    $("#listButton").click(getMemberList); //id="listButton"인 태그에 click하면 function getMemberList() 실행
+});
+function getMemberList(){
+    $.ajax({
+        url:"list.jsp",                    //list.jsp에 AJAX요청
+        success:function(data){
+            let obj=JSON.parse(data);      //data를 받아와서 JSON형태로 변환
+            let array=["<ol>"]; 
+            obj["member_list"].forEach(
+                    member =>  array.push("<li>"+member.id+"</li>")    
+                    //JSON에 있는 member.id의 value를 li태그에 넣어서 array에 넣어줌
+            );
+            array.push("</ol>");                                   
+ 
+            $("#result").html(array.join(""));  
+            //array의 요소들을 다 합쳐서 하나로 만든후 id="result"인 태그에 html로 출력
+        }
+    });    
+}
+
+//날짜 검색, 시도/구군 검색 ajax
+
+$(document).ready(function(){
+    $("#place_button").click(getCampList); 
+});
+
+function getCampList() {
+  $.ajax({
+    url: "search_place.cp",
+    success: function(data) {
+      try {
+        const { camp_list } = JSON.parse(data);
+        const htmlArray = camp_list.map(camp => {
+          return `
+            <li>
+              <div>
+                <div>
+                  <input type="hidden" value="${camp.reg_num_c}">
+                  <a href="Camp_Glam_Reserve.cp?reg_num_c=${camp.reg_num_c}">
+                    <img src="image/${camp.acc_picture}" alt="이미지 준비중">
+                  </a>
+                </div>
+              </div>
+              <div>
+                <a>${camp.acc_name}</a>
+                <p>${camp.site_1}</p>
+                <div>${camp.site_2}</div>
+                <div>${camp.detail}</div>
+                <div>
+                  <a href="camping_reserve.cp?reg_num_c=${camp.reg_num_c}">
+                    <button class="spots_button">예약하기</button>
+                  </a>
+                </div>
+              </div>
+            </li>
+          `;
+        });
+        $("#content_camping").html(htmlArray.join(""));
+      } catch (e) {
+        console.error("Error parsing data: ", e);
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.error(textStatus, errorThrown);
+    }
+  });
+}
 
 
-// 카카오맵 자바스크립트 지도 생성 및 마커
-	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-    	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-    	level: 3 //지도의 레벨(확대, 축소 정도)
-    	// disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
-	};
 
-	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-	// 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+						
 
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-    	position: markerPosition
-	});
 
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
 
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);    
 
-	// 지도에 클릭 이벤트를 등록합니다
-	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 카카오맵 API 부분
+// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 장소 검색 객체를 생성합니다
+var ps = new kakao.maps.services.Places(); 
+
+// 키워드로 장소를 검색합니다
+
+function placeSearch() {
+    var keyword = document.getElementById('keyword').value;
+    ps.keywordSearch(keyword, placesSearchCB);
+} 
+
+// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds = new kakao.maps.LatLngBounds();
+
+        for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+    } 
+}
+
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(place) {
     
-    	// 클릭한 위도, 경도 정보를 가져옵니다 
-    	var latlng = mouseEvent.latLng; 
-    
-    	// 마커 위치를 클릭한 위치로 옮깁니다
-    	marker.setPosition(latlng);
-    
-    	// 마우스로 클릭한 위치의 위도와 경도를 표시할 메세지
-    	var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-    	message += '경도는 ' + latlng.getLng() + ' 입니다';
+    // 마커를 생성하고 지도에 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    });
 
-    	// 'clickLatlng'라는 아이디값을 가진 <div> 태그의 innerHTML 으로 위 메세지를 설정합니다.
-    	var resultDiv = document.getElementById('clickLatlng'); 
-    	resultDiv.innerHTML = message;
-	});
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        infowindow.open(map, marker);
+    });
+}
+
+
 
  
