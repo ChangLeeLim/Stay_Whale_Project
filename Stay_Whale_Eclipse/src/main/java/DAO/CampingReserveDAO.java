@@ -8,20 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.sql.DataSource;
 import camping.Reserve_Camping;
-import DAO.ReserveDAO;
+import DAO.CampingReserveDAO;
 
-public class ReserveDAO {
+public class CampingReserveDAO {
 
 	DataSource ds;
 	Connection con;
-	private static ReserveDAO reserveDAO;
+	private static CampingReserveDAO reserveDAO;
 
-	private ReserveDAO() {
+	private CampingReserveDAO() {
 	}
 
-	public static ReserveDAO getInstance(){
+	public static CampingReserveDAO getInstance(){
 		if(reserveDAO == null){
-			reserveDAO = new ReserveDAO();
+			reserveDAO = new CampingReserveDAO();
 		}
 		return reserveDAO;
 	}
