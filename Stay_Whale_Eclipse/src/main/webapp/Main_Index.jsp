@@ -46,7 +46,7 @@
 			<a href="hotelPrint.xr"><li><div><img src="image\호텔리조트.png"></div><b>호텔/리조트</b></li></a>
 			<a href="Pension_Index.jsp"><li><div><img src="image\펜션.png"></div><b>펜션</b></li></a>
 			<a href="homestay.hs"><li><div><img src="image\홈스테이.png"></div><b>홈스테이</b></li></a>
-			<a href="Camp_Glam_Index.jsp"><li><div><img src="image\캠핑글램핑.png"></div><b>캠핑/글램핑</b></li></a>
+			<a href="Camp_Glam_Index.cp"><li><div><img src="image\캠핑글램핑.png"></div><b>캠핑/글램핑</b></li></a>
 			<a href="HotSight_Index.jsp"><li><div><img src="image\명소.png"></div><b>명소</b></li></a>
 			<a href="Jeonsi_Index.jsp"><li><div><img src="image\전시회.png"></div><b>전시/행사</b></li></a>
 			<a href="Withtour.jsp"><li><div><img src="image\함께하는투어.png"></div><b>함께하는Tour</b></li></a>

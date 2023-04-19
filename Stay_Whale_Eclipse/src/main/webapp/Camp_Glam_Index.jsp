@@ -3,7 +3,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="camping.ACC_Camping" %>
-<%@ page import="camping.PageInfo" %>
+<%@ page import="vo.PageInfo" %>
 <%@ page import="DTO.Bulletin_Board_Camptip" %>
 <%@ page import="DAO.DBProcess_Camptip" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
