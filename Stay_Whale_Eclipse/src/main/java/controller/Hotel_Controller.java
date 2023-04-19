@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.HotelListPrintAction;
+import action.HotelListSearchAction;
 import vo.ActionForward;
 import vo.HotelBean;
 
@@ -26,6 +27,14 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 
 		if(command.equals("/hotelPrint.xr")){
 			action  = new HotelListPrintAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/hotelSearch.xr")) {
+			action  = new HotelListSearchAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
