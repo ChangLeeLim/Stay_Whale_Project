@@ -9,7 +9,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import svc.RoominfoInsertService;
-import camping.ActionForward;
+import vo.ActionForward;
 import camping.Room_Info_Camping;
 
 

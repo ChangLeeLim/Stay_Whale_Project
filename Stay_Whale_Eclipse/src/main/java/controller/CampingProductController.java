@@ -13,7 +13,7 @@ import action.CampingReserveAction;
 import action.ReserveInsertAction;
 import action.SearchDateAction;
 import action.SearchPlaceAction;
-import camping.ActionForward;
+import vo.ActionForward;
 
 
 @WebServlet("*.cp")

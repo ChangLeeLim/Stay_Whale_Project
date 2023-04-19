@@ -1,9 +1,22 @@
 <!DOCTYPE html>
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.HomeStayBean"%>
 <%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("UTF-8");%>
+
+<%
+	ArrayList<HomeStayBean> homestayList = (ArrayList<HomeStayBean>)request.getAttribute("homestayList");
+    PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int listCount=pageInfo.getListCount();
+	int nowPage=pageInfo.getPage();
+	int maxPage=pageInfo.getMaxPage();
+	int startPage=pageInfo.getStartPage();
+	int endPage=pageInfo.getEndPage();
+%>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -115,7 +128,7 @@ body.modal-open {
 	<section id="main_homestay_section2">
 		<nav>
 			<ul>
-				<li><div><img src="image/add_icon2.png"></div><p style="text-align: center;">전체</p></li>
+				<li class='select'><div><img src="image/add_icon2.png"></div><p style="text-align: center;">전체</p></li>
 				<li><div><img src="image/private_room3.png"></div><p style="text-align: center;">개인실</p></li>
 				<li><div><img src="image/countryside3.png"></div><p style="text-align: center;">시골</p></li>
 				<li><div><img src="image/hanok3.png"></div><p style="text-align: center;">한옥</p></li>
@@ -129,7 +142,17 @@ body.modal-open {
 	<section id="main_homestay_section3">
 		
 			<ul>
-				<li><div class="airbnbimg"><img src="image/homestay_img1.png"></div>
+			<%
+				for(int i = 0; i < homestayList.size(); i++)
+				{
+					out.println("<li><div class='airbnbimg'><img src='image/"+homestayList.get(i).getAcc_picture()+"'></div>");
+					out.println("<div class='airbnblocation'><h3>"+homestayList.get(i).getAcc_name()+"</h3></div>");
+					out.println("<div class='airbnbdetail'>"+homestayList.get(i).getLocation()+"</div>");
+					out.println("<div class='airbnbprice'>"+homestayList.get(i).getPrice2()+"원(1박 기준)</div>");
+					out.println("<div class='airbnbrating'><h4>★ 없음</h4></div></li>");
+				}
+			%>
+				<!-- <li><div class="airbnbimg"><img src="image/homestay_img1.png"></div>
 				<div class="airbnblocation"><h3>거제면, 거제시, 한국</h3></div>
 				<div class="airbnbdetail">바다 전망</div>
 				<div class="airbnbprice">460,000원(1박 기준)</div>
@@ -175,7 +198,7 @@ body.modal-open {
 				<div class="airbnblocation"><h3>국동, 여수, 한국</h3></div>
 				<div class="airbnbdetail">해변 및 산 전망</div>
 				<div class="airbnbprice">102,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 4.97</h4></div></li>
+				<div class="airbnbrating"><h4>★ 4.97</h4></div></li> -->
 			</ul>
 		
 		<a href="#" onclick="return false"><p>더 보기</p></a>

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import svc.ReserveInsertService;
-import camping.ActionForward;
+import vo.ActionForward;
 import camping.Reserve_Camping;
 
 

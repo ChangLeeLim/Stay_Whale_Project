@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.SearchPlaceService;
-import camping.ActionForward;
+import vo.ActionForward;
 import camping.ACC_Camping;
 
 
