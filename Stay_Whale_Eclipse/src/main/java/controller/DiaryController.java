@@ -20,9 +20,9 @@ public class DiaryController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String requestURI = request.getRequestURI(); // ¿äÃ»À»ÇÏ¸é urI·Î ¿äÃ»ÇÏ°Ô µÇ´Ï±î ±× URI¸¦ ¹Þ¾Æ¿Í¼­
+		String requestURI = request.getRequestURI(); // ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¸ï¿½ urIï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ï°ï¿½ ï¿½Ç´Ï±ï¿½ ï¿½ï¿½ URIï¿½ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½
 		String contextPath = request.getContextPath(); // 
-		String command  = requestURI.substring(contextPath.length());//ÄÁÅØ½ºÆ® °æ·Î¸¦ Àß¶ó¹ö¸°´Ù.
+		String command  = requestURI.substring(contextPath.length());//ï¿½ï¿½ï¿½Ø½ï¿½Æ® ï¿½ï¿½Î¸ï¿½ ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		ActionForward forward = null;
 		Action action = null;
 		
@@ -31,11 +31,19 @@ public class DiaryController extends HttpServlet {
 				
 		if(command.equals("/diaryWrite.diary")){
 			action = new AttractShowAction();
-			forward = action.execute(request, response);
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
 		}else if(command.equals("/ContentWrite.diary")) {
 			action = new  PickAttraction();
-			forward =action.execute(request, response);
+			try {
+				forward =action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			
 		}

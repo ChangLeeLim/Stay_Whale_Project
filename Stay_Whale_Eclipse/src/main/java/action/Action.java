@@ -4,18 +4,12 @@ package action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-=======
-import javax.servlet.http.*;
 
->>>>>>> branch 'master' of https://github.com/ChangLeeLim/Stay_Whale_Project.git
 import vo.ActionForward;
 
 
-public interface Action {  // forward ´ã´ç ÀÎÅÍÆäÀÌ½º
+public interface Action {  // forward ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½
 	
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response );
-		
-		
-
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response ) throws Exception;
 
 }
