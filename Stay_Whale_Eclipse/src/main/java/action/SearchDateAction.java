@@ -4,10 +4,10 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 import svc.SearchPlaceService;
-import camping.ActionForward;
+import vo.ActionForward;
 import camping.ACC_Camping;
 
 
@@ -21,12 +21,12 @@ public class SearchDateAction implements Action {
 		articleList = SearchPlaceService.place_search(check_in, check_out);
 		
 		// JSON 형식으로 데이터 변환
-		Gson gson = new Gson();
+		/*Gson gson = new Gson();
 		String jsonData = gson.toJson(articleList);
 		
 		// 응답 데이터 설정
 		response.setContentType("application/json;charset=UTF-8");
-		response.getWriter().write(jsonData);
+		response.getWriter().write(jsonData);*/
 		
 		return null;   		
 	 }

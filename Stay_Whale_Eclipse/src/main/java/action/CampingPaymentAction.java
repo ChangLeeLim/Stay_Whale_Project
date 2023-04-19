@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.CampingPaymentService;
-import camping.ActionForward;
+import vo.ActionForward;
 import camping.Reserve_Camping;
 
 

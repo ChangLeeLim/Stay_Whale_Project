@@ -4,7 +4,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import camping.ActionForward;
+import vo.ActionForward;
 import camping.Room_Info_Camping;
 import svc.CampingReserveService;
 
