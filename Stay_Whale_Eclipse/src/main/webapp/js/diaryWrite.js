@@ -1,0 +1,329 @@
+var list = document.getElementById("data").value;
+var data = JSON.parse(list);  // 지도에 마커와 정보를 표기하기 위해서 DB에 있는 명소정보를 가져와 JSON객체로 변환.
+var length = data.length;
+
+var picknum=[];  // 선택시마다 넘어오는 명소번호를 담은 자바스크립트 객체 
+
+var pickdate = [];  // 선택한 날짜를 담는 객체	배열
+
+
+
+
+
+
+
+
+
+
+var mapContainer = document.getElementById('maps'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+
+
+//마커를 표시할 위치와 title 즉 마커를 표기하고 싶은 위치에 들어갈 정보들을 객체 배열로 담는 부분.
+var positions2 = [];   // 배열 객체생성 
+for(var i=0; i<length; i++){
+	var info ={
+			title: data[i].attraction_name ,  // 장소명 
+			latlng: new kakao.maps.LatLng(data[i].latitude, data[i].longitude),  //마커 좌표 
+			att_num: data[i].attraction_num ,                     // 명소번호
+			att_detail:data[i].attraction_detail ,					// 상세설명
+			att_site1: data[i].site_1,					// 도	
+			att_site2: data[i].site_2,					// 시 군구 
+			att_addr: data[i].attraction_addr,					// 주소 
+			att_pic: data[i].attraction_pic,						// 사진
+	};
+	positions2[i] = info;
+}
+
+
+
+
+var infowindow;
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions2.length; i ++) {    // for문으로 돌면서 찍는 것 
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({          // 마커 객체를 생성하고 위치와 제목 이미지 등을 위에 생성한 position2객체에서 불러와서 표기해준다. 
+        map: map, // 마커를 표시할 지도
+        position: positions2[i].latlng, // 마커를 표시할 위치
+        title : positions2[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됨.
+        image : markerImage, // 마커 이미지 
+        clickable: true
+    });
+    
+    const att_addr= positions2[i].att_addr;
+    const att_num = positions2[i].att_num;
+    const att_detail=positions2[i].att_detail;
+    const att_site1= positions2[i].att_site1;
+    const att_site2= positions2[i].att_site2;
+    const att_pic= positions2[i].att_pic;
+        
+    
+    //'<div style="padding:5px; width:300px; height:100px;">' + title +'<br>'+ test+'</div>';//데이터를 표기하는 부분예시
+    var makeInfowindow = (function(marker, title, att_addr, att_detail, att_pic, att_num) {    // 인포윈도우를 생성  
+        var iwContent =
+        	'<div style = "width: 300px; height: 150px;">'+
+        		'<input type="button" id="plus" style = "width:25px; height:25px; position:absolute; margin-left:210px; margin-top:2px; border:none;'+
+        		'background-image:url(image/contentplus.png); background-size:cover; background-position:center center;'+
+        		'background-color:white; cursor: pointer;" onclick="plus('+att_num+')">'+
+        		'<div style= "border: 0.25px solid; width:150px; height: 25px; position:absolute; margin-left:55px; font-size:14px;">'+
+        	 	title+'</div>'+
+        	 	'<div style =" border:0.25px solid; width:210px; height:20px; position:absolute; margin-left: 55px; margin-top: 30px; font-size:10px;">'+
+        	 	att_addr+' </div>'+
+        		'<div style = "height : 50px; width:50px; font-size:5px; background-image:url(image/'+att_pic+'); background-position: center center; background-size:cover;"></div>'+
+        		'<div style = "width:295px; height:92px; position:relative; left:1px; top:3px">'+
+        		
+        		'<div style ="width:100%; height:50px; overflow:hidden; color:#999; font-size: 12px;">'+att_detail+'</div>'+
+        		
+        		'<input type ="button" id="detailBtn" value="상세보기" style ="width:150px; height: 35px;'+
+        		'position:relative; left:70px; top:3px; color:white; font-weight:bold;'+
+        		'background-color:#4B89DC; border:none; cursor:pointer;" onclick ="detail('+att_num+')">'
+        		
+        		+'</div>'+
+        	'</div>';
+   
+        
+        
+        
+        var iwRemoveable = true;
+        var infowindow = new kakao.maps.InfoWindow({
+            content : iwContent,
+            removable : iwRemoveable   // x버튼 활성화
+            
+        });
+
+        // 클릭 이벤트 등록
+        kakao.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+        });
+
+        return infowindow;
+    })(marker, positions2[i].title, att_addr, att_detail, att_pic,att_num)  // 즉시실행 함수에 전달되는  매개변수
+    
+
+}  // 즉시 실행함수의 기본적인 형태 (functon(인자의 형태){실행문})(실체인자의 값)임 별도의 실행문 없이도 '선언과 동시에' 실행되는 특징을 가지고 있음.
+
+
+
+
+
+
+function plus(att_num){// 지도에서 선택한 여행지를 리스트에 추가하는 부분. 명소번호를 매개변수로 받음
+	var title; 
+	var pic;
+	for (var i =0 ; i<length ; i++){
+		if(data[i].attraction_num == att_num){ 
+			title = data[i].attraction_name;
+			pic = data[i].attraction_pic;  
+		
+		}
+	}
+	
+	picknum.push({    // 선언한 전역 객체배열에 담는 부분.  .push() 메서드는 객체배열에 해당객체를 추가해준다.
+		attraction_num : att_num
+	});
+
+
+	
+	var list = document.getElementById("selectionbar");  // 추가버튼 클릭시 엘리먼트를 추가하는 부분.
+	var temp = document.createElement("div");
+	var temp2 = document.createElement("div");
+	var temp3 = document.createElement("div");
+	var temp4 = document.createElement("div");
+	var temp5, temp6;
+	var childList = list.childNodes; // 자식노드를 배열로 (노드리스트로 반환)
+	var childCount = list.childNodes.length; // 배열의 길이
+
+	
+	
+	list.append(temp);
+	temp.append(temp2);  // 사진
+	temp.append(temp3);  // 명소이름
+	temp.append(temp4);
+	
+	
+	
+	
+	if(childCount > 1){  //  선택한 두 명소사이의 연결점 표현을 위한 요소 생성 
+		temp5 = document.createElement("div");
+		temp6 = document.createElement("div");
+		temp.append(temp5);
+		temp.append(temp6);
+		
+		temp6.innerHTML = "둘사이 거리 및 소요시간";  // 조건부 생성요소에 대한 값지정.
+	}
+	
+	// 자식요소 로 추가된 놈들에 대한 값지정.
+	temp2.style.backgroundImage = "url('image/"+pic+"')";  // 동적으로 추가된 엘리먼트에 데이터를 넣는 부분.
+	temp3.innerHTML = title;
+	temp4.addEventListener('click', function() {  //3번째 자식노드에 마우스 이벤트를 걸고 클릭시 제거하는 부분 // 요소가 생성이 되면서 '각각' 이벤트를 걸어버림/
+		temp.remove();//동적으로 생성된 엘리먼트에 대한 이벤트 설정. 리스트 삭제 
+		
+		if(childList.length > 1){// 추가되는 리스트 컨데이너의 자식요소의 배열의 길이 가 1이상일때(제일 첫요소 제외)   첫요소란 1) 제일처음 생성된 요소 및  2)두번째 요소였다가 첫번째 요소가 삭제되어 첫번째 요소가 된 것을 말함.
+			if(childList[1].childNodes.length>3){//만일 제일첫요소의 자식요소가 4개 이상이면.
+				childList[1].removeChild(childList[1].childNodes[4]);//5번째 자식요소 삭제
+				childList[1].removeChild(childList[1].childNodes[3]);// 4번째도 삭제 .
+			}
+		}
+		
+		for(var i =0 ; i<picknum.length ;i++){  // 삭제버튼을 클릭햇을때 HTML엘리먼트 삭제와 동시에 서버로 가져갈 객체배열 목록에서 삭제처리한다.
+			if(picknum[i].attraction_num == att_num){     //
+				picknum.splice(i,1);
+				break;   // 중복메뉴가 있을때 모두 지워지는 것을 방지하기 위한 break;
+			
+			}
+		}
+	});
+	
+}
+
+function detail(att_num) {   // 역시 명소번호를 매개변수로 받아서  detail bar 요소에 넣어준다. 추후 상세정보를 더 넣을 예정.
+	var pic;
+	var title;
+	var detail;
+	var titleObj = document.getElementById("detailTitle");
+	var picObj = document.getElementById("attraction_Pic");
+	var detailObj = document.getElementById("detailCont");
+	var addObj = document.getElementById("addCont");
+	
+	for(var i =0; i<length ;i++ ){
+		if(data[i].attraction_num == att_num){
+			pic = data[i].attraction_pic;
+			title = data[i].attraction_name;
+			detail = data[i].attraction_detail;	
+		}
+		
+	}	
+	picObj.style.backgroundImage = "url('image/"+pic+"')";
+	titleObj.innerHTML = title;
+	detailObj.innerHTML = detail;
+	
+	 addObj.setAttribute('onclick', "plus("+att_num+")")// 동시에 추가버튼에 매개변수로 받은  att_num을 가지고 함수를 할당해준다.
+			
+	
+}
+
+function del() {
+	$("#selectionbar > div").remove();
+	picknum.length = 0;
+	
+		
+}
+
+
+$(document).ready(function() {  // detailbar 숨기기.
+	$("#datailBar").css("width","0px");
+	$(document).on("click","#detailBtn",function() {// detailBtn은 문서가 준비되었을 때에는 존재하지 않으므로 document ready가 적용될 수 없음.
+		$("#datailBar").animate({width:"400px"})
+	});
+	
+	$("#closeDetail").click(function(){
+		$("#datailBar").animate({width:"0px"})
+		
+	});
+	
+});
+
+
+
+
+function create() {
+	
+	// XMLHttpRequest 객체를 사용한 AJAX 호출 코드입니다.
+	/*var xhr = new XMLHttpRequest();//XMLHttpRequest 객체
+	xhr.open("post", "ContentWrite.diary"); //xhr.open("post", "ContentWrite.diary")는 POST 방식으로 ContentWrite.diary URL로 요청을 보내겠다는 것을 나타냄.
+	xhr.setRequestHeader("Content-Type", 'application/json');
+	xhr.onload = function () {
+		if(xhr.status === 200){
+			console.log(xhr.responseText);
+			console.log("성공");
+
+	
+	
+		}else{
+			console.log("Error:", xhr.statusText);
+			cnoosle.log("실패?");
+		}
+		
+	};
+	
+	
+	console.log(JSON.stringify(picknum)+","+ JSON.stringify(pickdate));
+	xhr.send("["+JSON.stringify(picknum)+","+ JSON.stringify(pickdate)+"]");*/
+	
+	
+	data = "["+JSON.stringify(picknum)+","+ JSON.stringify(pickdate)+"]";
+	var hidden =  document.getElementById("att_num");
+	var myForm = document.getElementById("myForm");
+	hidden.value =data;         // input type= hidden에  값을 설정하고 다른 jsp페이지로 가지고 간다. 
+	
+	
+	myForm.submit();
+	
+	
+	
+}
+
+
+
+
+$(function() {// 데이트 피커 확인버튼 클릭시 이벤트 정의.
+	var test = $(".applyBtn.btn.btn-sm.btn-primary");
+	$(document).on("click",".applyBtn.btn.btn-sm.btn-primary",function() {// detailBtn은 문서가 준비되었을 때에는 존재하지 않으므로 document ready가 적용될 수 없음.
+		var sdate = $("#datePickerCont li:nth-child(2) p:first-child").html();
+		var edate = $("#datePickerCont li:nth-child(2) p:last-child").html();
+		var total = $("#datePickerCont li:nth-child(3) p").html();
+
+		pickdate.length = 0;  // 날짜데이터는 1개만 가져가야 므로 배열에 데이터가 쌓이는 것을 방지하기 위한 초기화.
+		pickdate.push({
+			start_date : sdate,
+			end_date : edate, 
+			total_date : total
+	});
+		
+		console.log(JSON.stringify(pickdate));
+		console.log(JSON.stringify(picknum));
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
