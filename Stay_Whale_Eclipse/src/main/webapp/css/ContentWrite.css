@@ -1,0 +1,323 @@
+div{
+	border: 0.25px solid;
+	box-sizing: border-box;
+}
+#section1{
+	border: 0.25px solid;
+	width: 1280px;
+	height: 800px;
+	margin: auto;
+	
+}
+#section2{
+	border: 0.25px solid;
+	width: 1280px;
+	height: 600px;
+	margin: 20px auto;
+	
+}
+
+#topPic{
+	width: 100%;
+	height: 400px;
+	
+}
+#topContWrap{
+	background-image: url("../image/mainThema.jpg");
+	background-size: cover;
+	background-position: center;
+	width: 1280px;
+	height: 100%;
+	margin: auto;
+}
+#topContWrap > div{
+	position: relative;
+    top: 70px;
+    left: 65px;
+    width: 650px;
+    border-radius: 20px;
+    height: 300px;
+    background-color:rgba(0, 0, 0, 0.7);
+}
+#userPic{
+	width: 80px;
+    height: 80px;
+    border-radius: 50% 50%;
+    position: relative;
+    top: 20px;
+    left: 30px;
+    border: 0.25px solid white;
+}
+#userPicReg{
+	position: absolute;
+    margin-left: 42px;
+    margin-top: 30px;
+}
+#userIdWrap{
+    position: relative;
+    top: -40px;
+    left: 125px;
+    width: 390px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    color: white;
+}
+#dateRange{
+	position: relative;
+    top: 40px;
+    left: 50px;
+    width: 280px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+#dateRange p{
+	display: inline-block;
+	font-size: 16px;
+	
+}
+#totalDays{
+	width: 100px;
+    height: 40px;
+    position: relative;
+    top: 0px;
+    left: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+}
+
+#contentTitle{
+	display: flex;
+    align-items: center;
+    width: 470px;
+    height: 70px;
+    position: relative;
+    top: 20px;
+    left: 50px;
+    color: white;
+    background-color: transparent;
+    font-size: 25px;
+}
+#contentTitle > p{
+	font-size: 30px;
+}
+
+#path{
+	width: 700px;
+	height: 800px;
+	float: left;
+	overflow: auto;
+}
+.style1{
+	width: 100%;
+	height: 145px;
+}
+.style1 > div:first-child{
+	width: 90px;
+    height: 100%;
+    float: left;
+}
+
+.style1 > div:first-child > div{
+	width: 50px;
+    height: 50px;
+    border-radius: 50% 50%;
+    background-color: #223b68;
+    position: relative;
+    top: 14px;
+    left: 17px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.style1 > div:nth-child(2){
+	position: relative;
+	top: 10px;
+	left: 10px;
+	width: 80px;
+	height: 80px;
+	float: left;
+	background-size: cover;
+	background-position: center;
+	
+}
+.style1 > div:nth-child(3){
+	display:flex;
+	align-items:center;
+	position: relative;
+	top: 10px;
+	left: 20px;
+    width: 350px;
+    height: 40px;
+    float: left;;
+    font-size: 17px;
+    font-weight: bold;
+}
+.style1 > div:nth-child(4){
+	position: relative;
+    top: 90px;
+    left: 65px;
+    width: 100px;
+    height: 40px;
+    float: left;
+}
+
+.style1 > div:nth-child(4) > input[type=button]{
+	width: 100%;
+	height: 100%;
+	border: none;
+	color: white;
+	background-color: #4B89DC;
+	cursor: pointer;
+}
+
+.style2{
+	width: 100%;
+	height: 40px;
+	background-color: #F8F8FA;
+}
+.style2 > div:first-child{
+	height: 70%;
+    width: 30px;
+    position: relative;
+    left: 25px;
+    top: 5px;
+    background-image: url(../image/dot2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+#maps{
+	width: 580px;
+    height: 800px;
+    float: left;
+    
+}
+#map{
+	width: 100%;
+	height: 450px;
+}
+#pathserial{
+	width: 100%;
+	height: 350px;
+}
+#pathserial > div:first-child{
+	width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#pathserial > div:nth-child(2){
+	width: 100%;
+    height: 288px;
+    overflow: auto;
+}
+#pathserial > div:first-child  p{
+	font-size: 25px;
+	font-weight: bolder;
+}
+#pathserial > div:nth-child(2) > div{
+	width: 160px;
+    height: 40px;
+    float: left;
+    margin-top: 25px;
+    margin-left: 25px;
+  
+}
+#pathserial > div:nth-child(2) > div >div:first-child{
+	height: 100%;
+	width: 30px;
+	float: left;
+}
+#pathserial > div:nth-child(2) > div > div:nth-child(2){
+	height: 100%;
+	width: 125px;
+	float: left;
+	display: flex;
+	align-items: center;
+}
+#pathserial > div:nth-child(2) > div > div:nth-child(2)>p{
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#pathserial > div:nth-child(2) > div >div:first-child  > div{
+    width: 20px;
+    height: 20px;
+    border-radius: 50% 50%;
+    position: relative;
+    top: 9px;
+    left: 3px;
+    background-color: #223b68;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
+#WtiteWrap1{
+	width: 700px;
+	height: 470px;
+	float: left;
+}
+#writeTitle{
+	width: 100%;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#writeContent{
+	width: 100%;
+	height: 405px;
+	resize: none;
+	font-size: 20px;
+}
+#writeTitle >p{
+	font-size: 25px;
+	font-weight: bolder;
+}
+#WtiteWrap2{
+	width: 580px;
+	height: 600px;
+	float: left;
+}
+#repPicWrap{
+	width: 100%;
+	height: 300px;
+}
+#hashtagWrap{
+	width: 100%;
+	height: 300px;
+}
+#buttonWrap{
+	margin-top: -130px;
+    width: 700px;
+    height: 130px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttonStyle1{
+	border: none;
+	width: 150px;
+	height: 40px;
+	background-color:  #4B89DC;
+	color: white;
+	position: relative;
+}
+#writeReg{
+	left: -20px;
+}
+#writeCancel{
+	left: 20px;
+}
