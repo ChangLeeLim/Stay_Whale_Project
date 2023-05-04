@@ -3,8 +3,8 @@ package svc;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import DAO.ReserveDAO;
-import camping.Reserve_Camping;
+import DAO.Camping_Reserve_DAO;
+import vo.Reserve_Camping;
 
 import static db.JdbcUtil.*;
 
@@ -15,13 +15,13 @@ public class CampingPaymentService {
 		
 		Connection con = getConnection();
 		
-		ReserveDAO reserveDAO = ReserveDAO.getInstance();
+		Camping_Reserve_DAO reserveDAO = Camping_Reserve_DAO.getInstance();
 		reserveDAO.setConnection(con);
 		
 		dateList = reserveDAO.reserve_date_search(fac_num_c);
+
+		
 		close(con);
-		
-		
 		return dateList;
 	}
 }

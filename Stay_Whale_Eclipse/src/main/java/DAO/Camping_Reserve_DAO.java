@@ -7,21 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.sql.DataSource;
-import camping.Reserve_Camping;
-import DAO.CampingReserveDAO;
 
-public class CampingReserveDAO {
+import DAO.Camping_Reserve_DAO;
+import vo.Reserve_Camping;
+
+public class Camping_Reserve_DAO {
 
 	DataSource ds;
 	Connection con;
-	private static CampingReserveDAO reserveDAO;
+	private static Camping_Reserve_DAO reserveDAO;
 
-	private CampingReserveDAO() {
+	private Camping_Reserve_DAO() {
 	}
 
-	public static CampingReserveDAO getInstance(){
+	public static Camping_Reserve_DAO getInstance(){
 		if(reserveDAO == null){
-			reserveDAO = new CampingReserveDAO();
+			reserveDAO = new Camping_Reserve_DAO();
 		}
 		return reserveDAO;
 	}
@@ -53,6 +54,7 @@ public class CampingReserveDAO {
 		}finally{
 			close(rs);
 			close(pstmt);
+			close(con);
 		}
 
 		return reserve_check;
@@ -89,6 +91,7 @@ public class CampingReserveDAO {
 		}finally{
 			close(rs);
 			close(pstmt);
+			close(con);
 		}
 
 		return num;
@@ -126,6 +129,7 @@ public class CampingReserveDAO {
 		}finally{
 			close(rs);
 			close(pstmt);
+			close(con);
 		}
 		
 		return insertReserve;
@@ -160,6 +164,7 @@ public class CampingReserveDAO {
 		}finally{
 			close(rs);
 			close(pstmt);
+			close(con);
 		}
 
 		return datelist;
@@ -194,6 +199,7 @@ public class CampingReserveDAO {
 		}finally{
 			close(rs);
 			close(pstmt);
+			close(con);
 		}
 
 		return datelist;

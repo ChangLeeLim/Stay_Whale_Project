@@ -1,4 +1,4 @@
-package camping;
+package vo;
 
 public class Reserve_Camping {
 	

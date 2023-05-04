@@ -1,0 +1,243 @@
+.ui-datepicker-trigger {
+		cursor: pointer;
+		width: 20px;
+		height: 20px;
+		margin-top: 22px;
+		opacity: 0.5;
+	}
+	.ui-widget-header { border: none !important; background-color: transparent !important; }
+
+	.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+	    border: 1px solid #fff !important;
+	    background: #fff !important;
+	    font-weight: normal !important;
+	    color: #454545 !important;
+	    text-align: center !important;
+	    font-size: 17px;
+	}
+	
+	.ui-widget.ui-widget-content {
+	    width: 300px;
+	}
+	
+	.ui-datepicker .ui-datepicker-title {
+	    font-size: 20px;
+	}
+	
+	.ui-datepicker .ui-datepicker-header {
+	    width: 100%;
+	}
+	
+	.ui-datepicker th {
+	    font-size: 16px;
+	    padding: 0.7em !important;
+	}
+	
+	.ui-datepicker-calendar th:first-child {
+		color: #ff0000 !important;
+	}
+	
+	.ui-datepicker-calendar th:nth-last-child(1) {
+		color: #0d47a1 !important;
+	}
+	
+	.ui-datepicker-calendar tr td:first-child a {
+		color: #ff0000 !important;
+	}
+	
+	.ui-datepicker-calendar tr td:nth-last-child(1) a {
+		color: #0d47a1 !important;
+	}
+	.hasDatepicker{cursor: pointer;}
+	
+	input::placeholder {
+		font-size: 15px;
+	}
+	
+	#from, #to {
+		text-align: center;
+		border: none;
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 20px;
+		width: 170px;
+		padding: 0.8em 0.5em;
+	}
+	
+		.con {
+	margin: 0 auto;
+}
+	.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+	/* 3 */
+.btn-3 {
+  background: rgb(0,172,238);
+background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+.btn-3 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-3:before,
+.btn-3:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+   background: rgba(2,126,251,1);
+  transition: all 0.3s ease;
+}
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-3:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3:hover{
+   background: transparent;
+  box-shadow: none;
+}
+.btn-3:hover:before {
+  height: 100%;
+}
+.btn-3:hover:after {
+  width: 100%;
+}
+.btn-3 span:hover{
+   color: rgba(2,126,251,1);
+}
+.btn-3 span:before,
+.btn-3 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+   background: rgba(2,126,251,1);
+  transition: all 0.3s ease;
+}
+.btn-3 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-3 span:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3 span:hover:before {
+  height: 100%;
+}
+.btn-3 span:hover:after {
+  width: 100%;
+}
+
+	
+.airbnb_name
+{
+	width:1280px;
+	margin:auto;
+}
+.airbnb_infor
+{
+	width:1280px;
+	margin:auto;
+}
+.airbnb_img
+{
+	width:1280px;
+	height:480px;
+	margin:auto;
+}
+.airbnb_img div
+{
+	float:left;
+}
+.airbnb_img_main img
+{
+	width:640px;
+	height:490px;
+}
+.airbnb_img_sub
+{
+	width:300px;
+	height:240px;
+	padding-left: 10px;
+}
+.airbnb_img_sub img
+{
+	width:300px;
+	height:240px;
+}
+.detail_main
+{
+	width:1280px;
+	height:1100px;
+	margin:auto;
+}
+.detail_left
+{
+	width:800px;
+	height:100%;
+	float:left;
+}
+.detail_right
+{
+	width:480px;
+	height:100%;
+	float: right;
+}
+.reserve
+{
+	float: right;
+}
+.title
+{
+	height:100px;
+	border-bottom: 1px solid gray;
+}
+.fix
+{
+	height:200px;
+	border-bottom: 1px solid gray;
+}
+.detail
+{
+	height:300px;
+	border-bottom: 1px solid gray;
+	/*white-space: nowrap;*/
+	overflow: scroll;
+  	text-overflow: ellipsis;
+}
+.facility
+{
+	height:400px;
+	border-bottom: 1px solid gray;
+}
+.reserve
+{
+	width: 380px;
+	height: 600px;
+}

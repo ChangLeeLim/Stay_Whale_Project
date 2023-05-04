@@ -2,8 +2,9 @@ package svc;
 
 import java.sql.Connection;
 
-import DAO.ReserveDAO;
-import camping.Reserve_Camping;
+import DAO.Camping_Reserve_DAO;
+import vo.Reserve_Camping;
+
 import static db.JdbcUtil.*;
 public class ReserveInsertService {
 
@@ -11,7 +12,7 @@ public class ReserveInsertService {
 		boolean isWriteSuccess = false;
 		
 		Connection con = getConnection();
-		ReserveDAO reserveDAO = ReserveDAO.getInstance();
+		Camping_Reserve_DAO reserveDAO = Camping_Reserve_DAO.getInstance();
 		reserveDAO.setConnection(con);
 		
 		int insertReserve = 0;

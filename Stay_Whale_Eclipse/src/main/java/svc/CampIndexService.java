@@ -3,27 +3,23 @@ package svc;
 import static db.JdbcUtil.*;
 import java.sql.Connection;
 import java.util.ArrayList;
-import DAO.CampingDAO;
-import camping.ACC_Camping;
+import DAO.Camping_Product_DAO;
+import vo.Accmodation_Camping;
 
 public class CampIndexService {
 
-	public static ArrayList<ACC_Camping> getCampMain() throws Exception{
-		
-		ArrayList<ACC_Camping> campingList = null;
-		
+	public static ArrayList<Accmodation_Camping> getCampMain() throws Exception{
+		ArrayList<Accmodation_Camping> campingList = null;
 		
 		Connection con = getConnection();
 		
-		CampingDAO campingDAO = CampingDAO.getInstance();
+		Camping_Product_DAO campingDAO = Camping_Product_DAO.getInstance();
 		campingDAO.setConnection(con);
 		
-		campingList = campingDAO.camping_SelectList();
+		campingList = campingDAO.camping_SelectList();		
 		close(con);
-		
-		
-		return campingList;
-		
+
+		return campingList;		
 	}
 
 }

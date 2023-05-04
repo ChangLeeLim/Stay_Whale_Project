@@ -17,6 +17,7 @@ import action.BoardReplyProAction;
 import action.BoardWriteProAction;*/
 import vo.ActionForward;
 import action.HomeStayListAction;
+import action.HomeStayDetailAction;
 
 @WebServlet("*.hs")
 public class HomeStayController extends javax.servlet.http.HttpServlet 
@@ -39,6 +40,15 @@ public class HomeStayController extends javax.servlet.http.HttpServlet
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}
+		else if(command.equals("/homestaydetail.hs"))
+		{
+			action = new HomeStayDetailAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+				}
 		}
 		
 		if(forward != null){

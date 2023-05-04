@@ -47,6 +47,7 @@ public class HomeStayDAO {
 		}finally{
 			close(rs);
 			close(pstmt);
+			close(con);
 		}
 
 		return listCount;
@@ -90,9 +91,56 @@ public class HomeStayDAO {
 		}finally{
 			close(rs);
 			close(pstmt);
+			close(con);
 		}
 
 		return homestayList;
+
+	}
+	
+	public HomeStayBean detailHomeStay(String reg_num_a){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String detail_homestay_sql="select *, format(price, 0) as price2 from accmodation_airbnb where reg_num_a=?";
+		HomeStayBean homestay = null;
+
+		try{
+			pstmt = con.prepareStatement(detail_homestay_sql);
+			pstmt.setString(1, reg_num_a);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()){
+				homestay = new HomeStayBean();
+				homestay.setReg_num_a(rs.getString("reg_num_a"));
+				homestay.setAcc_name(rs.getString("acc_name"));
+				homestay.setSite_1(rs.getString("site_1"));
+				homestay.setSite_2(rs.getString("site_2"));
+				homestay.setLocation(rs.getString("location"));
+				homestay.setTel_no(rs.getString("tel_no"));
+				homestay.setFax(rs.getString("fax"));
+				homestay.setEmail(rs.getString("email"));
+				homestay.setDetail(rs.getString("detail"));
+				homestay.setFacility_name(rs.getString("facility_name"));
+				homestay.setAcc_picture(rs.getString("acc_picture"));
+				homestay.setPrice(rs.getInt("price"));
+				homestay.setPrice2(rs.getString("price2"));
+				homestay.setStandard_amount(rs.getInt("standard_amount"));
+				homestay.setHost(rs.getString("host"));
+				homestay.setTheme(rs.getString("theme"));
+				homestay.setBedroom_count(rs.getInt("bedroom_count"));
+				homestay.setBed_count(rs.getInt("bed_count"));
+				homestay.setBathroom_count(rs.getInt("bathroom_count"));
+				homestay.setCategory(rs.getString("category"));
+			}
+
+		}catch(Exception ex){
+		}finally{
+			close(rs);
+			close(pstmt);
+			close(con);
+		}
+
+		return homestay;
 
 	}
 }

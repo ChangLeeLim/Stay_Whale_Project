@@ -1,4 +1,4 @@
-package camping;
+package vo;
 
 public class Room_Info_Camping {
 	
@@ -6,7 +6,7 @@ public class Room_Info_Camping {
 	private String reg_num_cr;
 	private String facility_name;
 	private int price;
-	private String detail_r;
+	private String room_detail;
 	private int standard_amount;
 	private String facility_picture;
 	
@@ -34,11 +34,11 @@ public class Room_Info_Camping {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getDetail_r() {
-		return detail_r;
+	public String getRoom_detail() {
+		return room_detail;
 	}
-	public void setDetail_r(String detail_r) {
-		this.detail_r = detail_r;
+	public void setRoom_detail(String room_detail) {
+		this.room_detail = room_detail;
 	}
 	public int getStandard_amount() {
 		return standard_amount;

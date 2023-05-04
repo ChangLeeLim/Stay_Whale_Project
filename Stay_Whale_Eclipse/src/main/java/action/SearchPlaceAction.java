@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.SearchPlaceService;
+import vo.Accmodation_Camping;
 import vo.ActionForward;
-import camping.ACC_Camping;
 
 
  public class SearchPlaceAction implements Action {
@@ -16,11 +16,13 @@ import camping.ACC_Camping;
 		String site_2 = request.getParameter("gugun1");
 		
 		
-		ArrayList<ACC_Camping> articleList=new ArrayList<ACC_Camping>();
-		articleList = SearchPlaceService.place_search(site_1, site_2);
+		ArrayList<Accmodation_Camping> searchPlaceList=new ArrayList<Accmodation_Camping>();
+		searchPlaceList = SearchPlaceService.place_search(site_1, site_2);
 
-		request.setAttribute("articleList", articleList);
-//		System.out.println(articleList.get(0).getAcc_name());
+		request.setAttribute("searchPlaceList", searchPlaceList);
+		
+		
+		
 		ActionForward forward= new ActionForward();
    		forward.setPath("/Camp_Glam_Index.jsp");
    		return forward;   		

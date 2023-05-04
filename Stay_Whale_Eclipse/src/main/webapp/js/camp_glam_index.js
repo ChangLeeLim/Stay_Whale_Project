@@ -14,10 +14,7 @@ $(function(){
         $(".logo").toggleClass('logodown', scrolled);
       });
     });
-// 캠핑/카라반/글램핑/지도 선택버튼 css 효과 기능
-function showContent(contentId) {
-	
-}
+
 $('.spot_button:first').addClass('selected');
 
 $('.spot_button').click(function(e) {
@@ -28,40 +25,6 @@ $('.spot_button').click(function(e) {
 });
     
 
-// 게시판 글목록 검색 기능
- $(document).ready(function() {
-    $("#board_search").submit(function(event) {
-      event.preventDefault(); // 기본 제출 이벤트 취소
-
-      var search_select = $("#search_select").val(); // 검색 옵션 값
-      var search_text = $("#search_text").val(); // 검색어 값
-
-      $.ajax({
-		  url: "../dbprocess/Camptip_Search.jsp",
-			type: "POST",
-  			data: {search_text: search_text, search_select: search_select},
-  		
-  		success: function(list) {
-    		var tbody = $("#board_list tbody");
-    		tbody.empty(); // 기존에 있던 게시글 삭제
-    		for (var i = 0; i < list.length; i++) {
-      			var tr = $("<tr>").attr("id", "list_data").addClass("table_list");
-      				tr.append($("<td>").text(list[i].post_num));
-				      tr.append($("<td>").text(list[i].post_title));
-				      tr.append($("<td>").text(list[i].user_id));
-				      tr.append($("<td>").text(list[i].post_category));
-				      tr.append($("<td>").text(list[i].post_date));
-				      tr.append($("<td>").text(list[i].post_readcount));
-				      tr.append($("<td>").text(list[i].post_like));
-					tbody.append(tr);
-    		}
-  		}, error: function(xhr, status, error) {
-    		console.log(error);
-  		}
-	});
-
-    });
-  });
      
 $('document').ready(function() {
  var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
@@ -116,7 +79,12 @@ $('document').ready(function() {
 });
 
 
-	// 메인 이미지 슬라이더 기능 _  수정필요함
+
+         
+
+
+
+// 메인 이미지 슬라이더 기능 _  수정필요함
 	var images = ["image/메인이미지1.jpg", "image/메인이미지2.jpg", "image/메인이미지3.jpg", "image/메인이미지4.jpg", "image/메인이미지5.jpg"];
 	var currentIndex = 0;
 	var slider = document.getElementsByClassName("title")[0];
@@ -147,67 +115,42 @@ $('document').ready(function() {
 	    currentIndex = 0;
 	  }
 	  slider.style.backgroundImage = "url('" + images[currentIndex] + "')";}, 4000);
+
+
+//스페셜 캠핑 슬라이드 스크립트	
+	const moveMain = document.querySelector('.move_main');
+	const moveMainBody = document.querySelectorAll('.move_main_body');
+	const prevButton2 = document.querySelector('.move_button:nth-of-type(1)');
+	const nextButton2 = document.querySelector('.move_button:nth-of-type(2)');
+	const slideDistance = moveMainBody[0].clientWidth + 20; // 리스트가 이동하는 거리
+	let currentPosition = 0; // 현재 리스트 위치
 	
-	
-	
-	//날짜 기준 검색필터 기능 _ 만드는중.....
-	
-	const searchForm = document.getElementById("search_date");
-	const searchButton = document.getElementById("date_button");
-	
-	searchForm.addEventListener("submit", function(event) {
-	  event.preventDefault(); // 기본 이벤트(페이지 새로고침) 방지
-	
-	  const checkIn = document.getElementById("check_in").value;
-	  const checkOut = document.getElementById("check_out").value;
-	
-	  // 검색 필터 기능 추가
-	  // ...
+	// 이전 버튼 클릭 이벤트
+	prevButton2.addEventListener('click', () => {
+	  if (currentPosition < 0) { // 리스트가 맨 왼쪽에 위치한 경우
+	    currentPosition += slideDistance;
+	    moveMain.style.transform = `translateX(${currentPosition}px)`;
+	  }
 	});
-
-// 예약날짜 선택시 입실퇴실날짜 오늘이전은 안되도록	
-var now_utc = Date.now() // 지금 날짜를 밀리초로
-// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
-var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
-// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
-var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-document.getElementById("check_in").setAttribute("min", today);
-document.getElementById("check_out").setAttribute("min", today);	
 	
+	// 다음 버튼 클릭 이벤트
+	nextButton2.addEventListener('click', () => {
+	  if (currentPosition > -slideDistance * (moveMainBody.length - 4)) { // 리스트가 맨 오른쪽에 위치한 경우
+	    currentPosition -= slideDistance;
+	    moveMain.style.transform = `translateX(${currentPosition}px)`;
+	  }
+	});
 	
-const moveMain = document.querySelector('.move_main');
-const moveMainBody = document.querySelectorAll('.move_main_body');
-const prevButton2 = document.querySelector('.move_button:nth-of-type(1)');
-const nextButton2 = document.querySelector('.move_button:nth-of-type(2)');
-const slideDistance = moveMainBody[0].clientWidth + 20; // 리스트가 이동하는 거리
-let currentPosition = 0; // 현재 리스트 위치
-
-// 이전 버튼 클릭 이벤트
-prevButton2.addEventListener('click', () => {
-  if (currentPosition < 0) { // 리스트가 맨 왼쪽에 위치한 경우
-    currentPosition += slideDistance;
-    moveMain.style.transform = `translateX(${currentPosition}px)`;
-  }
-});
-
-// 다음 버튼 클릭 이벤트
-nextButton2.addEventListener('click', () => {
-  if (currentPosition > -slideDistance * (moveMainBody.length - 4)) { // 리스트가 맨 오른쪽에 위치한 경우
-    currentPosition -= slideDistance;
-    moveMain.style.transform = `translateX(${currentPosition}px)`;
-  }
-});
-
-// 일정 시간마다 자동 슬라이드
-setInterval(() => {
-  if (currentPosition > -slideDistance * (moveMainBody.length - 4)) { // 리스트가 맨 오른쪽에 위치하지 않은 경우
-    currentPosition -= slideDistance;
-    moveMain.style.transform = `translateX(${currentPosition}px)`;
-  } else {
-    currentPosition = 0;
-    moveMain.style.transform = `translateX(${currentPosition}px)`;
-  }
-}, 3000);
+	// 일정 시간마다 자동 슬라이드
+	setInterval(() => {
+	  if (currentPosition > -slideDistance * (moveMainBody.length - 4)) { // 리스트가 맨 오른쪽에 위치하지 않은 경우
+	    currentPosition -= slideDistance;
+	    moveMain.style.transform = `translateX(${currentPosition}px)`;
+	  } else {
+	    currentPosition = 0;
+	    moveMain.style.transform = `translateX(${currentPosition}px)`;
+	  }
+	}, 3000);
 
 // 캠핑 버튼 클릭 이벤트
 document.getElementById("btn_camping").addEventListener("click", function() {
@@ -246,96 +189,6 @@ document.getElementById("btn_map").addEventListener("click", function() {
   document.getElementById("content_caravan").style.display = "none";
   document.getElementById("content_glamping").style.display = "none";
 });
-
-// 날짜 및 시도/구군 검색 시 상품출력 AJAX
-$(document).ready(function(){
-    $("#listButton").click(getMemberList); //id="listButton"인 태그에 click하면 function getMemberList() 실행
-});
-function getMemberList(){
-    $.ajax({
-        url:"list.jsp",                    //list.jsp에 AJAX요청
-        success:function(data){
-            let obj=JSON.parse(data);      //data를 받아와서 JSON형태로 변환
-            let array=["<ol>"]; 
-            obj["member_list"].forEach(
-                    member =>  array.push("<li>"+member.id+"</li>")    
-                    //JSON에 있는 member.id의 value를 li태그에 넣어서 array에 넣어줌
-            );
-            array.push("</ol>");                                   
- 
-            $("#result").html(array.join(""));  
-            //array의 요소들을 다 합쳐서 하나로 만든후 id="result"인 태그에 html로 출력
-        }
-    });    
-}
-
-//날짜 검색, 시도/구군 검색 ajax
-
-$(document).ready(function(){
-    $("#place_button").click(getCampList); 
-});
-
-function getCampList() {
-  $.ajax({
-    url: "search_place.cp",
-    success: function(data) {
-      try {
-        const { camp_list } = JSON.parse(data);
-        const htmlArray = camp_list.map(camp => {
-          return `
-            <li>
-              <div>
-                <div>
-                  <input type="hidden" value="${camp.reg_num_c}">
-                  <a href="Camp_Glam_Reserve.cp?reg_num_c=${camp.reg_num_c}">
-                    <img src="image/${camp.acc_picture}" alt="이미지 준비중">
-                  </a>
-                </div>
-              </div>
-              <div>
-                <a>${camp.acc_name}</a>
-                <p>${camp.site_1}</p>
-                <div>${camp.site_2}</div>
-                <div>${camp.detail}</div>
-                <div>
-                  <a href="camping_reserve.cp?reg_num_c=${camp.reg_num_c}">
-                    <button class="spots_button">예약하기</button>
-                  </a>
-                </div>
-              </div>
-            </li>
-          `;
-        });
-        $("#content_camping").html(htmlArray.join(""));
-      } catch (e) {
-        console.error("Error parsing data: ", e);
-      }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.error(textStatus, errorThrown);
-    }
-  });
-}
-
-
-
-
-						
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

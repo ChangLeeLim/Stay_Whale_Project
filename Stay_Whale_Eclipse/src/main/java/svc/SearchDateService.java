@@ -3,22 +3,22 @@ package svc;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import DAO.CampingDAO;
-import camping.ACC_Camping;
+import DAO.Camping_Product_DAO;
+import vo.Accmodation_Camping;
 
 import static db.JdbcUtil.*;
 
 public class SearchDateService {
 
-	public static ArrayList<ACC_Camping> place_search(String site_1, String site_2) throws Exception{
-		ArrayList<ACC_Camping> campingList = null;
+	public static ArrayList<Accmodation_Camping> date_search(String check_in, String check_out) throws Exception{
+		ArrayList<Accmodation_Camping> campingList = null;
 		
 		Connection con = getConnection();
 		
-		CampingDAO campingDAO = CampingDAO.getInstance();
+		Camping_Product_DAO campingDAO = Camping_Product_DAO.getInstance();
 		campingDAO.setConnection(con);
-		
-		campingList = campingDAO.searchPlace(site_1, site_2);
+//		System.out.println("서비스출발확인");
+		campingList = campingDAO.searchDate(check_in, check_out);
 		close(con);
 		
 		

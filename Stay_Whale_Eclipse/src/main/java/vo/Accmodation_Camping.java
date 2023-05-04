@@ -1,6 +1,6 @@
-package camping;
+package vo;
 
-public class ACC_Camping {
+public class Accmodation_Camping {
 	
 	private String reg_num_c;
 	private String acc_name;
@@ -14,7 +14,14 @@ public class ACC_Camping {
 	private String detail;
 	private String facility_list;
 	private String acc_picture;
+	private Double rating;
 	
+	public Double getRating() {
+		return rating;
+	}
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
 	public String getReg_num_c() {
 		return reg_num_c;
 	}

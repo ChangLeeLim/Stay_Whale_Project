@@ -8,7 +8,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import svc.ReserveInsertService;
 import vo.ActionForward;
-import camping.Reserve_Camping;
+import vo.Reserve_Camping;
 
 
 public class ReserveInsertAction implements Action {
