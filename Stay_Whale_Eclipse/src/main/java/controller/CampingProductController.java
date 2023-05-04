@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
-import action.BoardListAction;
 import action.CampIndexAction;
 import action.CampingPaymentAction;
 import action.CampingReserveAction;
