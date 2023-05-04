@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
+import action.BoardListAction;
 import action.CampIndexAction;
 import action.CampingPaymentAction;
 import action.CampingReserveAction;
@@ -35,7 +36,7 @@ public class CampingProductController extends javax.servlet.http.HttpServlet
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}		
+		}
 		else if(command.equals("/camping_reserve.cp")){
 			action = new CampingReserveAction();
 			try{
@@ -44,6 +45,7 @@ public class CampingProductController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
+		
 		else if(command.equals("/camping_payment.cp")){
 			action = new CampingPaymentAction();
 			try{
@@ -79,12 +81,13 @@ public class CampingProductController extends javax.servlet.http.HttpServlet
 		
 		
 		
-		if(forward != null){
+			if(forward != null){
 			
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());
 			}else{
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				RequestDispatcher dispatcher=
+						request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 			
