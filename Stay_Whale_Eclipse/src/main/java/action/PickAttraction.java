@@ -1,7 +1,5 @@
 package action;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,21 +21,21 @@ public class PickAttraction implements Action {
 		
 		
 		// "[[{\"attraction_num\":4}],[{\"start_date\":\"2023-04-12\",\"end_date\":\"2023-05-09\",\"total_date\":\"28\"}]]"; 
-		// jsonµ¥ÀÌÅÍ¸¦ ³Ñ°ÜÁÙ¶§ °´Ã¼ ¹è¿­ÀÌ 2°³ÀÌ»óÀÎ °æ¿ì¿¡ []·Î ÇÑ¹ø ´õ °¨½Î¼­ º¸³»¾ß ÇÑ´Ù.  ±× ÈÄ jackson ¶óÀÌºê·¯¸®¸¦ ÀÌ¿ëÇÑ ÆÄ½Ì.
+		// jsonï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ñ°ï¿½ï¿½Ù¶ï¿½ ï¿½ï¿½Ã¼ ï¿½è¿­ï¿½ï¿½ 2ï¿½ï¿½ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ []ï¿½ï¿½ ï¿½Ñ¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.  ï¿½ï¿½ ï¿½ï¿½ jackson ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½.
 		
 		
 		String jsonData = (String)request.getAttribute("data");
 		
 		
 		
-		ObjectMapper obj = new ObjectMapper();   // jackson ¶óÀÌºê·¯¸®¸¦ ÀÌ¿ëÇÑ °´Ã¼ÀÌ¸ç  ¹Þ¾Æ¿Â jsonµ¥ÀÌÅÍ¸¦  °´Ã¼È­ ÇÏ´Â Å¬·¡½ºÀÌ´Ù.
-		List<Attraction_Cont> pickList = null;  // jacksonÀ» ÀÌ¿ëÇØ °´Ã¼È­¸¦ ÇÏ´Â°æ¿ì getter setter¸¦ ÀÌ¿ëÇÏ±â ¶§¹®¿¡ ¹Ýµå½Ã jsonÀÇ key °ª¿¡ ¸Â´Â ÇÊµå¿Í  getter setter°¡ ÀÖ¾î¾ß ÇÑ´Ù.
+		ObjectMapper obj = new ObjectMapper();   // jackson ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ì¸ï¿½  ï¿½Þ¾Æ¿ï¿½ jsonï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½  ï¿½ï¿½Ã¼È­ ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
+		List<Attraction_Cont> pickList = null;  // jacksonï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼È­ï¿½ï¿½ ï¿½Ï´Â°ï¿½ï¿½ getter setterï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ jsonï¿½ï¿½ key ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½Êµï¿½ï¿½  getter setterï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		List<DiaryWriter> date = null;
 		try {         
-			JsonNode node  = obj.readTree(jsonData);  // Json¹è¿­¿¡ 2°³ÀÇ °´Ã¼¹è¿­ÀÌ Æ÷ÇÔµÇ¾î ÀÖÀ¸¹Ç·Î Æ®¸®±¸Á¶·Î ÀÐ¾îµé¿© Ã³¸®ÇØ¾ß ÇÑ´Ù. 
-			pickList = Arrays.asList(obj.readValue(node.get(0).toString(), Attraction_Cont[].class ));  // Ã¹¹øÂ° ¹è¿­À» °¡Á®¿À´Â ºÎºÐ
-			date = Arrays.asList(obj.readValue(node.get(1).toString(), DiaryWriter[].class ));  // µÎ¹øÀç ¹è¿­À» °¡Á®¿À´Â ºÎºÐ.
-			//pickList = Arrays.asList(obj.readValue(playload, Attraction_Cont[].class)); // ¼±ÅÃÇÑ ¸í¼ÒÀÇ ¹øÈ£¹è¿­À» List·Î º¯È¯.
+			JsonNode node  = obj.readTree(jsonData);  // Jsonï¿½è¿­ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ÔµÇ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½é¿© Ã³ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½. 
+			pickList = Arrays.asList(obj.readValue(node.get(0).toString(), Attraction_Cont[].class ));  // Ã¹ï¿½ï¿½Â° ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½
+			date = Arrays.asList(obj.readValue(node.get(1).toString(), DiaryWriter[].class ));  // ï¿½Î¹ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½.
+			//pickList = Arrays.asList(obj.readValue(playload, Attraction_Cont[].class)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½è¿­ï¿½ï¿½ Listï¿½ï¿½ ï¿½ï¿½È¯.
 
 		} catch (Exception e) {
 			e.printStackTrace();

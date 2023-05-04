@@ -1,8 +1,12 @@
 package vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Attraction_Cont {
 	private String attraction_name, attraction_addr, site1, site2, attraction_detail, attraction_pic;
 	private double latitue, longitude;
+	
+	@JsonProperty("attraction_num")
 	private int attraction_num;
 	public String getAttraction_name() {
 		return attraction_name;
