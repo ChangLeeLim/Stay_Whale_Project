@@ -3,12 +3,12 @@ package svc;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import dao.DiaryDAO;
+import DAO.DiaryDAO;
 import db.JdbcUtil;
 import vo.DiaryWriter;
 
 public class AreaContService {
-	public ArrayList<DiaryWriter> areaService1(int max, int page, String area) {// Á¦ÁÖÁö¿ª °Ô½Ã¹° °Ë»ö
+	public ArrayList<DiaryWriter> areaService1(int max, int page, String area) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½Ë»ï¿½
 		Connection con = JdbcUtil.getConnection();
 		DiaryDAO obj = DiaryDAO.getInstance();
 		obj.setConnection(con);

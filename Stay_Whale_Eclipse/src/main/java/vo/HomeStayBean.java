@@ -16,6 +16,12 @@ public class HomeStayBean {
 	private int price;
 	private String price2;
 	private int standard_amount;
+	private String host;
+	private String theme;
+	private int bedroom_count;
+	private int bed_count;
+	private int bathroom_count;
+	private String category;
 	
 	public String getReg_num_a() {
 		return reg_num_a;
@@ -101,6 +107,43 @@ public class HomeStayBean {
 	public void setStandard_amount(int standard_amount) {
 		this.standard_amount = standard_amount;
 	}
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}
+	public String getTheme() {
+		return theme;
+	}
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+	public int getBedroom_count() {
+		return bedroom_count;
+	}
+	public void setBedroom_count(int bedroom_count) {
+		this.bedroom_count = bedroom_count;
+	}
+	public int getBed_count() {
+		return bed_count;
+	}
+	public void setBed_count(int bed_count) {
+		this.bed_count = bed_count;
+	}
+	public int getBathroom_count() {
+		return bathroom_count;
+	}
+	public void setBathroom_count(int bathroom_count) {
+		this.bathroom_count = bathroom_count;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	
 	
 

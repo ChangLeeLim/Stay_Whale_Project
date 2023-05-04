@@ -1,29 +1,29 @@
 package svc;
 
-import dao.DiaryDAO;
+import DAO.DiaryDAO;
 import vo.Attraction_Cont;
 import vo.DiaryWriter;
 
 public class InsertService {
 	
-	public int insertService(DiaryWriter list) {  // ´ÙÀÌ¾î¸® Á¦¸ñ ¹× º»¹®³»¿ëµîµîµî ÀúÀå
+	public int insertService(DiaryWriter list) {  // ï¿½ï¿½ï¿½Ì¾î¸® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		//Connection con  = JdbcUtil.getConnection();
 		DiaryDAO obj  = DiaryDAO.getInstance();
-		//obj.setConnection(con);  // Ä¿³Ø¼Ç ¿Ï·á .
-		obj.insertData(list);   // ÀÎ¼³Æ®
-		int maxnum = obj.selectMaxnum();  // µ¥ÀÌÅÍ´Â Ç×»ó ¸¶Áö¸·¿¡ ½×ÀÏÅ×´Ï±î  ¸¶Áö¸· ¹øÈ£¸¦ ¸®ÅÏÇÔ.
+		//obj.setConnection(con);  // Ä¿ï¿½Ø¼ï¿½ ï¿½Ï·ï¿½ .
+		obj.insertData(list);   // ï¿½Î¼ï¿½Æ®
+		int maxnum = obj.selectMaxnum();  // ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×´Ï±ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		
 		
 		return maxnum;
 	}
 	
 	
-	public void insertService2(int maxnum, Attraction_Cont[] attraction_Num, DiaryWriter[] memo ) {//¼±ÅÃÇÑ ¸í¼Ò¿Í ¸Þ¸ðÀúÀå
+	public void insertService2(int maxnum, Attraction_Cont[] attraction_Num, DiaryWriter[] memo ) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò¿ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½
 		//Connection con = JdbcUtil.getConnection();
 		DiaryDAO obj  = DiaryDAO.getInstance();
 		//obj.setConnection(con);
 		
-		for(int i=0 ; i<attraction_Num.length; i++) {   // ¼±ÅÃÇÑ ¿©ÇàÁöÀÇ °³¼ö¸¸Å­ DB¸¦ µ¹·Á¼­ insert
+		for(int i=0 ; i<attraction_Num.length; i++) {   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ insert
 			obj.insertData2(maxnum, attraction_Num[i].getAttraction_num(), memo[i].getMemo());
 		}
 	
