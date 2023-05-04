@@ -100,11 +100,17 @@ $(function() {
 			ul2.children[0].innerHTML = data[j].user_Id;
 			ul2.children[1].innerHTML = data[j].post_Title;
 			ul2.children[2].innerHTML = data[j].post_Body;
+			
 			diaryCont.append(ul);
 			
-			ul.addEventListener("click", function(){
-				location.href = "content.diary?post_Num="+data[i].post_Num;
-			});
+			
+			
+			 (function(post_Num) {//이 경우에는 클로저(closure)를 사용하여 해결할 수 있습니다. 클로저를 사용하면 각각의 이벤트 핸들러 함수가 자신만의 고유한 렉시컬 환경을 유지하며, 따라서 for 루프 안에서 생성된 각각의 이벤트 핸들러 함수가 독립적으로 데이터에 접근할 수 있게 됩니다.
+				    ul.addEventListener("click", function() {
+				      location.href = "content.diary?post_Num="+post_Num;
+				    });
+				  })(data[j].post_Num);
+		
 		}
 		
 	}

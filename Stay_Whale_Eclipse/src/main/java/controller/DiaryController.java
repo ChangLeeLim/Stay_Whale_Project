@@ -74,6 +74,7 @@ public class DiaryController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/Cont_je.diary")) {// 제주도 데이터만 추출하기 
+			
 			try {
 				action = new AreaDataAction();
 				action.execute(request, response);
