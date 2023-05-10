@@ -5,17 +5,16 @@ import java.util.ArrayList;
 
 import dao.DiaryDAO;
 import db.JdbcUtil;
-import vo.DiaryWriter;
+import vo.Attraction_Cont;
 
-public class AreaContService {
-	public ArrayList<DiaryWriter> areaService1(int max, int page, String area) {// �������� �Խù� �˻�
+public class MapSearchService {
+	
+	public ArrayList<Attraction_Cont> mapSearchService(String keyWord) {
 		Connection con = JdbcUtil.getConnection();
 		DiaryDAO obj = DiaryDAO.getInstance();
 		obj.setConnection(con);
 		
-		ArrayList<DiaryWriter> data = obj.areaCont(max, page, area);
-
-		
+		ArrayList<Attraction_Cont> data = obj.mapSearch(keyWord);
 		
 		return data;
 	}

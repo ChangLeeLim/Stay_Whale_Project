@@ -3,7 +3,7 @@ package svc;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import DAO.DiaryDAO;
+import dao.DiaryDAO;
 import db.JdbcUtil;
 import vo.AttractionSelection;
 import vo.Attraction_Cont;

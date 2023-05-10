@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.geom.Area;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.AllContAction;
 import action.AreaDataAction;
+import action.AreaDataAction2;
 import action.AttractShowAction;
+import action.ContSearchAction;
 import action.ContentAction;
 import action.ContentWriteAction;
+import action.MapSearchAction;
 import action.PickAttraction;
 import vo.ActionForward;
 
@@ -79,7 +81,32 @@ public class DiaryController extends HttpServlet {
 				action = new AreaDataAction();
 				action.execute(request, response);
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/Cont_ju.diary")) {
+			System.out.println("전라도");
+			try {
+				action = new AreaDataAction2();
+				action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+							
+		}else if(command.equals("/ContSearch.diary")) {
+			try {
+				action = new ContSearchAction();
+				action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/MapSearch.diary")) {
+			try {
+				action = new MapSearchAction();
+				action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
 			

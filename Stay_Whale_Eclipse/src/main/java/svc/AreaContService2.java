@@ -7,17 +7,17 @@ import dao.DiaryDAO;
 import db.JdbcUtil;
 import vo.DiaryWriter;
 
-public class AreaContService {
-	public ArrayList<DiaryWriter> areaService1(int max, int page, String area) {// �������� �Խù� �˻�
+public class AreaContService2 {
+	public ArrayList<DiaryWriter> areaService2(int max, int page, String area) {
+		
 		Connection con = JdbcUtil.getConnection();
-		DiaryDAO obj = DiaryDAO.getInstance();
+		DiaryDAO obj = DiaryDAO .getInstance();
 		obj.setConnection(con);
 		
 		ArrayList<DiaryWriter> data = obj.areaCont(max, page, area);
-
 		
 		
-		return data;
+		return data; 
 	}
 
 }

@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import dao.DiaryDAO;
 import db.JdbcUtil;
 import vo.DiaryWriter;
+import vo.Search;
 
-public class AreaContService {
-	public ArrayList<DiaryWriter> areaService1(int max, int page, String area) {// �������� �Խù� �˻�
+public class ContSearchService {
+	
+	public ArrayList<DiaryWriter> contSearchService(Search searchInfo) {
+		
 		Connection con = JdbcUtil.getConnection();
 		DiaryDAO obj = DiaryDAO.getInstance();
 		obj.setConnection(con);
 		
-		ArrayList<DiaryWriter> data = obj.areaCont(max, page, area);
-
-		
+		ArrayList<DiaryWriter>data = obj.contSearch(searchInfo);
 		
 		return data;
 	}

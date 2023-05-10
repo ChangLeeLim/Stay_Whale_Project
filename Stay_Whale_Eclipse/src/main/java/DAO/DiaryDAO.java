@@ -1,5 +1,4 @@
-package DAO;
-
+package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +12,7 @@ import db.JdbcUtil;
 import vo.AttractionSelection;
 import vo.Attraction_Cont;
 import vo.DiaryWriter;
+import vo.Search;
 
 public class DiaryDAO {
 	
@@ -64,6 +64,8 @@ public class DiaryDAO {
 				data.add(list);
 				
 				}	
+			
+			System.out.println(data.size());
 
 		}catch(Exception e){
 			e.printStackTrace();
@@ -205,10 +207,6 @@ public class DiaryDAO {
 				
 			}
 			
-			System.out.println("첫입력시 maxnum"+ maxnum);
-			
-			
-		
 
 		}catch(Exception e){
 			e.printStackTrace();
@@ -389,8 +387,6 @@ public class DiaryDAO {
 		
 		
 		String sql="select attraction_Name, attraction_Pic, latitude, longitude from attraction where attraction_Num in"+nums;
-				
-		
 
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -427,7 +423,6 @@ public class DiaryDAO {
 	
 	
 	public ArrayList<DiaryWriter> allCont(int max, int page) {
-		
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -471,7 +466,7 @@ public class DiaryDAO {
 	
 	
 	
-	public ArrayList<DiaryWriter> areaCont1(int max, int page, String area) {
+	public ArrayList<DiaryWriter> areaCont(int max, int page, String area) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -494,12 +489,10 @@ public class DiaryDAO {
 				list.setPost_Title(rs.getString("post_Title"));
 				list.setUser_Id(rs.getString("user_Id"));
 				list.setPost_Body(rs.getString("post_Body"));
-
 				
 				data.add(list);	
 				
 			}
-		
 			
 			
 		}catch(Exception e){
@@ -515,8 +508,99 @@ public class DiaryDAO {
 		
 	}
 	
+	public ArrayList<DiaryWriter> contSearch(Search searchInfo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DiaryWriter list =null;
+		ArrayList<DiaryWriter> data = new ArrayList<DiaryWriter>(); 
+		int start = (searchInfo.getPage()-1)*16;  // 0 , 16,32,배수로 진행.
+		
+		String sql;
+		
+		if(searchInfo.getArea().equals("to")) {
+			sql ="select * "
+					+"from tourdiary "
+					+ "where post_Title like '%"+searchInfo.getSearch()+"%'"
+					+ "order by post_Date desc limit ?,?";
+		
+		}else {
+			sql="select * "
+					+ "from tourdiary "
+					+ "where area ='"+searchInfo.getArea()+"'"
+					+ "and post_Title like '%"+searchInfo.getSearch()+"%'"
+					+ "order by post_Date desc limit ?,?";
+		}
+		try{
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, start);  //시작번호로부터 
+			pstmt.setInt(2, searchInfo.getMax());  // 16개 
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list =  new DiaryWriter();
+				list.setPost_Num(rs.getInt("post_Num"));
+				list.setPost_Title(rs.getString("post_Title"));
+				list.setUser_Id(rs.getString("user_Id"));
+				list.setPost_Body(rs.getString("post_Body"));
+
+				data.add(list);	
+				
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		
+		}finally{
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(con);
+		}
+		return data;
+	}
 	
 	
+	public ArrayList<Attraction_Cont> mapSearch(String keyWord) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Attraction_Cont list = null;
+		ArrayList<Attraction_Cont> data = new ArrayList<Attraction_Cont>(); 
+		
+		String sql="select * from attraction where site_1 like '%"+keyWord+"%'";
+
+		try{
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+				
+			while(rs.next()) {
+				list = new Attraction_Cont();
+				
+				list.setAttraction_num(rs.getInt("attraction_Num"));
+				list.setAttraction_name(rs.getString("attraction_Name"));
+				list.setAttraction_addr(rs.getString("attraction_Addr"));
+				list.setSite1(rs.getString("site_1"));
+				list.setSite2(rs.getString("site_2"));
+				list.setAttraction_pic(rs.getString("attraction_Pic"));
+				list.setLatitue(rs.getDouble("latitude"));
+				list.setLongitude(rs.getDouble("longitude"));
+				
+				data.add(list);
+			
+			}
+			System.out.println(data.size());
+					
+		}catch(Exception e){
+			e.printStackTrace();
+		
+		}finally{
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(con);
+		}
+		
+		return data;
+	}
+	
+	
+	 
 	
 	
 }

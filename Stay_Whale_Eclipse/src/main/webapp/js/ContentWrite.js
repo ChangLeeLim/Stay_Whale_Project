@@ -10,7 +10,7 @@ var jsonData = JSON.parse(data);
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
         center: new kakao.maps.LatLng(jsonData[0].latitude, jsonData[0].longitude), // 지도의 중심좌표
-        level: 10 // 지도의 확대 레벨
+        level: 11 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -116,6 +116,7 @@ if (coord.length > 1) {
       })
       .then(response => response.json())
       .then(data => {
+    	 console.log(data);
         const startX = data.documents[0].x;
         const startY = data.documents[0].y;
         

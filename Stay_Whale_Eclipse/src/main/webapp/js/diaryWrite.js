@@ -1,16 +1,22 @@
 var list = document.getElementById("data").value;
+console.log(list);
 var data = JSON.parse(list);  // 지도에 마커와 정보를 표기하기 위해서 DB에 있는 명소정보를 가져와 JSON객체로 변환.
 var length = data.length;
 
-var picknum=[];  // 선택시마다 넘어오는 명소번호를 담은 자바스크립트 객체 
+console.log(length);
+
+var picknum=[];  // 선택시마다 넘어오는 명소번호를 담은 자바스크립트 객체
+
+console.log(picknum);
 
 var pickdate = [];  // 선택한 날짜를 담는 객체	배열
 
 
+let infoObj = [];  // 이벤트를 걸기 위해 마커 객체와 인포윈도우 객체를 생성한 객체 배열에  담는다.
+let markerObj= [];
 
-
-
-
+console.log(infoObj);
+console.log(markerObj);
 
 
 
@@ -18,7 +24,7 @@ var pickdate = [];  // 선택한 날짜를 담는 객체	배열
 var mapContainer = document.getElementById('maps'), // 지도를 표시할 div  
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 9 // 지도의 확대 레벨
+        level: 11 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -44,7 +50,6 @@ for(var i=0; i<length; i++){
 
 
 
-var infowindow;
 // 마커 이미지의 이미지 주소입니다
 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
     
@@ -64,6 +69,8 @@ for (var i = 0; i < positions2.length; i ++) {    // for문으로 돌면서 찍�
         image : markerImage, // 마커 이미지 
         clickable: true
     });
+    
+    markerObj.push(marker);
     
     const att_addr= positions2[i].att_addr;
     const att_num = positions2[i].att_num;
@@ -102,9 +109,12 @@ for (var i = 0; i < positions2.length; i ++) {    // for문으로 돌면서 찍�
         var iwRemoveable = true;
         var infowindow = new kakao.maps.InfoWindow({
             content : iwContent,
-            removable : iwRemoveable   // x버튼 활성화
+            removable : iwRemoveable,   // x버튼 활성화
+            position : positions2[i].latlng
             
         });
+        
+        infoObj.push(infowindow);
 
         // 클릭 이벤트 등록
         kakao.maps.event.addListener(marker, 'click', function() {
@@ -241,31 +251,7 @@ $(document).ready(function() {  // detailbar 숨기기.
 
 
 
-function create() {
-	
-	// XMLHttpRequest 객체를 사용한 AJAX 호출 코드입니다.
-	/*var xhr = new XMLHttpRequest();//XMLHttpRequest 객체
-	xhr.open("post", "ContentWrite.diary"); //xhr.open("post", "ContentWrite.diary")는 POST 방식으로 ContentWrite.diary URL로 요청을 보내겠다는 것을 나타냄.
-	xhr.setRequestHeader("Content-Type", 'application/json');
-	xhr.onload = function () {
-		if(xhr.status === 200){
-			console.log(xhr.responseText);
-			console.log("성공");
-
-	
-	
-		}else{
-			console.log("Error:", xhr.statusText);
-			cnoosle.log("실패?");
-		}
-		
-	};
-	
-	
-	console.log(JSON.stringify(picknum)+","+ JSON.stringify(pickdate));
-	xhr.send("["+JSON.stringify(picknum)+","+ JSON.stringify(pickdate)+"]");*/
-	
-	
+function create() {		
 	data = "["+JSON.stringify(picknum)+","+ JSON.stringify(pickdate)+"]";
 	var hidden =  document.getElementById("att_num");
 	var myForm = document.getElementById("myForm");
@@ -302,9 +288,198 @@ $(function() {// 데이트 피커 확인버튼 클릭시 이벤트 정의.
 
 
 
+let searchBtn = document.getElementById("searchBtn");
+
+
+searchBtn.addEventListener("click",function(){
+	let searchKeyword = document.getElementById("searchBar").value;
+	if(searchKeyword == ""){
+		alert("지역명을 입력해 주세요.");
+	}else{
+		let info = {
+				keyword : searchKeyword
+		}
+		
+		$.ajax({
+			  url: 'MapSearch.diary',
+			  method: 'POST',
+			  dataType: "json",
+			  data: JSON.stringify(info),
+			  success: function(data) {  // data는 정보
+				  if(data.length == 0){
+					  alert("검색결과가 없습니다.");
+					  
+				  }else{  // 엘리먼트 생성 및 데이터 부여 
+					  createEle(data);
+					  let latlng = new kakao.maps.LatLng(data[0].latitude, data[0].longitude);
+					  map.setCenter(latlng);  // 성공햇을때 제일 첫 요소의 좌표값으로 지도가 이동함.
+				  }
+
+			  },
+			  error: function(xhr, status, error) {
+			    console.log('Error occurred!');
+			    console.log(error);
+			  }
+			});
+	}
+
+	
+});
 
 
 
+function createEle(data){
+	
+	let searchFra= document.getElementById("searchData");
+	
+	for(let i=0 ; i<data.length ; i++){
+		let listFra = document.createElement("div");
+		
+		let pic = document.createElement("div");
+		pic.style.backgroundImage = "url(image/"+data[i].attractionPic+")";
+		
+		let title = document.createElement("div");
+		title.innerHTML =data[i].attractionName;
+		
+		let addr = document.createElement("div");
+		addr.innerHTML = data[i].attractionAddr;
+		
+		let btn = document.createElement("div");
+		btn.style.backgroundImage = "url(image/contentplus.png)";
+		
+		let site = document.createElement("div");
+		site.innerHTML = data[i].site_1 +" / "+data[i].site_2; 
+		
+		listFra.append(pic,title,addr,btn,site);
+		searchFra.append(listFra);	
+		
+		(function(attractionNum, attractionPic, attractionName,latitude, longitude){  // +버튼클릭시 이벤트리스너 
+			btn.addEventListener("click",function(){
+				
+				
+				let title; 
+				let pic;
+				
+				for (var i =0 ; i<data.length ; i++){   // 조회해서 나온 데이터를 기준으로 
+					if(data[i].attractionNum == attractionNum){ 
+						title = attractionName;
+						pic = attractionPic;  
+					
+					}
+				}
+				
+				picknum.push({    // 선언한 전역 객체배열에 담는 부분.  .push() 메서드는 객체배열에 해당객체를 추가해준다.
+					attraction_num : attractionNum
+				});
+				
+				console.log(picknum); 
+
+
+				
+				var list = document.getElementById("selectionbar");  // 추가버튼 클릭시 엘리먼트를 추가하는 부분.
+				var temp = document.createElement("div");
+				var temp2 = document.createElement("div");
+				var temp3 = document.createElement("div");
+				var temp4 = document.createElement("div");
+				var temp5, temp6;
+				var childList = list.childNodes; // 자식노드를 배열로 (노드리스트로 반환)
+				var childCount = list.childNodes.length; // 배열의 길이
+
+				
+				
+				list.append(temp);
+				temp.append(temp2);  // 사진
+				temp.append(temp3);  // 명소이름
+				temp.append(temp4);
+				
+				
+				
+				
+				if(childCount > 1){  //  선택한 두 명소사이의 연결점 표현을 위한 요소 생성 
+					temp5 = document.createElement("div");
+					temp6 = document.createElement("div");
+					temp.append(temp5);
+					temp.append(temp6);
+					
+					temp6.innerHTML = "둘사이 거리 및 소요시간";  // 조건부 생성요소에 대한 값지정.
+				}
+				
+				// 자식요소 로 추가된 놈들에 대한 값지정.
+				temp2.style.backgroundImage = "url('image/"+attractionPic+"')";  // 동적으로 추가된 엘리먼트에 데이터를 넣는 부분.
+				temp3.innerHTML = attractionName;
+				temp4.addEventListener('click', function() {  //3번째 자식노드에 마우스 이벤트를 걸고 클릭시 제거하는 부분 // 요소가 생성이 되면서 '각각' 이벤트를 걸어버림/
+					temp.remove();//동적으로 생성된 엘리먼트에 대한 이벤트 설정. 리스트 삭제 
+					
+					if(childList.length > 1){// 추가되는 리스트 컨데이너의 자식요소의 배열의 길이 가 1이상일때(제일 첫요소 제외)   첫요소란 1) 제일처음 생성된 요소 및  2)두번째 요소였다가 첫번째 요소가 삭제되어 첫번째 요소가 된 것을 말함.
+						if(childList[1].childNodes.length>3){//만일 제일첫요소의 자식요소가 4개 이상이면.
+							childList[1].removeChild(childList[1].childNodes[4]);//5번째 자식요소 삭제
+							childList[1].removeChild(childList[1].childNodes[3]);// 4번째도 삭제 .
+						}
+					}
+					
+					for(var i =0 ; i<picknum.length ;i++){  // 삭제버튼을 클릭햇을때 HTML엘리먼트 삭제와 동시에 서버로 가져갈 객체배열 목록에서 삭제처리한다.
+						if(picknum[i].attraction_num == attractionNum){     //
+							picknum.splice(i,1);
+							break;   // 중복메뉴가 있을때 모두 지워지는 것을 방지하기 위한 break;
+						
+						}
+					}
+					
+				});
+				
+				
+			});
+			
+			
+			
+			listFra.addEventListener("mouseenter", function() {
+				event.stopPropagation();
+				
+				for(let i = 0; i<infoObj.length ; i++){
+					// Ssibal 소수점이 제멋대로 찍혀서 toFixed를 이용해서 7째자리까지 정확히 표현하도록 한다.
+					let x = infoObj[i].getPosition().getLat().toFixed(7);
+					let y = infoObj[i].getPosition().getLng().toFixed(7);
+					
+			
+					if(latitude == x && longitude ==y){
+						infoObj[i].open(map, marker[i]);
+						 map.panTo(new kakao.maps.LatLng(latitude, longitude));
+						
+					}
+					
+				}
+				
+			});
+			
+			
+			
+			listFra.addEventListener("mouseleave", function() {
+				event.stopPropagation();
+				
+				for(let i = 0; i<infoObj.length ; i++){
+					// Ssibal 소수점이 제멋대로 찍혀서 toFixed를 이용해서 7째자리까지 정확히 표현하도록 한다.
+					let x = infoObj[i].getPosition().getLat().toFixed(7);
+					let y = infoObj[i].getPosition().getLng().toFixed(7);
+					
+			
+					if(latitude == x && longitude ==y){
+						infoObj[i].close();
+						
+					}
+					
+				}
+				
+			});
+			
+		})(data[i].attractionNum, data[i].attractionPic, data[i].attractionName, data[i].latitude, data[i].longitude); // IIFE 즉시실행함수(Immediately Invoked Function Expression )의 표현을 빌린 클로져
+		
+		
+			
+	
+		}
+	
+	
+}
 
 
 

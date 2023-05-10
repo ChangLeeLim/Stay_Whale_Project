@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import DAO.DiaryDAO;
+import dao.DiaryDAO;
 import db.JdbcUtil;
 import vo.Attraction_Cont;
 

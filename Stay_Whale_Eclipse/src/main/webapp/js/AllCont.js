@@ -6,8 +6,8 @@ $(function() {
 		// 무한스크롤 페이징.
 	var pages = 1;  // 증가할 페이지
 	var temp = 1;// 배수에 곱해질 수 
-	var maxCont = 16;
-	var child = document.getElementById("diaryCont").children.length;  // 자식요소 
+	const maxCont = 16;
+	//var child = document.getElementById("diaryCont").children.length;  // 문서 준비완료시 자식요소 
 		
 	var intersectionObserver = new IntersectionObserver(function(entries) {// 여기서 entries는 관찰대상 엘리먼트임
 		if(entries[0].intersectionRatio <= 0){// intersectionRatio 는 0 or 1의 값을 가지며 0은 관찰대상이 뷰포트에 들어오지 않은상태를 의미함.
@@ -28,7 +28,7 @@ $(function() {
 	
 
 
-	function getData(currentTarget) {// 지역을 매개변수로 받아서 요청을 보냄.
+	function getData(currentTarget) {//  지역별 검색 지역을 매개변수로 받아서 요청을 보냄.
 		
 		var param = {
 				max : maxCont,
@@ -45,16 +45,17 @@ $(function() {
 			  dataType: "json",
 			  data: params,
 			  success: function(data) {  // data는 정보
-				  
+				  console.log(data);
 				  createElement(data)
-				
-					
-					  if((child+data.length) > 16*temp){
-						  var section2 = $("#section2")
-							var currentHeight = section2.height();
-							section2.css("height", `${currentHeight + 1600}px`);   // 관찰대상이 뷰포트에 들어오면 섹션의 사이즈가 늘어나면서
-							temp++;
-							console.log("화면늘리기");	
+				  let elements = document.getElementById("diaryCont").children.length;
+				  
+				  if((elements+data.length) > 16*temp){
+					  console.log(elements+data.length);
+					  var section2 = $("#section2")
+					  var currentHeight = section2.height();
+					  section2.css("height", `${currentHeight + 1600}px`);   // 관찰대상이 뷰포트에 들어오면 섹션의 사이즈가 늘어나면서
+					  temp++;
+					  console.log("화면늘리기");	
 					  }		   
 	
 			  },
@@ -69,9 +70,9 @@ $(function() {
 	}
 	
 	
-	function createElement(data) {// 엘리먼트를 추가하고 데이터를뿌려주는 메소드
-		console.log("생성할 엘리먼트 갯수: "+length)
-		console.log(data);
+	function createElement(data) {// 엘리먼트를 추가하고 데이터를뿌려주는 메소드;
+		
+		console.log(data.length);
 		
 		var diaryCont = document.getElementById("diaryCont");
 		
@@ -104,8 +105,11 @@ $(function() {
 			diaryCont.append(ul);
 			
 			
-			
-			 (function(post_Num) {//이 경우에는 클로저(closure)를 사용하여 해결할 수 있습니다. 클로저를 사용하면 각각의 이벤트 핸들러 함수가 자신만의 고유한 렉시컬 환경을 유지하며, 따라서 for 루프 안에서 생성된 각각의 이벤트 핸들러 함수가 독립적으로 데이터에 접근할 수 있게 됩니다.
+			//for 루프 내부에서 생성한 이벤트 핸들러 함수가 발생할 때는 이미 for 루프가 종료되었기 때문에, 해당 이벤트 핸들러 함수 내부에서 참조하는 j 변수는 이미 최종값으로 설정된다.
+			//이 경우에는 클로저(closure)를 사용하여 해결할 수 있다. 
+			//클로저를 사용하면 각각의 이벤트 핸들러 함수가 자신만의 고유한 렉시컬 환경을 유지하며, 따라서 for 루프 안에서 생성된 각각의 이벤트 핸들러 함수가 독립적으로 데이터에 접근할 수 있게 된다.
+			// 형식은 즉시함수 호출형식이다.
+			 (function(post_Num) {
 				    ul.addEventListener("click", function() {
 				      location.href = "content.diary?post_Num="+post_Num;
 				    });
@@ -114,9 +118,69 @@ $(function() {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	let searchLevel = 0;  // 검색레벨 0: 지역별 버튼을 늘렀을 경우 , 1:검색바에 검색명을 입력했을 경우.
+	const searchBtn = document.getElementById("searchBtn");  // 검색바에 의한 검색 구현.
+	
+	searchBtn.addEventListener("click", function() {
+		temp = 1;
+		pages = 1;
+		let info = {
+				search : document.getElementById("searchBar").value,
+				area : currentTarget,
+				max : maxCont,
+				page : pages
+		}
 		
+		searchLevel =1;
+		console.log(searchLevel);
+		$.ajax({
+			  url: 'ContSearch.diary',
+			  method: 'POST',
+			  dataType: "json",
+			  data: JSON.stringify(info),
+			  success: function(data) {  // data는 정보
+				  $("#diaryCont").empty();// 모든 자식요소를 지우고 
+				  $("#section2").css("height", "1600px");//높이를 초기화하고 
+				  createElement(data)
+				  let elements = document.getElementById("diaryCont").children.length;// 틀안의 엘리먼트듸 갯수
+				  
+				  if((elements+data.length) > 16*temp){
+					  console.log(elements+data.length);
+					  var section2 = $("#section2")
+					  var currentHeight = section2.height();
+					  section2.css("height", `${currentHeight + 1600}px`);   // 관찰대상이 뷰포트에 들어오면 섹션의 사이즈가 늘어나면서
+					  temp++;
+					  console.log("화면늘리기");	
+					  }		   
+	
+			  },
+			  error: function(xhr, status, error) {
+			    console.log('Error occurred!');
+			    console.log(error);
+			  }
+			});
+		
+		
+		let dataObj = document.getElementById("searchData");
+		let form = document.getElementById("searchForm");
 	
 	
+	
+		
+		
+	});
+	
+	
+	
+	
+	
+	
+	// 지역별 검색 및 버튼 클릭시 UI조정
 	
 	$("#searchOp > ul >li:first-child ~").addClass("btnNomal");  // 상단 버튼 클릭시 컬러조정.
 	$("#searchOp > ul >li:first-child").addClass("btnClick");
@@ -126,52 +190,33 @@ $(function() {
 			$(this).addClass("btnClick");
 			$(this).siblings("li").removeClass("btnClick");  // 자신을 제외한 이웃을 선택하는 선택자
 			$(this).siblings("li").addClass("btnNomal");
+			currentTarget = $(this).data("target");//data라는 접두어를사용해서 그 값을 가져옴.	
 			
-			currentTarget = $(this).data("target");//data라는 접두어를사용해서 그 값을 가져옴.
+			$("#diaryCont").empty();// 모든 자식요소를 지우고 
+			$("#section2").css("height", "1600px");//높이를 초기화하고 
+			temp =1;  // 곱해질 변수 초기화
+			pages =1; // 페이지도 초기화
+			searchLevel = 0;// 검색레벨 초기화
 			console.log(currentTarget);
-			if(currentTarget == 'je'){
-				$("#diaryCont").empty();// 모든 자식요소를 지우고 
-				$("#section2").css("height", "1600px");//높이를 초기화하고 
-				temp =1;  // 곱해질 변수 초기화
-				pages =1; // 페이지도 초기화
-				var child  = document.getElementById("diaryCont").children.length;  // 엘리먼트 추가시 기준을 잡을 자식요소의 갯수
+			if(currentTarget == 'je' && searchLevel ==0){
+				console.log("제주도 검색실행");
+				
 				
 				getData(currentTarget);// ajax실행
-				
+			
 			}else if(currentTarget =="se"){
-				$("#diaryCont").empty();// 모든 자식요소를 지우고 
-				$("#section2").css("height", "1600px");//높이를 초기화하고 
-				temp =1;  // 곱해질 변수 초기화
-				pages =1; // 페이지도 초기화
-				var child  = document.getElementById("diaryCont").children.length;  // 엘리먼트 추가시 기준을 잡을 자식요소의 갯수
+				
 				
 			}else if(currentTarget == 'ka'){
-				$("#diaryCont").empty();// 모든 자식요소를 지우고 
-				$("#section2").css("height", "1600px");//높이를 초기화하고 
-				temp =1;  // 곱해질 변수 초기화
-				pages =1; // 페이지도 초기화
-				var child  = document.getElementById("diaryCont").children.length;  // 엘리먼트 추가시 기준을 잡을 자식요소의 갯수
 				
 			}else if(currentTarget == 'ch'){
-				$("#diaryCont").empty();// 모든 자식요소를 지우고 
-				$("#section2").css("height", "1600px");//높이를 초기화하고 
-				temp =1;  // 곱해질 변수 초기화
-				pages =1; // 페이지도 초기화
-				var child  = document.getElementById("diaryCont").children.length;  // 엘리먼트 추가시 기준을 잡을 자식요소의 갯수
-			}else if(currentTarget == 'ky'){
-				$("#diaryCont").empty();// 모든 자식요소를 지우고 
-				$("#section2").css("height", "1600px");//높이를 초기화하고 
-				temp =1;  // 곱해질 변수 초기화
-				pages =1; // 페이지도 초기화
-				var child  = document.getElementById("diaryCont").children.length;  // 엘리먼트 추가시 기준을 잡을 자식요소의 갯수
 				
-			}else{
+			}else if(currentTarget == 'ky'){
+				
+				
+			}else if(currentTarget == 'ju'&& searchLevel==0){
 				console.log("ju");
-				$("#diaryCont").empty();// 모든 자식요소를 지우고 
-				$("#section2").css("height", "1600px");//높이를 초기화하고 
-				temp =1;  // 곱해질 변수 초기화
-				pages =1; // 페이지도 초기화
-				var child  = document.getElementById("diaryCont").children.length;  // 엘리먼트 추가시 기준을 잡을 자식요소의 갯수
+				getData(currentTarget);// ajax실행
 				
 			}
 			
@@ -195,6 +240,7 @@ $(function() {
 		
 	
 });
+
 
 
 
