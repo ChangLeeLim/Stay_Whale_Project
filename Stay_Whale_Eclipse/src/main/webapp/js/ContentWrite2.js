@@ -52,7 +52,7 @@ $(function () {
         var hashObj = $("#hashTag");  
         
         hashObj.val(jsonhashData);  // hidden의 값으로 지정해줌.
-                
+                console.log(hashData);
 
     }
     
