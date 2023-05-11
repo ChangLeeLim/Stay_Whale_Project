@@ -278,7 +278,7 @@
 						<ul>
 							<li>제목 :엄마야 누나야 강변살자.</li>
 							<li>출발일 : 2023.10.10 (3박)</li>
-							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는weofowiejfwioejfowejfiwejfweoifjweiofjwoeijfweoif</li>
+							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는 치킨</li>
 							<li>userID</li>
 							<li><strong># 바람, # 모래사장, #신난다, # 즐거운 하루 , # 신나는 하루</strong></li>
 						</ul>
@@ -292,23 +292,7 @@
 						<ul>
 							<li>제목 :엄마야 누나야 강변살자.</li>
 							<li>출발일 : 2023.10.10 (3박)</li>
-							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는</li>
-							<li>userID</li>
-							<li><strong># 바람, # 모래사장, #신난다, # 즐거운 하루 , # 신나는 하루</strong></li>
-						</ul>
-
-					</div>
-		
-				</li>
-				<li>
-					<div>
-						<img src="image/p1.png">
-					</div>
-					<div>
-						<ul>
-							<li>제목 :엄마야 누나야 강변살자.</li>
-							<li>출발일 : 2023.10.10 (3박)</li>
-							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는</li>
+							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는 창의씨</li>
 							<li>userID</li>
 							<li><strong># 바람, # 모래사장, #신난다, # 즐거운 하루 , # 신나는 하루</strong></li>
 						</ul>
@@ -324,7 +308,23 @@
 						<ul>
 							<li>제목 :엄마야 누나야 강변살자.</li>
 							<li>출발일 : 2023.10.10 (3박)</li>
-							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는</li>
+							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는 광의씨</li>
+							<li>userID</li>
+							<li><strong># 바람, # 모래사장, #신난다, # 즐거운 하루 , # 신나는 하루</strong></li>
+						</ul>
+
+					</div>
+		
+				</li>
+				<li>
+					<div>
+						<img src="image/p1.png">
+					</div>
+					<div>
+						<ul>
+							<li>제목 :엄마야 누나야 강변살자.</li>
+							<li>출발일 : 2023.10.10 (3박)</li>
+							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는 준열씨</li>
 							<li>userID</li>
 							<li><strong># 바람, # 모래사장, #신난다, # 즐거운 하루 , # 신나는 하루</strong></li>
 						</ul>
@@ -340,7 +340,7 @@
 						<ul>
 							<li>제목 :엄마야 누나야 강변살자.</li>
 							<li>출발일 : 2023.10.10 (3박)</li>
-							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는weofowiejfwioejfowejfiwejfweoifjweiofjwoeijfweoif</li>
+							<li>내용 :푸른언덕에 배낭을매고 황금빛 태양 축제를 여는 현우씨</li>
 							<li>userID</li>
 							<li><strong># 바람, # 모래사장, #신난다, # 즐거운 하루 , # 신나는 하루</strong></li>
 						</ul>

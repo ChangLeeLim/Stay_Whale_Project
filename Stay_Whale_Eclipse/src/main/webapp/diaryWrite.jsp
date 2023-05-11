@@ -111,12 +111,21 @@
 			<input id="addCont" class="btn" type="button" value="목록에추가">
 			
 		</div>
-
-
+			
 		<div id="maps">
-				<script type="text/javascript" src="js/diaryWrite.js">
-				
-				</script>
+			<div id="searchDataWrap">
+				<div id="searchArea">
+					<input type="text" id="searchBar" placeholder="지역명으로 검색">
+					<div id="searchBtn">
+						<div></div>
+					</div>
+				</div>
+				<div id="searchData">
+				</div>
+			</div>
+			<script type="text/javascript" src="js/diaryWrite.js"></script>
+			
+			
 			</div>
 	
 			

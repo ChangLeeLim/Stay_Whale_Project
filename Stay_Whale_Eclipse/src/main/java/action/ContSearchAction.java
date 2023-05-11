@@ -6,19 +6,20 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
 
 import svc.AreaContService;
+import svc.ContSearchService;
 import vo.ActionForward;
 import vo.DiaryWriter;
+import vo.Search;
 
-public class AreaDataAction implements Action {
-
+public class ContSearchAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		StringBuilder sb = new StringBuilder();
-		AreaContService serv = new AreaContService();
 	
 		try(BufferedReader reader = request.getReader()) {  
 			String line;   
@@ -28,22 +29,25 @@ public class AreaDataAction implements Action {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		String searchData= sb.toString();
 		
-		String jsonData = sb.toString();
-		JSONObject obj = new JSONObject(jsonData);
-		
-		int max = obj.getInt("max");
-		int page = obj.getInt("page");
-		String area = obj.getString("area");
-		
-		ArrayList<DiaryWriter> data = serv.areaService1(max, page, area);
-		
-		String userData = "[]";  // 데이터가 하나도 없을 경우에 빈 배열이 출력 되도록 한다. 
-		
-		if(data.size() >0) {
+	
 			
+		JSONObject obj = new JSONObject(searchData);
+		Search searchInfo = new Search();
+		searchInfo.setSearch(obj.getString("search"));
+		searchInfo.setArea(obj.getString("area"));
+		searchInfo.setPage(obj.getInt("page"));
+		searchInfo.setMax(obj.getInt("max"));
+	
+		ContSearchService serv  = new ContSearchService();
+		ArrayList<DiaryWriter>data = serv.contSearchService(searchInfo);
+		
+		String userData = "[]";// 없을 경우에 빈 배열을 넘기도록 처리.
+		if(data.size()>0) {
+
 			StringBuilder sb2 = new StringBuilder("[");
-			for(int i=0; i<data.size(); i++) {
+			for(int i=0; i < data.size();i++) {
 				sb2.append("{");
 				sb2.append("\"post_Num\" : "+data.get(i).getPost_Num()+",");
 				sb2.append("\"post_Title\" : \""+data.get(i).getPost_Title()+"\",");
@@ -52,21 +56,21 @@ public class AreaDataAction implements Action {
 			}
 			sb2.setLength(sb2.length()-1);
 			sb2.append("]");
-			userData = sb2.toString();
-			
-			
+			userData = sb2.toString();	
 		}
 		
-		response.setContentType("application/json;charset=utf-8");  
-		PrintWriter out  = response.getWriter(); 
-		out.println(userData);   
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(userData);
 		out.flush();
 		out.close();
 		
 		
 		
+	
+		
+	
 		return null;
 	}
-	
 
 }
