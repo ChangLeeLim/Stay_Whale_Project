@@ -5,5 +5,5 @@
 
 	out.println(post_Num);
 	
-	response.sendRedirect("delete.diary?post_Num="+post_Num);
+	response.sendRedirect("delete.diary?post_Num="+post_Num); // 안녕
 %>
