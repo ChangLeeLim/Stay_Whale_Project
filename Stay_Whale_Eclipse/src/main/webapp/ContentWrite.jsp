@@ -81,6 +81,7 @@
 %>
 <textarea id="data" style="display: none;"><%= json%></textarea>
 
+
 <form id="writeData" action="write.diary" method="Post">
 	<input type="hidden" id="hashTag" name="hashTag" value="">
 	<input type="hidden" id= "memo" name="memo">
@@ -132,6 +133,9 @@
 							out.println("<div><textarea placeholder ='내용을 입력하세요.'></textarea></div>");
 							out.println("<input type = 'button' value = '저장'>");
 							out.println("<input type = 'button' value = '취소'>");
+							
+							
+							
 							out.println("</div>");
 							out.println("<div class = 'style2'>");
 							out.println("<div></div>");
@@ -147,6 +151,7 @@
 							out.println("<div><textarea placeholder ='내용을 입력하세요.'></textarea></div>");
 							out.println("<input type = 'button' value = '저장'>");
 							out.println("<input type = 'button' value = '취소'>");
+							
 							out.println("</div>");
 							}
 						}
@@ -167,6 +172,7 @@
 					out.println("<div><textarea placeholder ='내용을 입력하세요.'></textarea></div>");
 					out.println("<input type = 'button' value = '저장'>");
 					out.println("<input type = 'button' value = '취소'>");
+					
 					out.println("</div>");
 									
 				}else{

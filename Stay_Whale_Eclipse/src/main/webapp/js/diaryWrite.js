@@ -3,7 +3,7 @@ console.log(list);
 var data = JSON.parse(list);  // 지도에 마커와 정보를 표기하기 위해서 DB에 있는 명소정보를 가져와 JSON객체로 변환.
 var length = data.length;
 
-console.log(length);
+
 
 var picknum=[];  // 선택시마다 넘어오는 명소번호를 담은 자바스크립트 객체
 
@@ -83,13 +83,13 @@ for (var i = 0; i < positions2.length; i ++) {    // for문으로 돌면서 찍�
     //'<div style="padding:5px; width:300px; height:100px;">' + title +'<br>'+ test+'</div>';//데이터를 표기하는 부분예시
     var makeInfowindow = (function(marker, title, att_addr, att_detail, att_pic, att_num) {    // 인포윈도우를 생성  
         var iwContent =
-        	'<div style = "width: 300px; height: 150px;">'+
-        		'<input type="button" id="plus" style = "width:25px; height:25px; position:absolute; margin-left:210px; margin-top:2px; border:none;'+
+        	'<div style = "width: 300px; height: 150px; border-radius:10px;">'+
+        		'<input type="button" id="plus" style = "width:25px; height:25px; position:absolute; margin-left:220px; margin-top:0px; border:none;'+
         		'background-image:url(image/contentplus.png); background-size:cover; background-position:center center;'+
         		'background-color:white; cursor: pointer;" onclick="plus('+att_num+')">'+
-        		'<div style= "border: 0.25px solid; width:150px; height: 25px; position:absolute; margin-left:55px; font-size:14px;">'+
+        		'<div style= "width:150px; height: 25px; position:absolute; margin-left:55px; font-size:14px; border:0.25px solid #EBEBEB;">'+
         	 	title+'</div>'+
-        	 	'<div style =" border:0.25px solid; width:210px; height:20px; position:absolute; margin-left: 55px; margin-top: 30px; font-size:10px;">'+
+        	 	'<div style ="width:210px; height:20px; position:absolute; margin-left: 55px; margin-top: 30px; font-size:10px;">'+
         	 	att_addr+' </div>'+
         		'<div style = "height : 50px; width:50px; font-size:5px; background-image:url(image/'+att_pic+'); background-position: center center; background-size:cover;"></div>'+
         		'<div style = "width:295px; height:92px; position:relative; left:1px; top:3px">'+
@@ -306,6 +306,7 @@ searchBtn.addEventListener("click",function(){
 			  dataType: "json",
 			  data: JSON.stringify(info),
 			  success: function(data) {  // data는 정보
+				  console.log(data.length);
 				  if(data.length == 0){
 					  alert("검색결과가 없습니다.");
 					  
@@ -331,6 +332,9 @@ searchBtn.addEventListener("click",function(){
 function createEle(data){
 	
 	let searchFra= document.getElementById("searchData");
+	while (searchFra.firstChild) {
+		  searchFra.removeChild(searchFra.firstChild);
+		};
 	
 	for(let i=0 ; i<data.length ; i++){
 		let listFra = document.createElement("div");

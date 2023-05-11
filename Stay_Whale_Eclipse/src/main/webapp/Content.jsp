@@ -112,7 +112,7 @@
 <input type="hidden" id="spot" value="<%= spotEncode%>">
 <input type="hidden" id="hash" value="<%= hashEncode%>">
 
-<form id="writeData" action="write.diary" method="Post">
+<form id="reviseData" action="" method="Post">
 	
 	
 	<div id="topPic">
@@ -126,7 +126,7 @@
 					
 					</ul>
 				</div>
-				<input type="text" id="contentTitle" name="contentTitle" readonly="readonly" value="<%= title%>">	
+				<input type="text" id="contentTitle" name="contentTitle" readonly="readonly" style="pointer-events: none;" value="<%= title%>">	
 				<div id="dateRange"><p><%= start_Date%></p>&nbsp;&nbsp;~&nbsp;&nbsp;<p><%= end_Date%></p></div>
 				<div id="totalDays"><%= total_Date-1%>박 <%= total_Date%>일</div>
 			</div>
@@ -236,7 +236,7 @@
 			 <div id="writeTitle">
 			 	<p> Tour Dirary</p>
 			 </div>
-			 <textarea id="writeContent" name="writeContent" rows="50" cols="50" readonly="readonly"><%= body%>></textarea>
+			 <textarea id="writeContent" name="writeContent" rows="50" cols="50" readonly="readonly" style=" pointer-events: none;"><%= body%>></textarea>
 		</div>
 		<div id="WtiteWrap2">
 			<div id="picTitle">
@@ -266,10 +266,12 @@
 		
 		<%	// 세션 유무에 따라서 수정버튼은 보이게 혹은 보이지 않게 해야함.
 		
-			out.println("<input id='revise' class = 'buttonStyle1' type = 'button' value ='수정하기'style = 'left:100px;'>");
+			out.println("<input id='revise' class = 'buttonStyle1' type = 'button' value ='수정하기'style = 'left:65px;' onclick='reviseCont("+post_Num+")'>");
+			out.println("<input id='revise' class = 'buttonStyle1' type = 'button' value ='삭제하기'style = 'left:150px;' onclick='deleteCont("+post_Num+")'>");
+		
 		
 		%>
-		<input type="button" class="buttonStyle1" id="totalCont" value="목록으로 ">
+		<input type="button" class="buttonStyle1" id="totalCont" value="목록으로 " onclick="location.href='AllCont.jsp'">
 			
 		</div>
 	</section>

@@ -26,13 +26,6 @@ $(function () {
     attnumObj.value = attnumJsonData;
     
    
-    
-  
-   
-    
-
-	
-	
 	
 
     // 입력한 값을 태그로 생성한다.
@@ -40,6 +33,9 @@ $(function () {
         tag[counter] = value;   // 속성 : value로 배열로 저장을 한다. 
         
         counter ++;
+        
+        console.log(tag);
+        
        
       
         var info = {  // 매개변수로 받는 입력값을  객채 배열로 저장함.
@@ -49,6 +45,7 @@ $(function () {
         	hashData.push(info);
         
         var jsonhashData = JSON.stringify(hashData);  // 객체배열의 값을 문자화 하고
+        console.log(jsonhashData);
         var hashObj = $("#hashTag");  
         
         hashObj.val(jsonhashData);  // hidden의 값으로 지정해줌.
@@ -102,11 +99,18 @@ $(function () {
     
     $(document).on("click", ".del-btn", function (e) {
         var index = $(this).attr("data-idx");
-        console.log(index);
+        //console.log(index);
         $(this).parent().remove();
-       /* for(var i = 0 ; i < tag.length ; i++){
-        	tag.splice(1,(i+1))
-        }*/
+        console.log(tag[index]);
+        console.log(hashData[0].hashTag)
+        for(let i=0 ; i< hashData.length;i++){
+        	if(tag[index] === hashData[i].hashTag){
+        		hashData.splice(i,1);
+        	}
+        }
+        delete tag[index];
+        
+        console.log(hashData);
         
     });
 
@@ -152,7 +156,7 @@ $(function () {
 	});
     
     
-    $("#writeReg").click(function() {
+    $("#writeReg").click(function() {// submit부분.
     	var memoObj = document.querySelectorAll(".style1 > div:nth-child(5)");
     	for (var i = 0 ; i<memoObj.length ; i++){
     		info = {
@@ -174,6 +178,8 @@ $(function () {
         $("#writeData").submit();
 		
 	});
+    
+
  
     
 
@@ -182,6 +188,48 @@ $(function () {
     
 });
 
+
+
+/*// 모달창 부분
+
+function openModal() {
+	document.getElementById("modalBackdrop").style.display = "block";
+	let form = document.getElementById("writeData");
+	let modal = document.createElement("div");
+	let title = document.createElement("div");
+	let input = document.createElement("input");
+	let close = document.createElement("div");
+	
+	modal.classList.add("modal");
+	modal.style.display = "block";
+	
+	title.classList.add("title");
+	title.innerHTML = "사진업로드";
+	
+	//modal.append(title);
+	
+	input.setAttribute("type", "file");
+	//modal.append(input);
+	
+	close.classList.add("close");
+	close.innerHTML = "X";
+	
+	
+	
+	modal.append(title, input, close);
+	form.append(modal);
+	
+	
+	document.getElementById("modal").style.display = "block";
+	
+}
+
+function closeModal() {
+	document.getElementById("modalBackdrop").style.display = "none";
+	document.getElementById("modal").style.display = "none";
+	
+}
+*/
 
 
 

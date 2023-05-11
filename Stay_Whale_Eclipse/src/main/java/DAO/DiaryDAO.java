@@ -195,7 +195,7 @@ public class DiaryDAO {
 		ResultSet rs = null;
 		int maxnum = 0;
 		
-		String sql="select max(post_Num)+1 from tourdiary";
+		String sql="select IFNULL(max(post_Num),0)+1 from tourdiary"; //게시물이 하나도 없는경우 null이되므로 대체값을 지정해 주어야 한다. 
 
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -451,7 +451,7 @@ public class DiaryDAO {
 				
 			}
 		
-			
+			System.out.println(data.size());
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -597,6 +597,83 @@ public class DiaryDAO {
 		}
 		
 		return data;
+	}
+	
+	public boolean deleteCont(int post_Num) {
+		boolean success1 = false;
+		String sql = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int delCount = 0;
+		
+		sql="delete from tourdiary where post_Num =?";
+	
+	
+	
+	
+		try{
+			pstmt=con.prepareStatement(sql); //preparStatement 찾아보기 		
+			
+			pstmt.setInt(1, post_Num);
+		
+			delCount=pstmt.executeUpdate();
+			System.out.println(delCount);
+			
+			if(delCount >0) {
+				success1 = true;
+			}
+		
+	
+		}catch(Exception ex){
+			
+			ex.printStackTrace();
+			
+		}finally{
+			JdbcUtil.commit(con);
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return success1;
+	}
+	
+	
+	public boolean deleteSelection(int post_Num) {
+		boolean success2 = false;
+		String sql = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int delCount = 0;
+		
+		sql="delete from attraction_selection where post_Num =?";
+	
+	
+	
+	
+		try{
+			pstmt=con.prepareStatement(sql); //preparStatement 찾아보기 		
+			
+			pstmt.setInt(1, post_Num);
+		
+			delCount=pstmt.executeUpdate();
+			
+			System.out.println(delCount);
+			if(delCount>0) {
+				success2 = true;
+			}
+		
+	
+		}catch(Exception ex){
+			
+			ex.printStackTrace();
+			
+		}finally{
+			JdbcUtil.commit(con);
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return success2;
 	}
 	
 	

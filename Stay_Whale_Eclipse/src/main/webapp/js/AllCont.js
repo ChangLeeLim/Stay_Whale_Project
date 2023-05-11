@@ -3,10 +3,14 @@ $(function() {
 	var currentTarget = "to";  // 전체보기 defalut 값. 
 	
 	
+	
 		// 무한스크롤 페이징.
 	var pages = 1;  // 증가할 페이지
 	var temp = 1;// 배수에 곱해질 수 
 	const maxCont = 16;
+	
+	getData(currentTarget); // 기본상태 
+
 	//var child = document.getElementById("diaryCont").children.length;  // 문서 준비완료시 자식요소 
 		
 	var intersectionObserver = new IntersectionObserver(function(entries) {// 여기서 entries는 관찰대상 엘리먼트임
@@ -25,7 +29,6 @@ $(function() {
 	intersectionObserver.observe(document.getElementById("nextEle"));  //observe매서드를 이용해서 관찰대상을 등록할 수 있음.
 
 		
-	
 
 
 	function getData(currentTarget) {//  지역별 검색 지역을 매개변수로 받아서 요청을 보냄.
@@ -45,7 +48,7 @@ $(function() {
 			  dataType: "json",
 			  data: params,
 			  success: function(data) {  // data는 정보
-				  console.log(data);
+				  //console.log(data);
 				  createElement(data)
 				  let elements = document.getElementById("diaryCont").children.length;
 				  
