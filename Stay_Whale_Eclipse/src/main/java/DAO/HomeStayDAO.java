@@ -54,19 +54,42 @@ public class HomeStayDAO {
 
 	}
 	
-	public ArrayList<HomeStayBean> selectArticleList(int page,int limit){
+	public ArrayList<HomeStayBean> selectArticleList(int page,int limit, String category, String search){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String board_list_sql="select *, format(price, 0) as price2 from accmodation_airbnb order by reg_num_a desc limit ?,8";
+		
+		
 		ArrayList<HomeStayBean> homestayList = new ArrayList<HomeStayBean>();
 		HomeStayBean homestay = null;
-		int startrow=(page-1)*10; 
+		int startrow=(page-1)*8; 
 
 		try{
-			pstmt = con.prepareStatement(board_list_sql);
-			pstmt.setInt(1, startrow);
-			rs = pstmt.executeQuery();
-
+			if(category == null || category.equals("전체"))
+			{
+				String board_list_sql="select *, format(price, 0) as price2 from accmodation_airbnb order by reg_num_a desc limit ?,8";
+				pstmt = con.prepareStatement(board_list_sql);
+				pstmt.setInt(1, startrow);
+				rs = pstmt.executeQuery();	
+			}
+			
+			else if(category != null)
+			{
+				String board_list_sql="select *, format(price, 0) as price2 from accmodation_airbnb where category=? order by reg_num_a desc limit ?,8";
+				pstmt = con.prepareStatement(board_list_sql);
+				pstmt.setString(1, category);
+				pstmt.setInt(2, startrow);
+				rs = pstmt.executeQuery();	
+			}
+			
+			if(search != null)
+			{
+				search = "%"+search+"%";
+				String board_list_sql="select *, format(price, 0) as price2 from accmodation_airbnb where acc_name like ? order by reg_num_a desc limit ?,8";
+				pstmt = con.prepareStatement(board_list_sql);
+				pstmt.setString(1, search);
+				pstmt.setInt(2, startrow);
+				rs = pstmt.executeQuery();	
+			}
 			while(rs.next()){
 				homestay = new HomeStayBean();
 				homestay.setReg_num_a(rs.getString("reg_num_a"));

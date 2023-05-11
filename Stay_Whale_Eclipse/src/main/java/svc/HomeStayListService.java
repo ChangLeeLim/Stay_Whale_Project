@@ -19,13 +19,13 @@ public class HomeStayListService {
 		
 	}
 
-	public ArrayList<HomeStayBean> getArticleList(int page, int limit) throws Exception{
+	public ArrayList<HomeStayBean> getArticleList(int page, int limit, String category, String search) throws Exception{
 		
 		ArrayList<HomeStayBean> homestayList = null;
 		Connection con = getConnection();
 		HomeStayDAO homestayDAO = HomeStayDAO.getInstance();
 		homestayDAO.setConnection(con);
-		homestayList = homestayDAO.selectArticleList(page,limit);
+		homestayList = homestayDAO.selectArticleList(page,limit,category,search);
 		close(con);
 		return homestayList;
 		

@@ -564,7 +564,7 @@ public class DiaryDAO {
 		Attraction_Cont list = null;
 		ArrayList<Attraction_Cont> data = new ArrayList<Attraction_Cont>(); 
 		
-		String sql="select * from attraction where site_1 like '%"+keyWord+"%'";
+		String sql="select * from attraction where site_1 like '%"+keyWord+"%' or site_2 like '%"+keyWord+"%' or attraction_Name like '%"+keyWord+"%'";
 
 		try{
 			pstmt = con.prepareStatement(sql);
