@@ -17,6 +17,7 @@ import action.AttractShowAction;
 import action.ContSearchAction;
 import action.ContentAction;
 import action.ContentWriteAction;
+import action.DeleteContAction;
 import action.MapSearchAction;
 import action.PickAttraction;
 import vo.ActionForward;
@@ -67,7 +68,7 @@ public class DiaryController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/Cont_to.diary")) {
+		}else if(command.equals("/Cont_to.diary")) {//전체로 해놓고 검색.
 			try {
 				action = new AllContAction();
 				forward = action.execute(request, response);
@@ -84,7 +85,7 @@ public class DiaryController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/Cont_ju.diary")) {
+		}else if(command.equals("/Cont_ju.diary")) {  //전라도 검색
 			System.out.println("전라도");
 			try {
 				action = new AreaDataAction2();
@@ -101,7 +102,7 @@ public class DiaryController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/MapSearch.diary")) {
+		}else if(command.equals("/MapSearch.diary")) {  // 지도에서 검색
 			try {
 				action = new MapSearchAction();
 				action.execute(request, response);
@@ -109,6 +110,14 @@ public class DiaryController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			
+		}else if(command.equals("/delete.diary")) {  //다이어리삭제
+			try {
+				action = new DeleteContAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 		

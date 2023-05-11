@@ -45,7 +45,7 @@ public class AreaDataAction2 implements Action {  // 전라도 검색
 				sb2.append("\"post_Num\" : "+data.get(i).getPost_Num()+",");
 				sb2.append("\"post_Title\" : \""+data.get(i).getPost_Title()+"\",");
 				sb2.append("\"user_Id\" : \""+data.get(i).getUser_Id()+"\",");
-				sb2.append("\"post_Body\" : \""+data.get(i).getPost_Body()+"\"},");
+				sb2.append("\"post_Body\" : \""+data.get(i).getPost_Body().replace("\r\n", "").replace("\"", "\\\"")+"\"},");  // 줄바꿈제거
 			}
 			
 			sb2.setLength(sb2.length()-1);

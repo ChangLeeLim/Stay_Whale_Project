@@ -18,6 +18,7 @@ public class ContentAction implements Action {
 		
 		int post_Num = Integer.parseInt(request.getParameter("post_Num"));   
 		
+		System.out.println("들어오는 번호"+post_Num);
 		
 		ContentService serv  = new ContentService();
 		
@@ -26,20 +27,22 @@ public class ContentAction implements Action {
 		
 		ArrayList<AttractionSelection> content2 = serv.contentSelectService2(post_Num);
 		
-		int size = content2.size();  // 명소 번호만 따로 모아야 함 여기서 List의 사이즈가 번호의 갯수가 됨.
+		int size = content2.size();  // 紐낆냼 踰덊샇留� �뵲濡� 紐⑥븘�빞 �븿 �뿬湲곗꽌 List�쓽 �궗�씠利덇� 踰덊샇�쓽 媛��닔媛� �맖.
 		StringBuilder sb = new StringBuilder("(");
 		for (int i =0 ; i<size ; i++) {
 			sb.append(content2.get(i).getAttraction_Num()).append(",");
 		}
-		sb.setLength(sb.length()-1);// 맨 마지막,제거
+		sb.setLength(sb.length()-1);// 留� 留덉�留�,�젣嫄�
 		sb.append(")");
 		
 		
-		String nums = sb.toString();//(4,5) 와 같은 형태로 in으로 돌리기 위한 String 배열 
+		String nums = sb.toString();//(4,5) �� 媛숈� �삎�깭濡� in�쑝濡� �룎由ш린 �쐞�븳 String 諛곗뿴 
 		
 	
 		ArrayList<Attraction_Cont> content3 = serv.contentSelectService3(nums);   
 		
+		
+		System.out.println(content1.getPost_Body());
 		
 		
 		request.setAttribute("content", content1);

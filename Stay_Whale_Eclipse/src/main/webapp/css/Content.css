@@ -53,6 +53,9 @@ input[type = button]{
     top: 20px;
     left: 30px;
     border: 0.25px solid white;
+    background-image: url("../image/user_pic1.png");
+    background-position: center;
+    background-size: cover;
 }
 
 #userIdWrap{
@@ -129,7 +132,7 @@ input[type = button]{
     color: white;
     background-color: transparent;
     font-size: 25px;
-    pointer-events: none;
+    
 }
 #contentTitle > p{
 	font-size: 30px;
@@ -209,6 +212,7 @@ input[type = button]{
 	cursor: pointer;
 }
 
+
 .style1 > textarea:nth-child(5){
 	float: left;
     width: 320px;
@@ -221,7 +225,7 @@ input[type = button]{
     color: #999;
     resize: none;
     pointer-events: none;
-    border: 0.25px solid #EBEBEB;
+    border: none;
     
     
   
@@ -355,7 +359,6 @@ input[type = button]{
     font-size: 17px;
     margin-left: 15px;
     margin-top: 10px;
-    pointer-events: none;
     font-weight: bold;
     
 }
@@ -447,7 +450,7 @@ input[type = button]{
 	cursor: pointer;
 }
 #totalCont{
-	left: 485px;
+	left: 430px;
 	width: 100px;
 	
 }

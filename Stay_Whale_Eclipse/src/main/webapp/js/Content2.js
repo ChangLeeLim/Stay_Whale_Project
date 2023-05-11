@@ -22,11 +22,17 @@ $(function () {// UI 관련 JS코드
     		parent.next().css("height", "300px");
     		
         	$(this).attr("value", "접기");	
-    	}else{
+    	}else if($(this).attr("value")==="접기"){
     		parent.parent().css("height", "145px");
-    		parent.next().css("height", "20px");
+    		parent.next().css("height", "15px");
     		$(this).attr("value", "더보기");
-    	}
+    	}/*else if($(this).attr("value")==="수정완료"){
+    		$(this).attr("value", "수정하기");
+			parent.parent().css("height", "145px");  // 더보기 클릭시 컨테이너의 길이를 400px까지 늘림.
+    		parent.next().css("height", "15px");
+    		parent.next().css("border", "none");
+    		parent.next().css("pointer-events","none;");
+    	}*/
     	
     	
 		
@@ -55,10 +61,71 @@ $(function () {// UI 관련 JS코드
 			
 		}
 	});
+    
+   
 
     
     
 });
+
+function reviseCont(post_Num){
+	
+/*	console.log(post_Num);
+	let body = document.getElementById("writeContent");
+	let button = document.getElementById("revise");
+	let title  = document.getElementById("contentTitle");
+	let memoBtn = document.querySelectorAll(".style1 > div:nth-child(4) > input[type=button]");
+	
+	console.log(memoBtn);
+	for(let i=0; i <memoBtn.length;i++){
+		memoBtn[i].value = "수정하기";
+	}
+	
+	$(".style1 > div:nth-child(4) > input[type=button]").click(function() {
+		var parent =$(this).parent();
+		if($(this).attr("value")==="수정하기"){
+			$(this).attr("value", "수정완료");
+			console.log($(this).attr("value"));
+			parent.parent().css("height", "400px");  // 더보기 클릭시 컨테이너의 길이를 400px까지 늘림.
+	    	parent.next().css("height", "300px");
+	    	parent.next().css("border", "0.25px solid");
+	    	parent.next().css("pointer-events","auto");
+			
+			
+		}else if($(this).attr("value")==="수정완료"){
+			$(this).attr("value", "수정하기");
+			parent.parent().css("height", "145px");  
+	    	parent.next().css("height", "15px");
+	    	parent.next().css("border", "none");
+	    	parent.next().css("pointer-events","none;");	
+		
+		}
+		
+	});
+	
+	button.value="취소하기";
+	
+	body.removeAttribute("readonly");
+	body.style.pointerEvents= "";
+	body.style.border = "2px solid black";
+	body.focus();
+	
+	title.removeAttribute("readonly");
+	title.style.pointerEvents="";
+	
+	
+	
+	if(button.value ==="취소하기"){
+		button.addEventListener("click", function() {// 취소하기 일때 
+			location.href ="content.diary?post_Num="+post_Num;  // 다시 돌아가고 
+		});
+	}*/
+} 
+
+function deleteCont(post_Num) {
+	location.href = "deleteProcess.jsp?post_Num="+post_Num;
+	
+}
 
 
 

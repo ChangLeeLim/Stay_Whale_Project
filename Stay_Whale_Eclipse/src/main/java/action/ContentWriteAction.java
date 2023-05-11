@@ -64,7 +64,7 @@ public class ContentWriteAction implements Action {
 		
 		int maxnum = serv.insertService(list);  // 글의 게시번호를 구하고 
 		
-		System.out.println(maxnum);
+		System.out.println("저장의 최고 번호"+ maxnum);
 		
 		
 		

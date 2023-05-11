@@ -47,7 +47,7 @@
 		<section id="section2">	
 			<div id="diaryCont">
 				<%
-					for(int i=0 ; i< 16; i++){  // 초기 16개의 데이터 
+		/* 			for(int i=0 ; i< 16; i++){  // 초기 16개의 데이터 
 						out.println("<ul>");
 						out.println("<li>");
 							out.println("<div style ='background-image: url(image/jeju.jpg)'></div>");
@@ -65,7 +65,7 @@
 					out.println("</ul>");
 						
 					}
-					
+					 */
 				%>
 					
 			</div>
