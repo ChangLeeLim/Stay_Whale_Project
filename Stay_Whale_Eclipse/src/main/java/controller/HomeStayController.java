@@ -17,6 +17,7 @@ import action.BoardReplyProAction;
 import action.BoardWriteProAction;*/
 import vo.ActionForward;
 import action.HomeStayListAction;
+import action.HomeStayMoreAction;
 import action.HomeStayDetailAction;
 
 @WebServlet("*.hs")
@@ -51,6 +52,16 @@ public class HomeStayController extends javax.servlet.http.HttpServlet
 				}
 		}
 		
+		else if(command.equals("/homestay2.hs"))
+		{
+			action = new HomeStayMoreAction();
+			System.out.println("확인");
+			try {
+				action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+				}
+		}
 		if(forward != null){
 			
 			if(forward.isRedirect()){

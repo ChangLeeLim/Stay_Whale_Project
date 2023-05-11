@@ -10,12 +10,15 @@
 
 <%
 	ArrayList<HomeStayBean> homestayList = (ArrayList<HomeStayBean>)request.getAttribute("homestayList");
-    PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	int listCount=pageInfo.getListCount();
-	int nowPage=pageInfo.getPage();
-	int maxPage=pageInfo.getMaxPage();
-	int startPage=pageInfo.getStartPage();
-	int endPage=pageInfo.getEndPage();
+
+	
+
+	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+	int listCount = pageInfo.getListCount();
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
 %>
 <html>
 <head>
@@ -115,7 +118,7 @@ body.modal-open {
 			<ul>
 				<!--<li>검색(돋보기)</li>-->
 				<li style="height: 40px;"><form action="" class="search-bar" style="padding: 0px">
-	<input type="search" name="search" pattern=".*\S.*" required placeholder="">
+	<input type="search" name="search" id="search" pattern=".*\S.*" required placeholder="">
 	<button class="search-btn" type="submit">
 		<span>Search</span>
 	</button>
@@ -145,64 +148,21 @@ body.modal-open {
 			<%
 				for(int i = 0; i < homestayList.size(); i++)
 				{
-					out.println("<li><div class='airbnbimg'><img src='image/"+homestayList.get(i).getAcc_picture()+"'></div>");
+					String imglist = homestayList.get(i).getAcc_picture();
+					String[] imglists = imglist.split(",");
+					
+					out.println("<li><div class='airbnbimg'><img src='image/"+imglists[0]+"'></div>");
+					out.println("<input type='text' name='airbnbnum' class=airbnbnum' value='"+homestayList.get(i).getReg_num_a()+"' hidden>");
 					out.println("<div class='airbnblocation'><h3>"+homestayList.get(i).getAcc_name()+"</h3></div>");
 					out.println("<div class='airbnbdetail'>"+homestayList.get(i).getLocation()+"</div>");
 					out.println("<div class='airbnbprice'>"+homestayList.get(i).getPrice2()+"원(1박 기준)</div>");
 					out.println("<div class='airbnbrating'><h4>★ 없음</h4></div></li>");
 				}
 			%>
-				<!-- <li><div class="airbnbimg"><img src="image/homestay_img1.png"></div>
-				<div class="airbnblocation"><h3>거제면, 거제시, 한국</h3></div>
-				<div class="airbnbdetail">바다 전망</div>
-				<div class="airbnbprice">460,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 4.84</h4></div></li>
-				
-				<li><div class="airbnbimg"><img src="image/homestay_img2.png"></div>
-				<div class="airbnblocation"><h3>Niseko, Abuta District, 일본</h3></div>
-				<div class="airbnbdetail">산 전망</div>
-				<div class="airbnbprice">330,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 5.0</h4></div></li>
-				
-				<li><div class="airbnbimg"><img src="image/homestay_img3.png"></div>
-				<div class="airbnblocation"><h3>시모다, 일본</h3></div>
-				<div class="airbnbdetail">바다 전망</div>
-				<div class="airbnbprice">1,128,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 4.91</h4></div></li>
-				
-				<li><div class="airbnbimg"><img src="image/homestay_img4.png"></div>
-				<div class="airbnblocation"><h3>오분동, 삼척, 한국</h3></div>
-				<div class="airbnbdetail">194km 거리</div>
-				<div class="airbnbprice">138,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 4.86</h4></div></li>
-				
-				<li><div class="airbnbimg"><img src="image/homestay_img5.png"></div>
-				<div class="airbnblocation"><h3>속초시, 한국</h3></div>
-				<div class="airbnbdetail">바다 전망</div>
-				<div class="airbnbprice">114,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 5.0</h4></div></li>
-				
-				<li><div class="airbnbimg"><img src="image/homestay_img6.png"></div>
-				<div class="airbnblocation"><h3>수영구, 한국</h3></div>
-				<div class="airbnbdetail">해변 및 바다 전망</div>
-				<div class="airbnbprice">123,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 4.84</h4></div></li>
-				
-				<li><div class="airbnbimg"><img src="image/homestay_img7.png"></div>
-				<div class="airbnblocation"><h3>저동, 강릉, 한국</h3></div>
-				<div class="airbnbdetail">호수 전망</div>
-				<div class="airbnbprice">90,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 4.78</h4></div></li>
-				
-				<li><div class="airbnbimg"><img src="image/homestay_img8.png"></div>
-				<div class="airbnblocation"><h3>국동, 여수, 한국</h3></div>
-				<div class="airbnbdetail">해변 및 산 전망</div>
-				<div class="airbnbprice">102,000원(1박 기준)</div>
-				<div class="airbnbrating"><h4>★ 4.97</h4></div></li> -->
 			</ul>
-		
-		<a href="#" onclick="return false"><p>더 보기</p></a>
 	</section>
+	<a href="#" onclick="return false" id="more"><p style="width:1280px; margin: 0px auto; font-size: 25px; text-align: center;" >더 보기</p></a>
+	<input type="text" value=<%=nowPage %> id="page" hidden/>
 
 	<jsp:include page="footer.jsp"/>
 
