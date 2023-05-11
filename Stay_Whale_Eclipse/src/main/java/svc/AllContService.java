@@ -3,7 +3,7 @@ package svc;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import dao.DiaryDAO;
+import DAO.DiaryDAO;
 import db.JdbcUtil;
 import vo.DiaryWriter;
 
