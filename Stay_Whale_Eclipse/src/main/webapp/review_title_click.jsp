@@ -51,7 +51,7 @@
 			out.println("<div class='two_wrap'>");
 			out.println("<label>작성일</label><input type='text' class='writeday' name='writeday' readonly value='" + arr.get(i).getPost_date() + "'>");
 			out.println("<label>작성자</label><input type='text' class='id_text' name='id' value='" + arr.get(i).getUser_id() + "' readonly>");
-			out.println("<label>여행지</label><input type='text' class='travel' readonly name='travellocation' value='" + arr.get(i).getPost_travel_location() + "'>");
+			out.println("<label>숙소명</label><input type='text' class='travel' readonly name='travellocation' value='" + arr.get(i).getPost_travel_location() + "'>");
 			out.println("<label>평점</label><input type='text' class='avg_text' name='avgscore' readonly>");
 			out.println("<label>조회수</label><input type='text' class='read_count' name='read_count' value='" + arr.get(i).getPost_readcount() + "' readonly>");
 			out.println("</div>");

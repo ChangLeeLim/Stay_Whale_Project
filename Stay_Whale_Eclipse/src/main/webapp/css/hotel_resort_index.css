@@ -91,6 +91,11 @@
 		padding-top: 10px;
 		height: 1850px;
 		overflow: scroll;
+		-ms-overflow-style: none; /* IE and Edge */
+    	scrollbar-width: none; /* Firefox */
+	}
+	.info ul::-webkit-scrollbar {
+    	display: none; /* Chrome, Safari, Opera*/
 	}
 	.list_image {
 		position: relative;
@@ -119,7 +124,6 @@
 	}
 	.info_content ul li {
 		height: auto;
-		cursor: pointer;
 		margin-bottom: 30px;
 		transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
 	}

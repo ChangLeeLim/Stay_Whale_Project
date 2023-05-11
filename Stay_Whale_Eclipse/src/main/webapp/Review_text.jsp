@@ -60,7 +60,7 @@
 					</fieldset>
 					</div>
 					<div>작성자<input type="text" class="id_text" value= "<%= id%>" name="id" readonly></div>
-					<div>여행지<input type="text" class="location_text" name="travellocation" placeholder="여행지를 입력해주세요"></div>
+					<div>숙소명<input type="text" class="location_text" name="travellocation" placeholder="여행지를 입력해주세요"></div>
 				</div>
 				<div style="display: flex; justify-content: center;">
 					<textarea class="txt" name="txt" placeholder="소중한 리뷰를 작성해 주세요."></textarea>

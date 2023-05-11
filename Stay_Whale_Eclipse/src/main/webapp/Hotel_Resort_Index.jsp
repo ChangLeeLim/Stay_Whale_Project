@@ -7,7 +7,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>STAY WHALE || Hotel Resort</title>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ac96333bf6ff2bb0f94315ab1e58bf1"></script>
 </head>
 <body>
 	<%
@@ -15,6 +14,9 @@
 		String id = (String)session.getAttribute("id");
 		ArrayList <HotelBean> hotelList = (ArrayList<HotelBean>)request.getAttribute("hotelList");
 		ArrayList <HotelBean> hotelSearchList = (ArrayList<HotelBean>)request.getAttribute("hotelSearchList");
+		if(hotelSearchList != null) {
+			hotelList = hotelSearchList;
+		}
 		DecimalFormat df = new DecimalFormat("###,###");
 	%>
 	<%
@@ -45,6 +47,8 @@
 						<div style="margin-top: 20px;"><b>날짜</b></div>
 						<div id="date_wrap">
 							<input type="text" name="date_selec" readonly placeholder="날짜 선택" id="day_Selec">
+							<input type="hidden" id="checkin">
+							<input type="hidden" id="checkout">
 						</div>
 					</div>
 					<div style="margin-top: 10px;"><b>상세조건</b></div>
@@ -74,8 +78,7 @@
 							    </ul>
 						    </div>
 				    </div>
-						    
-				    
+					
 				    <div style="margin-bottom: 10px;">가격<span style="font-size: 5px; color: gray;">(만원)</span></div>
 				    <div id="price_Wrap">
 					    <div class="range-slider">
@@ -188,7 +191,6 @@
 					<div id="pop_info_1" class="pop_wrap" style="display:none;">
 					  <div class="pop_inner">
 					    <div class="mapWrap" id="map">
-							
 						</div>
 					    <button type="button" class="btn_close">닫기</button>
 					  </div>
@@ -203,35 +205,19 @@
 					<div class="info_content">
 						<ul>
 							<%	
-							if(hotelSearchList == null && hotelList != null) {
 								for(int i=0; i<hotelList.size(); i++) {
-									out.println("<li>");
+									out.println("<a href='selecHotel.xr?hNum="+hotelList.get(i).getReg_num_h()+"&id="+id+"&cin="+hotelList.get(0).getCheckin()+"&cout="+hotelList.get(0).getCheckout()+"'><li>");
 									out.println("<div class='list_image' style='background-image: url(image/" + hotelList.get(i).getAcc_picture() + "');>");
 										out.println("<div class='content_text_wrap'>");
 											out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelList.get(i).getHotel_grade() + "</span></div>");
 											out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelList.get(i).getAcc_name() + "</span></div>");
-											out.println("<div id='info_intext3'><span>★ " + hotelList.get(i).getRating() + " (2,761)</span></div>");
+											out.println("<div id='info_intext3'><span>★ " + hotelList.get(i).getRating() + " (" + df.format(hotelList.get(i).getReview_count()) + ")</span></div>");
 											out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelList.get(i).getLocation() + "</span></div>");
 											out.println("<div id='info_intext5'><span>" + df.format(hotelList.get(i).getPrice()) + "</span>원</div>");
 										out.println("</div>");
 									out.println("</div>");
-									out.println("</li>");
+									out.println("</li></a>");
 								}
-							} else if(hotelSearchList != null && hotelList == null) {
-								for(int i=0; i<hotelSearchList.size(); i++) {
-									out.println("<li>");
-									out.println("<div class='list_image' style='background-image: url(image/" + hotelSearchList.get(i).getAcc_picture() + "');>");
-										out.println("<div class='content_text_wrap'>");
-											out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelSearchList.get(i).getHotel_grade() + "</span></div>");
-											out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelSearchList.get(i).getAcc_name() + "</span></div>");
-											out.println("<div id='info_intext3'><span>★ " + hotelSearchList.get(i).getRating() + " (2,761)</span></div>");
-											out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelSearchList.get(i).getLocation() + "</span></div>");
-											out.println("<div id='info_intext5'><span>" + df.format(hotelSearchList.get(i).getPrice()) + "</span>원</div>");
-										out.println("</div>");
-									out.println("</div>");
-									out.println("</li>");
-								}
-							}
 							%>
 						</ul>
 					</div>

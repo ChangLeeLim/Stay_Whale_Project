@@ -1,8 +1,117 @@
 package vo;
 
+import java.util.ArrayList;
+
 public class HotelBean {
-	String reg_num_h, acc_name, site_1, site_2, location, tel_no, fax, email, detail, acc_category, facility_list, acc_picture, hotel_grade;
-	int price;
+	String reg_num_h, acc_name, site_1, site_2, location, tel_no, fax, email, detail, comment, facility_list, acc_picture, hotel_grade;
+	String room_num, room_type, room_name, reg_num_r, stay_type, room_detail, standard_amount, room_picture, checkin, checkout;
+	double rating;
+	int price, room_price, review_count;
+
+	public String getCheckin() {
+		return checkin;
+	}
+
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
+	}
+
+	public String getCheckout() {
+		return checkout;
+	}
+
+	public void setCheckout(String checkout) {
+		this.checkout = checkout;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public int getReview_count() {
+		return review_count;
+	}
+
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
+
+	public String getRoom_num() {
+		return room_num;
+	}
+
+	public void setRoom_num(String room_num) {
+		this.room_num = room_num;
+	}
+
+	public String getRoom_type() {
+		return room_type;
+	}
+
+	public void setRoom_type(String room_type) {
+		this.room_type = room_type;
+	}
+
+	public String getRoom_name() {
+		return room_name;
+	}
+
+	public void setRoom_name(String room_name) {
+		this.room_name = room_name;
+	}
+
+	public String getReg_num_r() {
+		return reg_num_r;
+	}
+
+	public void setReg_num_r(String reg_num_r) {
+		this.reg_num_r = reg_num_r;
+	}
+
+	public String getStay_type() {
+		return stay_type;
+	}
+
+	public void setStay_type(String stay_type) {
+		this.stay_type = stay_type;
+	}
+
+	public String getRoom_detail() {
+		return room_detail;
+	}
+
+	public void setRoom_detail(String room_detail) {
+		this.room_detail = room_detail;
+	}
+
+	public String getStandard_amount() {
+		return standard_amount;
+	}
+
+	public void setStandard_amount(String standard_amount) {
+		this.standard_amount = standard_amount;
+	}
+
+	public String getRoom_picture() {
+		return room_picture;
+	}
+
+	public void setRoom_picture(String room_picture) {
+		this.room_picture = room_picture;
+	}
+
+	public int getRoom_price() {
+		return room_price;
+	}
+
+	public void setRoom_price(int room_price) {
+		this.room_price = room_price;
+	}
+
 	public int getPrice() {
 		return price;
 	}
@@ -11,7 +120,6 @@ public class HotelBean {
 		this.price = price;
 	}
 
-	double rating;
 	public double getRating() {
 		return rating;
 	}
@@ -91,15 +199,6 @@ public class HotelBean {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-
-	public String getAcc_category() {
-		return acc_category;
-	}
-
-	public void setAcc_category(String acc_category) {
-		this.acc_category = acc_category;
-	}
-
 	public String getFacility_list() {
 		return facility_list;
 	}

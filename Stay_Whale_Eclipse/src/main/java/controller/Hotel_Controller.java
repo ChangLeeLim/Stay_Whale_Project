@@ -1,16 +1,21 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import action.Action;
+import action.HotelLikeAction;
 import action.HotelListPrintAction;
 import action.HotelListSearchAction;
+import action.HotelRoomSearchAction;
+import action.HotelSelecAction;
+import action.HotelunLikeAction;
 import vo.ActionForward;
-import vo.HotelBean;
 
 @WebServlet("*.xr")
 public class Hotel_Controller extends javax.servlet.http.HttpServlet 
@@ -35,6 +40,38 @@ public class Hotel_Controller extends javax.servlet.http.HttpServlet
 		}
 		else if(command.equals("/hotelSearch.xr")) {
 			action  = new HotelListSearchAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/selecHotel.xr")) {
+			action  = new HotelSelecAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/likeCheck.xr")) {
+			action  = new HotelLikeAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/unLikeCheck.xr")) {
+			action  = new HotelunLikeAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/roomSearch.xr")) {
+			action  = new HotelRoomSearchAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {

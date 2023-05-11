@@ -127,7 +127,7 @@
 					<div id="search_div">
 						<select id="search_selec">
 							<option>제목</option>
-							<option>여행지</option>
+							<option>숙소명</option>
 							<option>작성자</option>
 						</select>
 						<input id="search_box" type="text" placeholder="검 색">
