@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -169,7 +169,7 @@ public class DiaryDAO {
 		Statement st = null;
 		try {                                                                                               
 		Class.forName("com.mysql.cj.jdbc.Driver");                                                                      
-	    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tourdiary2","root","882614");        // 1개의 connection당!!! 1개의 작업(insert?,select)만 해라!!!
+	    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/websitedb","root","1234");        // 1개의 connection당!!! 1개의 작업(insert?,select)만 해라!!!
 		String s= "insert into tourdiary (user_Id, post_Title, post_Body, readCount, post_Like, hashTag, start_date, total_date, end_Date,area) "+
         "values ('testId','"+list.getPost_Title()+"','"+list.getPost_Body()+"',"+0+","+0+",'"+list.getHashTag()+"','"
         +list.getStart_date()+"',"+ list.getTotal_date()+",'"+list.getEnd_date()+"','"+list.getArea()+"');";      
@@ -264,7 +264,7 @@ public class DiaryDAO {
 		Statement st = null;
 		try {                                                                                               
 		Class.forName("com.mysql.cj.jdbc.Driver");                                                                      
-	    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tourdiary2","root","882614");        // 1개의 connection당!!! 1개의 작업(insert?,select)만 해라!!!
+	    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/websitedb","root","1234");        // 1개의 connection당!!! 1개의 작업(insert?,select)만 해라!!!
 		String s=  "insert into  attraction_selection (post_Num, attraction_Num, memo) values("+maxnum+","+ attraction_Num+",'" +memo+"')"; 
 		st = con.createStatement();                
 	    st.executeUpdate(s);                                           

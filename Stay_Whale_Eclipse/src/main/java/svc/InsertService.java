@@ -1,6 +1,6 @@
 package svc;
 
-import dao.DiaryDAO;
+import DAO.DiaryDAO;
 import vo.Attraction_Cont;
 import vo.DiaryWriter;
 
