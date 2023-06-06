@@ -98,7 +98,6 @@
 	}
 	#profile_text {
 		margin-right: 20px;
-		width: 100px;
 		overflow: hidden;
 	}
 	#user_id {
@@ -111,14 +110,15 @@
 		font-size: 12px;
 	}
 	#travellocation {
-		width: 75px;
+		text-align: center;
 		height: 23px;
 		overflow: hidden;
 		font-family: 'Noto Sans KR', sans-serif;
-		font-weight: 700;
-		font-size: 16px;
+		font-weight: 600;
+		font-size: 15px;
 	}
 	#avgscore {
+		text-align: center;
 		color: #ffd400;
 		font-size: 17px;
 	}
@@ -140,20 +140,6 @@
 	}
 	#content_ul li:nth-child(n+6):nth-child(-n+8) {
 		margin-left: 26px;
-	}
-	#next_wrap {
-		display: flex;
-		justify-content: center;
-		margin: auto;
-		width: 1280px;
-		height: 40px;
-	}
-	#next_page {
-		font-size: 20px;
-	}
-	#next_page img{
-		width: 23px;
-		height: 15px;
 	}
 	#che_wrap {
 		margin: auto;
@@ -221,6 +207,26 @@
 		margin: auto;
 		height: 300px;
 	}
+	.page_wrap {
+		width: 1280px;
+		display: flex;
+		justify-content: center;
+		margin-bottom: 40px;
+	}
+	#pageList {
+		display: flex;
+	}
+	.prevAfterIcons {
+		width: 25px;
+		height: 25px;
+	}
+	.pageNum {
+		display: block;
+		text-align: center;
+		width: 25px;
+		height: 25px;
+		border: 1px solid gray;
+	}
 	#search_box {
 		border-radius: 5px;
 		border: 1px solid gray;
@@ -255,4 +261,9 @@
 		display: flex;
 		justify-content: flex-end;
 	}
+	#thumbnail:nth-child(n+2) {
+		display: none;
+	}
+	
+	
 	

@@ -6,11 +6,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import DTO.Writer;
+import db.JdbcUtil;
 import vo.HotelBean;
 import vo.HotelCheckBox;
 import vo.HotelRoomBean;
@@ -134,17 +137,18 @@ public class HotelDAO {
 						"select h.reg_num_h, h.acc_name, h.hotel_grade, concat(h.site_1,' ',h.site_2,' ',h.location) as location, "
 						+ "(select TRUNCATE(avg(post_rating),1) from bulletin_board_review as b where post_category = h.reg_num_h group by post_category) as review_avg, "
 						+ "h.comment, h.tel_no, h.detail, h.facility_list, r.room_type, "
-						+ "r.room_name,r.price,r.stay_type,r.room_detail,r.standard_amount,r.room_picture "
+						+ "r.room_name,r.price,r.stay_type,r.room_detail,r.standard_amount,r.room_picture,r.room_num, "
+						+ "(select group_concat(room_picture) from room_info_hotel where reg_num_h = '"+obj.getReg_num_h()+"') as allImage "
 						+ "from websitedb.accmodation_hotel as h "
-						+ "join websitedb.room_info_hotel as r on h.reg_num_h = r.reg_num_h where r.reg_num_h = '"+obj.getReg_num_h()+"'"
-						+ "");
+						+ "join websitedb.room_info_hotel as r on h.reg_num_h = r.reg_num_h where r.reg_num_h = '"+obj.getReg_num_h()+"'");
 			}
 			else {
 				pstmt = con.prepareStatement(
 						"select h.reg_num_h, h.acc_name, h.hotel_grade, concat(h.site_1,' ',h.site_2,' ',h.location) as location, "
 						+ "(select TRUNCATE(avg(post_rating),1) from bulletin_board_review as b where post_category = h.reg_num_h group by post_category) as review_avg, "
 						+ "h.comment, h.tel_no, h.detail, h.facility_list, r.room_type, "
-						+ "r.room_name,r.price,r.stay_type,r.room_detail,r.standard_amount,r.room_picture "
+						+ "r.room_name,r.price,r.stay_type,r.room_detail,r.standard_amount,r.room_num,r.room_picture, "
+						+ "(select group_concat(room_picture) from room_info_hotel where reg_num_h = '"+obj.getReg_num_h()+"') as allImage "
 						+ "from websitedb.accmodation_hotel as h "
 						+ "join websitedb.room_info_hotel as r on h.reg_num_h = r.reg_num_h where r.room_num IN "
 						+ "(select room_num from room_info_hotel where room_num NOT IN "
@@ -169,6 +173,8 @@ public class HotelDAO {
 				hotelBean.setRoom_detail(rs.getString("r.room_detail"));
 				hotelBean.setStandard_amount(rs.getString("r.standard_amount"));
 				hotelBean.setRoom_picture(rs.getString("r.room_picture"));
+				hotelBean.setRoom_allImage(rs.getString("allImage"));
+				hotelBean.setRoom_num(rs.getString("r.room_num"));
 				roomList.add(hotelBean);
 			}
 		}catch(Exception ex){
@@ -238,12 +244,13 @@ public class HotelDAO {
 		
 		try{
 			pstmt = con.prepareStatement(
-					"select room_type, room_name, price, stay_type, room_detail, standard_amount, room_picture from room_info_hotel where room_num IN "
+					"select room_num, room_type, room_name, price, stay_type, room_detail, standard_amount, room_picture from room_info_hotel where room_num IN "
 					+ "(select room_num from room_info_hotel where room_num NOT IN "
 					+ "(select room_num from reserve_list where reserve_date < '"+roomInfo.getRoom_expireday()+"' AND expire_date > '"+roomInfo.getRoom_reserveday()+"') and reg_num_h = '"+roomInfo.getReg_num_r()+"')");
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				roomBean = new HotelRoomBean();
+				roomBean.setRoom_num(rs.getString("room_num"));
 				roomBean.setRoom_type(rs.getString("room_type"));
 				roomBean.setRoom_name(rs.getString("room_name"));
 				roomBean.setPrice(rs.getString("price"));
@@ -261,4 +268,52 @@ public class HotelDAO {
 		}
 		return roomSearchList;
 	}
+	
+	public ArrayList<Writer> selecHotelReview(String hNum) {
+		Writer writer = null;
+		ArrayList<Writer> hotelReviewBulletin = new ArrayList<Writer>();
+		
+		try{
+			pstmt = con.prepareStatement(
+					"select (select count(*) from bulletin_board_review where post_category = '"+hNum+"') as cnt, user_id, post_date, post_title, post_body, post_file, post_rating from bulletin_board_review where post_category = '"+hNum+"'");
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				writer = new Writer();
+				writer.setPost_cnt(rs.getInt("cnt"));
+				writer.setUser_id(rs.getString("user_id"));
+				writer.setPost_date(rs.getString("post_date"));
+				writer.setPost_title(rs.getString("post_title"));
+				writer.setPost_body(rs.getString("post_body"));
+				writer.setPost_file(rs.getString("post_file"));
+				writer.setPost_rating(rs.getInt("post_rating"));
+				hotelReviewBulletin.add(writer);
+			}
+		}catch(Exception ex){
+		}finally{
+			close(con);
+			close(rs);
+			close(pstmt);
+		}
+		return hotelReviewBulletin;
+	}
+	public void reserveHotel(HotelBean hotelbean) {
+		   try {
+		      String query = "INSERT INTO reserve_list(reserve_date, expire_date, user_id, room_num, reserve_hotel_num) VALUES (?, ?, ?, ?, ?)";
+		      pstmt = con.prepareStatement(query);
+		      pstmt.setString(1, hotelbean.getCheckin());
+		      pstmt.setString(2, hotelbean.getCheckout());
+		      pstmt.setString(3, hotelbean.getAcc_name());
+		      pstmt.setString(4, hotelbean.getRoom_num());
+		      pstmt.setString(5, hotelbean.getReg_num_h());
+		      pstmt.executeUpdate();
+		   } catch (SQLException e) {
+		      e.printStackTrace();
+		   } finally {
+			  JdbcUtil.commit(con);
+			  close(rs);
+			  close(pstmt);
+			  close(con);
+		   }
+		}
+
 }

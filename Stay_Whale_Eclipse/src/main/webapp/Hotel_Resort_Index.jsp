@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true"%>
 <%@ page import="vo.HotelBean"%>
 <%@ page import="java.text.*" %>
+<%@ page import="java.util.Collections" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.google.gson.Gson" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>STAY WHALE || Hotel Resort</title>
+	<title>STAY WHALE || Hotel Resort</title>	
 </head>
 <body>
 	<%
@@ -14,6 +17,15 @@
 		String id = (String)session.getAttribute("id");
 		ArrayList <HotelBean> hotelList = (ArrayList<HotelBean>)request.getAttribute("hotelList");
 		ArrayList <HotelBean> hotelSearchList = (ArrayList<HotelBean>)request.getAttribute("hotelSearchList");
+		String suc = (String)request.getParameter("suc");
+		if(suc == null) {
+			suc = "fail";
+		} else if(suc.equals("suc")){ %>
+			<script>
+				alert("예약이 완료 되었습니다. 감사합니다.")
+				location.href = "hotelPrint.xr"
+			</script>	
+		<%}
 		if(hotelSearchList != null) {
 			hotelList = hotelSearchList;
 		}
@@ -46,9 +58,11 @@
 					<div>
 						<div style="margin-top: 20px;"><b>날짜</b></div>
 						<div id="date_wrap">
-							<input type="text" name="date_selec" readonly placeholder="날짜 선택" id="day_Selec">
-							<input type="hidden" id="checkin">
-							<input type="hidden" id="checkout">
+								<input type="text" name="date_selec" readonly placeholder="날짜 선택" id="day_Selec">
+							<%if(hotelList.size() > 0) { %>
+								<input type="hidden" id="checkin" value="<%= hotelList.get(0).getCheckin()%>">
+								<input type="hidden" id="checkout" value="<%= hotelList.get(0).getCheckout()%>">
+							<% } %>
 						</div>
 					</div>
 					<div style="margin-top: 10px;"><b>상세조건</b></div>
@@ -185,47 +199,52 @@
 				</aside>
 			</div>
 		<article>
-			<nav>
-				<ul class="info_list">
-					<li><button type="button" a href='#pop_info_1' id="map_Bt" class="custom-btnn btn-3"><span><img src="image/map_icon.png">지 도</span></button></li>
-					<div id="pop_info_1" class="pop_wrap" style="display:none;">
-					  <div class="pop_inner">
-					    <div class="mapWrap" id="map">
-						</div>
-					    <button type="button" class="btn_close">닫기</button>
-					  </div>
-					</div>
-					<li><button type="button" id="high_Price_Bt" class="custom-btnn btn-3"><span><img src="image/high_price.png">높은 가격 순</span></button></li>
-					<li><button type="button" id="low_Price_Bt" class="custom-btnn btn-3"><span><img src="image/low_price.png">낮은 가격 순</span></button></li>
-					<li><button type="button" id="distance_Bt" class="custom-btnn btn-3"><span><img src="image/distance_icon.png">거리 순</span></button></li>
-					<li><button type="button" id="recommen_Bt" class="custom-btnn btn-3"><span><img src="image/recommen_icon.png">추천 순</span></button></li>
-				</ul>
-			</nav>
 				<div class="info">
+					<div class="btnWrap">
+						<ul class="info_list">
+							<% if(hotelList.size() > 0) { %>
+								<li><button type="button" id="recommen_Bt" class="custom-btnn btn-3"><span><img src="image/recommen_icon.png">추천 순</span></button></li>
+								<li><button type="button" id="low_Price_Bt" class="custom-btnn btn-3"><span><img src="image/low_price.png">낮은 가격 순</span></button></li>
+								<li><button type="button" id="high_Price_Bt" class="custom-btnn btn-3"><span><img src="image/high_price.png">높은 가격 순</span></button></li>
+							<% } %>
+						</ul>
+					</div>
 					<div class="info_content">
 						<ul>
 							<%	
-								for(int i=0; i<hotelList.size(); i++) {
-									out.println("<a href='selecHotel.xr?hNum="+hotelList.get(i).getReg_num_h()+"&id="+id+"&cin="+hotelList.get(0).getCheckin()+"&cout="+hotelList.get(0).getCheckout()+"'><li>");
-									out.println("<div class='list_image' style='background-image: url(image/" + hotelList.get(i).getAcc_picture() + "');>");
-										out.println("<div class='content_text_wrap'>");
-											out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelList.get(i).getHotel_grade() + "</span></div>");
-											out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelList.get(i).getAcc_name() + "</span></div>");
-											out.println("<div id='info_intext3'><span>★ " + hotelList.get(i).getRating() + " (" + df.format(hotelList.get(i).getReview_count()) + ")</span></div>");
-											out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelList.get(i).getLocation() + "</span></div>");
-											out.println("<div id='info_intext5'><span>" + df.format(hotelList.get(i).getPrice()) + "</span>원</div>");
+								if(hotelList.size() > 0) {
+									for(int i=0; i<hotelList.size(); i++) {
+										out.println("<a href='selecHotel.xr?hNum="+hotelList.get(i).getReg_num_h()+"&id="+id+"&cin="+hotelList.get(0).getCheckin()+"&cout="+hotelList.get(0).getCheckout()+"'><li>");
+										out.println("<div class='list_image' style='background-image: url(image/" + hotelList.get(i).getAcc_picture() + "');>");
+											out.println("<div class='content_text_wrap'>");
+												out.println("<div class='info_in_text' id='info_intext1'><span>" + hotelList.get(i).getHotel_grade() + "</span></div>");
+												out.println("<div class='info_in_text' id='info_intext2'><span>" + hotelList.get(i).getAcc_name() + "</span></div>");
+												out.println("<div id='info_intext3'><span>★ " + hotelList.get(i).getRating() + " (" + df.format(hotelList.get(i).getReview_count()) + ")</span></div>");
+												out.println("<div class='info_in_text' id='info_intext4'><span>" + hotelList.get(i).getLocation() + "</span></div>");
+												out.println("<div id='info_intext5'><span>" + df.format(hotelList.get(i).getPrice()) + "</span>원</div>");
+											out.println("</div>");
 										out.println("</div>");
+										out.println("</li></a>");
+									}
+								} else {
+									out.println("<div class='nullList'>");
+										out.println("<div class='nosearchimg'><img src='image/no_search_icon2.png'></div>");
+										out.println("<div class='nosearchtxt'>검색하는 호텔의 정보가 존재하지 않습니다.</div>");
+										out.println("<div class='nosearchtxt2'>다시 검색을 진행해주세요</div>");
 									out.println("</div>");
-									out.println("</li></a>");
 								}
 							%>
 						</ul>
+						<input type="hidden" class="user" value="<%= id%>">
 					</div>
 				</div>
 			</div>
 		</article>
 	<jsp:include page="footer.jsp"/>
 </body>
+<script>
+    var hotelList = <%= new Gson().toJson(hotelList) %>;
+</script>
 <link rel="stylesheet" type="text/css" href="css/hotel_resort_index.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>

@@ -2,11 +2,14 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import DTO.Writer;
+import vo.HotelBean;
 
 public class DataProcess_Review {
 	Connection conn = null;
@@ -37,6 +40,62 @@ public class DataProcess_Review {
 			e.printStackTrace();
 		}
 	}
+	public int selectListCount() {
+		data_Connec();
+		int listCount= 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			pstmt=conn.prepareStatement("select count(*) from bulletin_board_review");
+			rs = pstmt.executeQuery();
+
+			if(rs.next()){
+				listCount=rs.getInt(1);
+			}
+		}catch(Exception ex){
+
+		}finally{
+			data_Close();
+		}
+		return listCount;
+	}
+	
+	public int searchListCount(String val, String str) {
+		data_Connec();
+		int listCount= 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		if(str.equals("post_title")) {
+			try{
+				pstmt=conn.prepareStatement("select count(*) from bulletin_board_review where post_title like '%" + val + "%' order by post_num desc");
+				rs = pstmt.executeQuery();
+	
+				if(rs.next()){
+					listCount=rs.getInt(1);
+				}
+			}catch(Exception ex){
+	
+			}finally{
+				data_Close();
+			}
+		} else {
+			try{
+				pstmt=conn.prepareStatement("select count(*) from bulletin_board_review where " + str + " like '%" + val + "%' order by post_num desc");
+				rs = pstmt.executeQuery();
+	
+				if(rs.next()){
+					listCount=rs.getInt(1);
+				}
+			}catch(Exception ex){
+	
+			}finally{
+				data_Close();
+			}
+		}
+		return listCount;
+	}
+	
 	
 	public void review_insert(Writer obj) {
 		data_Connec();
@@ -61,11 +120,12 @@ public class DataProcess_Review {
 		}
 	}
 	
-	public ArrayList<Writer> review_check() {
+	public ArrayList<Writer> review_check(int page, int limit) {
 		data_Connec();
 		ArrayList<Writer> arr = new ArrayList();
+		int startrow=(page-1)*8;
 			try {
-				ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review order by post_num desc;");
+				ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review order by post_num desc limit "+startrow+", "+limit+";");
 				while(rs.next()) {
 					Writer wr = new Writer();
 					
@@ -186,6 +246,24 @@ public class DataProcess_Review {
 		}
 			return title;
 	}
+	public HotelBean writeReview(String id) {
+		data_Connec();
+		HotelBean hotelBean = new HotelBean();
+			try {
+				ResultSet rs = stmt.executeQuery("select h.acc_name,h.reg_num_h from reserve_list as l left join accmodation_hotel as h on h.reg_num_h = l.reserve_hotel_num "
+						+ "where user_id = '"+id+"' and expire_date <= now() order by expire_date desc limit 1 ");
+				while(rs.next()) {
+					hotelBean.setAcc_name(rs.getString("h.acc_name"));
+					hotelBean.setReg_num_h(rs.getString("h.reg_num_h"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+				data_Close();
+		}
+			return hotelBean;
+	}
+	
 	public Writer before_after(String title) {
 		data_Connec();
 			Writer obj = new Writer();
@@ -202,12 +280,13 @@ public class DataProcess_Review {
 			}
 			return obj;
 		}
-	public ArrayList<Writer> review_search(String val, String str) {
+	public ArrayList<Writer> review_search(String val, String str, int page, int limit) {
 		data_Connec();
 		ArrayList<Writer> arr = new ArrayList();
+		int startrow=(page-1)*8;
 			if(str.equals("post_title")) {
 				try {
-					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review where post_title like '%" + val + "%' order by post_num desc;");
+					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review where post_title like '%" + val + "%' order by post_num desc limit "+startrow+", "+limit+";");
 					while(rs.next()) {
 						Writer wr = new Writer();
 						wr.setPost_num(rs.getInt("post_num"));
@@ -229,7 +308,7 @@ public class DataProcess_Review {
 				}
 			} else {
 				try {
-					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review where " + str + " ='" + val + "' order by post_num desc;");
+					ResultSet rs = stmt.executeQuery("select DATE_FORMAT(post_date, '%y.%m.%d') as post_date, post_category, post_readcount, post_like, post_num ,post_file, post_title, post_travel_location, post_rating, user_id from bulletin_board_review where " + str + " like '%" + val + "%' order by post_num desc limit "+startrow+", "+limit+";");
 					while(rs.next()) {
 						Writer wr = new Writer();
 						wr.setPost_num(rs.getInt("post_num"));
