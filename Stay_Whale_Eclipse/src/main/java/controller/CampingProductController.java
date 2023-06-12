@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.CampIndexAction;
-import action.CampingPaymentAction;
+import action.CampIndexAction2;
+import action.CampingLikeAction;
 import action.CampingReserveAction;
+import action.CampingReserveCheck;
+import action.CampingUnlikeAction;
 import action.ReserveInsertAction;
 import action.SearchDateAction;
+import action.SearchKeywordAction;
 import action.SearchPlaceAction;
 import vo.ActionForward;
 
@@ -29,7 +33,8 @@ public class CampingProductController extends javax.servlet.http.HttpServlet
 		Action action=null;
 
 		if(command.equals("/Camp_Glam_Index.cp")){
-			action = new CampIndexAction();
+			//action = new CampIndexAction();
+			action = new CampIndexAction2();
 			try {
 				forward=action.execute(request, response );
 			} catch (Exception e) {
@@ -45,14 +50,6 @@ public class CampingProductController extends javax.servlet.http.HttpServlet
 			}
 		}
 		
-		else if(command.equals("/camping_payment.cp")){
-			action = new CampingPaymentAction();
-			try{
-				forward=action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
 		else if(command.equals("/reserve_insert.cp")){
 			action = new ReserveInsertAction();
 			try{
@@ -77,11 +74,42 @@ public class CampingProductController extends javax.servlet.http.HttpServlet
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/search_keyword.cp")){
+			action = new SearchKeywordAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/camping_Like.cp")){
+			action = new CampingLikeAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/camping_unLike.cp")){
+			action = new CampingUnlikeAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/reserve_check.cp")){
+			action = new CampingReserveCheck();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		
 		
 		
-			if(forward != null){
-			
+		if(forward != null){	
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());
 			}else{
@@ -89,7 +117,6 @@ public class CampingProductController extends javax.servlet.http.HttpServlet
 						request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
-			
 		}
 		
 	}

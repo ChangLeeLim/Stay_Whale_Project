@@ -9,7 +9,14 @@ public class Room_Info_Camping {
 	private String room_detail;
 	private int standard_amount;
 	private String facility_picture;
+	private String acc_name;
 	
+	public String getAcc_name() {
+		return acc_name;
+	}
+	public void setAcc_name(String acc_name) {
+		this.acc_name = acc_name;
+	}
 	public String getFacility_num_c() {
 		return facility_num_c;
 	}

@@ -1,31 +1,3 @@
-$(function(){
-      var $header = $('header'); //헤더를 변수에 넣기
-      var $page = $('.section_wrap'); //색상이 변할 부분
-      var $window = $(window);
-      var pageOffsetTop = $page.offset().top;//색상 변할 부분의 top값 구하기
-
-      $window.resize(function(){ //반응형을 대비하여 리사이즈시 top값을 다시 계산
-        pageOffsetTop = $page.offset().top;
-      });
-      
-      $window.on('scroll', function(){ //스크롤시
-        var scrolled = $window.scrollTop() >= pageOffsetTop; //스크롤된 상태; true or false
-        $header.toggleClass('down', scrolled); //클래스 토글
-        $(".logo").toggleClass('logodown', scrolled);
-      });
-    });
-
-$('.spot_button:first').addClass('selected');
-
-$('.spot_button').click(function(e) {
-  	e.preventDefault();
-  	$('.spot_button').removeClass('selected');
-  	$(this).addClass('selected');
-  	showContent($(this).attr('data-content-id'));
-});
-    
-
-     
 $('document').ready(function() {
  var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
   var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
@@ -44,11 +16,7 @@ $('document').ready(function() {
    var area14 = ["경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"];
    var area15 = ["거제시","김해시","마산시","밀양시","사천시","양산시","진주시","진해시","창원시","통영시","거창군","고성군","남해군","산청군","의령군","창녕군","하동군","함안군","함양군","합천군"];
    var area16 = ["서귀포시","제주시","남제주군","북제주군"];
-
- 
-
  // 시/도 선택 박스 초기화
-
  $("select[name^=sido]").each(function() {
   $selsido = $(this);
   $.each(eval(area0), function() {
@@ -56,11 +24,7 @@ $('document').ready(function() {
   });
   $selsido.next().append("<option value=''>구/군 선택</option>");
  });
-
- 
-
  // 시/도 선택시 구/군 설정
-
  $("select[name^=sido]").change(function() {
   var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
   var $gugun = $(this).next(); // 선택영역 군구 객체
@@ -78,13 +42,74 @@ $('document').ready(function() {
 
 });
 
+$(function(){
+   $('.spot_button:first').addClass('selected');
+
+	$('.spot_button').click(function(e) {
+	  	e.preventDefault();
+	  	$('.spot_button').removeClass('selected');
+	  	$(this).addClass('selected');
+	  	$(this).attr('data-content-id');
+	});
+
+});
 
 
-         
+
+$(function(){
+	$('.slider-nav').slick({
+		// 슬라이더 옵션 설정
+		slidesToShow: 4,
+		slidesToScroll: 4,
+		rows: 2,
+		infinite: true,
+		autoplay: true,
+		autoplaySpeed: 2000,
+	  	prevArrow : "<button type='button' class='prevArrow'>Previous</button>", 
+		nextArrow : "<button type='button' class='nextArrow'>Next</button>"
+	});
+});
 
 
 
-// 메인 이미지 슬라이더 기능 _  수정필요함
+// 콘텐츠 버튼 클릭 이벤트
+var contentButtons = document.getElementsByClassName("spot_button");
+
+for (var i = 0; i < contentButtons.length; i++) {
+  contentButtons[i].addEventListener("click", function() {
+    var contentId = this.getAttribute("data-content-id");
+	console.log(contentId);
+    // 선택한 콘텐츠 보이기
+    document.getElementById(contentId).style.display = "block";
+
+    // 다른 콘텐츠 숨김 처리
+    var otherContentIds = ["content_camping", "content_caravan", "content_glamping"];
+
+    for (var j = 0; j < otherContentIds.length; j++) {
+      if (otherContentIds[j] !== contentId) {
+        document.getElementById(otherContentIds[j]).style.display = "none";
+      }
+    }
+
+    // 슬라이더 초기화
+    $('.slider-nav').slick('unslick');
+    // 슬라이더 다시 적용
+    $('.slider-nav').slick({
+      // 슬라이더 옵션 설정
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      rows: 2,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      prevArrow: "<button type='button' class='prevArrow'>Previous</button>",
+      nextArrow: "<button type='button' class='nextArrow'>Next</button>"
+    });
+  });
+}
+
+
+// 메인 이미지 슬라이더 기능
 	var images = ["image/메인이미지1.jpg", "image/메인이미지2.jpg", "image/메인이미지3.jpg", "image/메인이미지4.jpg", "image/메인이미지5.jpg"];
 	var currentIndex = 0;
 	var slider = document.getElementsByClassName("title")[0];
@@ -141,115 +166,62 @@ $('document').ready(function() {
 	  }
 	});
 	
+	
 	// 일정 시간마다 자동 슬라이드
 	setInterval(() => {
-	  if (currentPosition > -slideDistance * (moveMainBody.length - 4)) { // 리스트가 맨 오른쪽에 위치하지 않은 경우
-	    currentPosition -= slideDistance;
-	    moveMain.style.transform = `translateX(${currentPosition}px)`;
-	  } else {
+	  currentPosition -= slideDistance;
+	  if (currentPosition < -slideDistance * (moveMainBody.length - 4)) { // 리스트가 맨 오른쪽에 위치한 경우
 	    currentPosition = 0;
-	    moveMain.style.transform = `translateX(${currentPosition}px)`;
 	  }
+	  moveMain.style.transform = `translateX(${currentPosition}px)`;
 	}, 3000);
 
-// 캠핑 버튼 클릭 이벤트
-document.getElementById("btn_camping").addEventListener("click", function() {
-  // 캠핑 콘텐츠를 보이게 함
-  document.getElementById("content_camping").style.display = "block";
-  // 다른 콘텐츠는 숨김 처리
-  document.getElementById("content_caravan").style.display = "none";
-  document.getElementById("content_glamping").style.display = "none";
-  document.getElementById("content_map").style.display = "none";
-});
 
-// 카라반 버튼 클릭 이벤트
-document.getElementById("btn_caravan").addEventListener("click", function() {
-  // 카라반 콘텐츠를 보이게 함
-  document.getElementById("content_caravan").style.display = "block";
-  // 다른 콘텐츠는 숨김 처리
-  document.getElementById("content_camping").style.display = "none";
-  document.getElementById("content_glamping").style.display = "none";
-  document.getElementById("content_map").style.display = "none";
-});
-// 글램핑 버튼 클릭 이벤트
-document.getElementById("btn_glamping").addEventListener("click", function() {
-  // 글램핑 콘텐츠를 보이게 함
-  document.getElementById("content_glamping").style.display = "block";
-  // 다른 콘텐츠는 숨김 처리
-  document.getElementById("content_camping").style.display = "none";
-  document.getElementById("content_caravan").style.display = "none";
-  document.getElementById("content_map").style.display = "none";
-});
-// 지도 버튼 클릭 이벤트
-document.getElementById("btn_map").addEventListener("click", function() {
-  // 지도 콘텐츠를 보이게 함
-  document.getElementById("content_map").style.display = "block";
-  // 다른 콘텐츠는 숨김 처리
-  document.getElementById("content_camping").style.display = "none";
-  document.getElementById("content_caravan").style.display = "none";
-  document.getElementById("content_glamping").style.display = "none";
-});
-
-
-
-// 카카오맵 API 부분
-// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
-
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places(); 
-
-// 키워드로 장소를 검색합니다
-
-function placeSearch() {
-    var keyword = document.getElementById('keyword').value;
-    ps.keywordSearch(keyword, placesSearchCB);
-} 
-
-// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-function placesSearchCB (data, status, pagination) {
-    if (status === kakao.maps.services.Status.OK) {
-
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-        // LatLngBounds 객체에 좌표를 추가합니다
-        var bounds = new kakao.maps.LatLngBounds();
-
-        for (var i=0; i<data.length; i++) {
-            displayMarker(data[i]);    
-            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }       
-
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
-    } 
+// 모달 창 열기 버튼에 이벤트 리스너 등록
+let videoLinks = document.getElementsByClassName('video-link');
+for (let i = 0; i < videoLinks.length; i++) {
+  videoLinks[i].addEventListener('click', function(event) {
+    event.preventDefault();
+    let videoId = this.getAttribute('data-video-id');
+    openModal(videoId);
+  });
 }
 
-// 지도에 마커를 표시하는 함수입니다
-function displayMarker(place) {
-    
-    // 마커를 생성하고 지도에 표시합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(place.y, place.x) 
-    });
+// 모달 창 열기 함수
+function openModal(videoId) {
+  let modalSection = document.querySelector('.modal-section');
+  let modal = document.getElementById('video-modal');
+  let videoContainer = document.getElementById('video-container');
+  videoContainer.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  modal.style.display = 'block';
+  modalSection.style.display = 'block';
 
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, 'click', function() {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-        infowindow.open(map, marker);
-    });
+// ESC 키 이벤트 리스너 등록 ('~하',어떤 함수 실행)
+  document.addEventListener('keydown', closeModalOnEsc);
 }
 
+// 모달 창 닫기 함수
+function closeModal() {
+  let modalSection = document.querySelector('.modal-section');
+  let modal = document.getElementById('video-modal');
+  let videoContainer = document.getElementById('video-container');
+  videoContainer.innerHTML = '';
+  modal.style.display = 'none';
+  modalSection.style.display = 'none';
 
+  // ESC 키 이벤트 리스너 제거
+  document.removeEventListener('keydown', closeModalOnEsc);
+}
 
- 
+// 모달 창 닫기 버튼에 이벤트 리스너 등록
+let closeBtn = document.getElementById('close-modal');
+closeBtn.addEventListener('click', function() {
+  closeModal();
+});
+
+// ESC 키를 눌렀을 때 모달 창 닫기
+function closeModalOnEsc(event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+}

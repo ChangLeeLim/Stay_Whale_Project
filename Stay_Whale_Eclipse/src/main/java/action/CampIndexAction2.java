@@ -9,7 +9,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,21 +18,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import svc.SearchPlaceService;
+import svc.CampIndexService;
 import vo.Accmodation_Camping;
 import vo.ActionForward;
 import vo.Camping_Youtube;
 
+public class CampIndexAction2 implements Action {
+    
+    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ArrayList<Accmodation_Camping> articleList = new ArrayList<Accmodation_Camping>();
+        articleList = CampIndexService.getCampMain();
 
- public class SearchPlaceAction implements Action {
-	 
-	 public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		String site_1 = request.getParameter("sido1");
-		String site_2 = request.getParameter("gugun1");
-		ArrayList<Accmodation_Camping> searchPlaceList=new ArrayList<Accmodation_Camping>();
-		searchPlaceList = SearchPlaceService.place_search(site_1, site_2);
-
-		// YouTube API 호출 및 데이터 가져오기
+        // YouTube API 호출 및 데이터 가져오기
         String apiKey = "AIzaSyBWnOMs5_oWvp5w-K9qW7lYHFDfbpirHro";
         // 검색어
         String query = "캠핑팁";
@@ -99,12 +97,12 @@ import vo.Camping_Youtube;
             youtubeData.add(youtube1);
             youtubeData.add(youtube2);
         }
+
+        request.setAttribute("articleList", articleList);
         request.setAttribute("youtubeData", youtubeData);
-		
-		request.setAttribute("searchPlaceList", searchPlaceList);
-		ActionForward forward= new ActionForward();
-   		forward.setPath("/Camp_Glam_Index.jsp");
-   		return forward;   		
-	 }
-	 
- }
+
+        ActionForward forward = new ActionForward();
+        forward.setPath("/Camp_Glam_Index.jsp");
+        return forward;
+    }
+}

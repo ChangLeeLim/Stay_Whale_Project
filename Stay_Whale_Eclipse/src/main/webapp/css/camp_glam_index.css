@@ -2,6 +2,7 @@
   {
     margin: 0px;
     padding: 0px;
+    font-family: var(--font-sans);
   }
   ol, ul, li
   {
@@ -98,11 +99,11 @@
 	
 	/* 예약 조건 스타일 */
 	.reserve_section {
-		display: flex;
+		/* display: flex;
 		align-items:center;
- 		justify-content:center;
+ 		justify-content:center; */
 	  	/* justify-content: space-between; */
-	  	flex-wrap: wrap;
+	  	/* flex-wrap: wrap; */
 	  	width: 100%;
 	  	height: 250px;		
 		margin: auto;
@@ -113,11 +114,11 @@
 	}	
 
 	.reserve_title{
-		display: flex;
+		/* display: flex;
 		align-items:center;
- 		justify-content:center;
+ 		justify-content:center; */
 		width: 80%;
-		height: 20px;
+		height: 50px;
 		margin: auto;
 		margin-top: 5px;
 		font-size: 25px;
@@ -127,11 +128,11 @@
 		display: flex;
 		flex-wrap: wrap;
 		text-align: center;
-		align-items:center;
- 		justify-content:center;
+		/* align-items:center; */
+ 		justify-content: space-between;
  		
-		width: 80%;
-		height: 120px;
+		width: 100%;
+		height: 130px;
 		margin:auto;
 		font-family: var(--font-sans);
 	}
@@ -143,7 +144,7 @@
  		justify-content: space-around;
 
 		width: 80%;
-		height: 120px;
+		height: 80px;
 		margin:auto;
 		font-family: var(--font-sans);
 	}
@@ -169,7 +170,7 @@
 	}
 
 	.reserve_content ul > li{
-		width: 500px;
+		width: 400px;
 		height: 90px;
 		margin:auto;
 		margin-top: 5px;
@@ -178,13 +179,32 @@
 		font-family: var(--font-sans);
 		font-size: 25px;
 	}
-	.sidogugun_label{
-		display: flex;
-		justify-content: space-around;
-	}	
-	.sidogugun_select{
-		display: flex;
-		justify-content: space-around;
+	.reserve_content label{
+		font-size: 20px;
+	}
+	.keyword{
+		width: 300px;
+		height: 30px;
+		border-radius: 4px;
+		border-width: 1px;
+	}
+	#check_in{
+		width: 150px;
+		height: 30px;
+		border-radius: 4px;
+		border-width: 1px;
+	}
+	#check_out{
+		width: 150px;
+		height: 30px;
+		border-radius: 4px;
+		border-width: 1px;
+	}
+	#sido1{
+		width: 150px;
+	}
+	#gugun1{
+		width: 150px;
 	}
 	.reserve_content2 button {
 		width: 150px;
@@ -223,20 +243,18 @@
 	  	border-style: solid;		
 		border-radius: 10px;
 	}
-	
-	
-	
+
 	/* 상품 스타일 */
 	.spots_section {
 		display: flex;
 	  	justify-content: space-between;
 	  	flex-wrap: wrap;
 		width:1280px;
-		height: 900px;
+		height: 1000px;
 	  	background-color: #f5f5f5;
 	  	text-align: center;
 	  	margin:auto;
-	  	margin-top: 15px;
+	  	margin-top: 25px;
 	}
 
 	.spot_container {
@@ -245,43 +263,38 @@
 	  	flex-wrap: wrap;
 	  	width: 1280px;		
 		margin: auto;
-		font-family: var(--font-sans);
 	}
-	#content_camping{
-		margin-top: 10px;
+	.post-slider{
+		position: relative;
+		width: 100%;
+		margin:auto;
 	}
-	.map_clickLatlng{
-		z-index:99;
+	.slider-nav{
+		width: 1280px;
 		margin: auto;
-	}
-	.map_container {
-		width:1000px; 
-		height:700px; 
-		margin: auto;
-	}
-		
-	.spot_container ul > li {
+	
+	}	
+	.post {
 	  	width: 300px;
 	  	height: 400px;
 	  	margin: 0px 10px 10px 10px;
 	  	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	  	margin-top: 10px;
 	  	margin-bottom: 40px;
 		transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
 		
 	}
-	.spot_container ul > li:hover {
+	.post:hover {
 	  	box-shadow: 43px 30px 20px 5px rgba(0,0,0,0.4), 5px 10px 5px 3px rgba(0,0,0,0.4);
-      	transform: translateY(-10px);
 	}
 
-	.spot_container img {
+	.post img {
 	  	width: 300px;
 	  	height: 200px;
 	  	object-fit: cover;
-	  	/* object-fit: contain; */
 	}
 	
-	.spot_container button {
+	.post button {
 	  	background-color: #ffcc00;
 	  	color: white;
 	  	border: none;
@@ -291,7 +304,7 @@
 	  	transition: all 0.3s ease-in-out;
 	}
 	
-	.spot_container button:hover {
+	.post button:hover {
 	  	background-color: white;
 	  	color:  #ffcc00;
 	}
@@ -303,13 +316,14 @@
 	  	justify-content: center;
 	  	flex-wrap: wrap;
 		width:1280px;
-		height: 400px;
+		height: 450px;
 		background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../image/메인이미지4.jpg") ;
 		background-size: cover;
 	  	background-position: center;
 	  	text-align: center;
 	  	margin:auto;
 	  	margin-top: 15px;
+	  	margin-bottom: 10px;
 		box-shadow: 0px 0px 10px;
 		font-family: var(--font-sans);
 		
@@ -353,8 +367,7 @@
 	.move_main img {
 	  	width: 300px;
 	  	height: 200px;
-	  	object-fit: cover;
-	  	/* object-fit: contain; */
+	  	object-fit: contain;
 	}
 	.move_main_body{
 		width: 300px;
@@ -508,10 +521,120 @@
 		border-width: 1px;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
 	}
-	
-	
-	#clickLatlng{
-		width: 1280px;
-		height: 50px;
-		z-index: 50;
+	.product_none{
+		width: 600px;
+		margin: auto;
+		font-size: 40px;
 	}
+
+/* 슬릭슬라이더 사용시 반복되는 특정 아이템들요소안에 요소들이 여러개면 각각 스타일을 지정해줘야 출이된다 */
+.post-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+}
+
+.post h2 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.post h3 {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.post div.rating {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #ffcc00;
+}
+
+.post button.spots_button {
+  margin-top: 10px;
+}
+
+.prevArrow,
+.nextArrow {
+	position: absolute;
+	top: 0;
+	transform: translateY(-100%);
+	cursor: grab;
+	width: 150px;
+	height: 50px;
+	align-items:center;
+	margin-top: 5px;
+ 	background-color:  #ffcc00;
+ 	color: white;
+ 	border: none;
+ 	font-size: 20px;
+ 	padding: 3px 3px 3px 3px;
+	border-radius: 8px;
+}
+.prevArrow:hover,
+.nextArrow:hover {
+background-color: white;
+color:  #ffcc00;
+}
+.prevArrow {
+  left: 300px;
+}
+.nextArrow {
+  right: 300px;
+}
+/*  */	
+
+.modal-section {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  margin: 20% auto;
+  padding: 20px;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid #888;
+  width: 600px;
+  height: 415px;
+  position: relative;
+}
+
+.close {
+  color: rgb(254, 255, 255);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#video-container {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  position: relative;
+  margin-top: 10%;
+}
+
+#video-container iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}

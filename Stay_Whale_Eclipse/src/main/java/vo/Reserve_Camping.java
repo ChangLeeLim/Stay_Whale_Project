@@ -3,13 +3,6 @@ package vo;
 public class Reserve_Camping {
 	
 	private int reserve_num;
-	private String reserve_date;
-	private String expire_date;
-	private String user_id;
-	private String facility_num_c;
-	private String payment_method;
-	private int payment_price;
-	
 	public int getReserve_num() {
 		return reserve_num;
 	}
@@ -46,12 +39,19 @@ public class Reserve_Camping {
 	public void setPayment_method(String payment_method) {
 		this.payment_method = payment_method;
 	}
-	public int getPayment_price() {
-		return payment_price;
+	public String getDaysBetween() {
+		return daysBetween;
 	}
-	public void setPayment_price(int payment_price) {
-		this.payment_price = payment_price;
+	public void setDaysBetween(String daysBetween) {
+		this.daysBetween = daysBetween;
 	}
+	private String reserve_date;
+	private String expire_date;
+	private String user_id;
+	private String facility_num_c;
+	private String payment_method;
+	private String daysBetween;
+	
 	
 	
 }

@@ -22,30 +22,26 @@ public class ReserveInsertAction implements Action {
 		reserve.setExpire_date(request.getParameter("end_date"));
 		reserve.setUser_id(request.getParameter("user_id"));
 		reserve.setFacility_num_c(request.getParameter("facility_num_c"));
-		reserve.setPayment_method(request.getParameter("pay_option"));
-		reserve.setPayment_price(Integer.parseInt(request.getParameter("pay_price")));
-		
+			
 		ReserveInsertService reserveinsertservice = new ReserveInsertService();
-		boolean isWriteSuccess = reserveinsertservice.registArticle(reserve);
+		boolean checking = reserveinsertservice.registArticle(reserve);
 		
-//		System.out.println(isWriteSuccess); 값을 받아오는지 확인
-		
-		if(!isWriteSuccess){
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('해당일에는 예약할수없습니다.')");
-			out.println("history.back();");
-			out.println("</script>");
+		if (!checking) {
+		    response.setContentType("text/html;charset=UTF-8");
+		    PrintWriter out = response.getWriter();
+		    out.println("<script>");
+		    out.println("alert('해당일에는 예약할 수 없습니다.');");
+		    out.println("history.back();");
+		    out.println("</script>");
+		} else {
+		    response.setContentType("text/html;charset=UTF-8");
+		    PrintWriter out = response.getWriter();
+		    out.println("<script>");
+		    out.println("alert('예약완료');");
+		    out.println("location.href='Camp_Glam_Index.cp';"); // 페이지 이동
+		    out.println("</script>");
 		}
-		else{
-			forward = new ActionForward();
-			forward.setRedirect(true);
-			forward.setPath("Camp_Glam_Index.cp");
-		}
-
 		return forward;
-		
-	}  	
+	}
 	
 }
