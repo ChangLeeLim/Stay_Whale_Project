@@ -42,3 +42,4 @@
 
 https://github.com/ChangLeeLim/Stay_Whale_Project/assets/129818004/74daffe3-8e00-4ae3-bb91-f6b1d2d2a5b8
 
+https://github.com/ChangLeeLim/Stay_Whale_Project/assets/129818004/b18acb15-6420-491e-a20f-d514b57d80c9
